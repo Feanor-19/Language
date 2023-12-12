@@ -3,6 +3,6 @@
 
 #include "..\..\..\..\mylibheaders\tree.h"
 
-int f();
+#include "logger.h"
 
 #endif /* COMMON_H */

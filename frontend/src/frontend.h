@@ -3,7 +3,6 @@
 
 // TODO - вторая попытка разобраться с этим
 #include ".\..\..\common\src\common.h"
-
-int g();
+#include "config_front.h"
 
 #endif /* FRONTEND_H */

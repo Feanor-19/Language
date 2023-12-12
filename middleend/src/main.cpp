@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "middleend.h"
+#include "config_middle.h"
 
 int main()
 {

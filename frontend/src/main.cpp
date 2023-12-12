@@ -2,9 +2,15 @@
 
 #include "frontend.h"
 
-int main()
+int main( int argc, const char *argv[])
 {
-    printf( "hello frontend %d %d\n", f(), g() );
+    Config cfg = get_config(argc, argv);
+    if (cfg.error)
+    {
+        print_cfg_error_message( stderr, cfg.error );
+        return cfg.error;
+    }
+    print_config(stdout, cfg);
 
     return 0;
 }
