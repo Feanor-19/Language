@@ -1,0 +1,22 @@
+{
+    "tasks": [
+      {
+        "type": "cppbuild",
+        "label": "Make",
+        "command": "make.exe",
+        "args": [],
+        "options": {
+          "cwd": "${workspaceFolder}"
+        },
+        "problemMatcher": [
+          "$gcc"
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "detail": "build"
+      }
+    ],
+    "version": "2.0.0"
+  }
