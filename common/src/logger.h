@@ -39,7 +39,9 @@ void log_( const char *type,
 
 
 //! @brief Closes all opened logging streams.
-void log_end();
+void log_end( void );
 
+//! @brief Returns current log stream.
+FILE *log_get_stream( void );
 
 #endif /* LOGGER_H */

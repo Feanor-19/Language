@@ -5,7 +5,7 @@
 #include <stdarg.h>
 
 
-FILE *STREAM_LOG    = NULL;
+FILE *STREAM_LOG = NULL;
 
 
 inline void print_local_time_into_stream( FILE *stream )
@@ -50,6 +50,8 @@ int logger_init_log( FILE *opened_stream )
 
     STREAM_LOG = opened_stream;
 
+    write_log_header( );
+
     return 1;
 }
 
@@ -74,7 +76,20 @@ void log_( const char *type,
     putc( '\n', STREAM_LOG );
 }
 
-void log_end()
+void log_end( void )
 {
+    if ( !STREAM_LOG )
+        return;
 
+    fprintf( STREAM_LOG, "[LOG END TIME: " );
+    print_local_time_into_stream( STREAM_LOG );
+    fprintf( STREAM_LOG, "]\n" );
+
+    fclose( STREAM_LOG );
+    STREAM_LOG = NULL;
+}
+
+FILE *log_get_stream( void )
+{
+    return STREAM_LOG;
 }

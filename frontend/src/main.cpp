@@ -5,20 +5,23 @@
 int main( int argc, const char *argv[])
 {
     Config cfg = get_config(argc, argv);
+
+    if ( !init_log(cfg) )
+    {
+        print_status_message( stdout, STATUS_ERROR_CANT_INITIALIZE_LOG );
+        return STATUS_ERROR_CANT_INITIALIZE_LOG;
+    }
+
     if (cfg.error)
     {
-        print_cfg_error_message( stderr, cfg.error );
+        print_cfg_error_message( log_get_stream(), cfg.error );
         return cfg.error;
     }
-    print_config(stdout, cfg);
+    print_config(log_get_stream(), cfg);
 
-    logger_init_log( "test_log.txt" );
 
-    LOG("test1 %d", 0);
 
-    WARNING("test2 %d", 19);
 
-    ERROR("test3 %s", "hehehe");
 
     log_end();
 

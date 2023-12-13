@@ -3,11 +3,13 @@
 const char* FLAG_HELP               = "-h";
 const char* FLAG_INPUT_FILE         = "-i";
 const char* FLAG_OUTPUT_FILE        = "-o";
+const char* FLAG_LOG_FILE           = "-l";
 
 CmdLineFlag supported_flags[] = {
                                     { FLAG_HELP             , 0, 0, "" },
                                     { FLAG_INPUT_FILE       , 0, 1, "" },
-                                    { FLAG_OUTPUT_FILE      , 0, 1, "" }
+                                    { FLAG_OUTPUT_FILE      , 0, 1, "" },
+                                    { FLAG_LOG_FILE         , 0, 1, "" }
                                 };
 
 const char *help_message = "No help message yet :-(";
@@ -47,10 +49,10 @@ static Config assemble_config(size_t n_flags, CmdLineFlag flags[])
 {
     assert(flags != NULL);
 
-    const char *FILE_IN_DEFAULT_NAME = "prog.txt";
-    const char *FILE_OUT_DEFAULT_NAME = "compiler_tree.txt";
+    const char *FILE_IN_DEFAULT_NAME = "compiler_tree.txt";
+    const char *FILE_OUT_DEFAULT_NAME = "asm.txt";
 
-    Config config = {"", "", CONFIG_NO_ERROR};
+    Config config = {"", "", "", CONFIG_NO_ERROR};
 
     CmdLineFlag *p_curr_flag = NULL;
 
@@ -84,6 +86,21 @@ static Config assemble_config(size_t n_flags, CmdLineFlag flags[])
         config.output_file_name = FILE_OUT_DEFAULT_NAME;
     }
 
+    if ( (p_curr_flag = extract(n_flags, supported_flags, FLAG_LOG_FILE) )!= NULL
+       && p_curr_flag->state )
+    {
+        if ( is_str_empty(p_curr_flag->add_arg) )
+        {
+            config.error = CONFIG_ERROR_LOG;
+            return config;
+        }
+        config.log_file_name = p_curr_flag->add_arg;
+    }
+    else
+    {
+        config.log_file_name = NULL;
+    }
+
     return config;
 
 }
@@ -93,17 +110,21 @@ void print_config(FILE *stream, Config cfg)
     assert(stream != NULL);
     assert(cfg.error == CONFIG_NO_ERROR);
 
-    printf("The following configuration is set:\n"
-    "data source:                               <%s>\n"
-    "output destination:                        <%s>\n",
-    cfg.input_file_name, cfg.output_file_name);
+    fprintf(stream,
+            "The following configuration is set:\n"
+            "data source:                               <%s>\n"
+            "output destination:                        <%s>\n"
+            "log:                                       <%s>\n",
+            cfg.input_file_name,
+            cfg.output_file_name,
+            cfg.log_file_name ? cfg.log_file_name : "stdout");
 }
 
 void print_cfg_error_message(FILE *stream, ConfigError error)
 {
     assert(stream != NULL);
 
-    printf("Some error occured during confgiruation of the prorgam: ");
+    fprintf(stream, "Some error occured during confgiruation of the prorgam: ");
 
     switch (error)
     {
@@ -113,13 +134,16 @@ void print_cfg_error_message(FILE *stream, ConfigError error)
     case CONFIG_ERROR_OUTPUT:
         fprintf(stream, "Output file error.\n");
         break;
+    case CONFIG_ERROR_LOG:
+        fprintf(stream, "Log file error.\n");
+        break;
     case CONFIG_NO_ERROR:
     default:
         assert(0 && "Default case in ConfigError switch!");
         break;
     }
 
-    printf("Please, restart and try again.\n");
+    fprintf(stream, "Please, restart and try again.\n");
 
     return;
 }

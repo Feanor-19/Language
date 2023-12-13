@@ -10,10 +10,11 @@ CFLAGS = 	-Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef 				\
 			-Wstack-usage=8192 -Wstrict-aliasing -Wstrict-null-sentinel -Wtype-limits 	\
 			-Wwrite-strings -Werror=vla -D_DEBUG -D_EJUDGE_CLIENT_SIDE
 
-OBJ = obj
-SRC = src
-BIN = bin
-CMN = ./../common
+OBJ 	= obj
+SRC 	= src
+BIN 	= bin
+CMN 	= .\..\common
+LOGS 	= .\logs
 
 COMMON_LIB_FOLDER = ./../../../mylibs/
 LIB_NAMES 			= tree onegin
@@ -41,7 +42,7 @@ $(CMN)/$(OBJ)/%.o : $(CMN)/$(SRC)/%.cpp
 
 .PHONY: run
 run:
-	$(OUT)
+	@$(OUT) -i .\..\compiler_tree.txt -o .\..\asm.txt -l $(LOGS)\log.txt
 
 .PHONY: clean
 clean:
@@ -55,3 +56,8 @@ clean_dumps:
 .PHONY: clean_latex
 clean_latex:
 	rm -r -f $(LATEX_FOLDER)
+
+.PHONY: clean_logs
+clean_logs:
+	rm -r -f $(LOGS)
+	mkdir $(LOGS)
