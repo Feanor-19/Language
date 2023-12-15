@@ -42,7 +42,7 @@ $(CMN)/$(OBJ)/%.o : $(CMN)/$(SRC)/%.cpp
 
 .PHONY: run
 run:
-	@$(OUT) -i .\..\compiler_tree.txt -o .\..\compiler_tree_new.txt -l $(LOGS)\log.txt
+	@$(OUT) -l $(LOGS)\log.txt
 
 .PHONY: clean
 clean:
