@@ -8,6 +8,7 @@
 
 #define FREE(ptr) do{ if (ptr) free(ptr); ptr = NULL; }while(0)
 #define ASSERT_UNREACHEABLE() assert( 0 && "Unreacheable line!" )
+#define SIZEARR(arr) (sizeof(arr)/sizeof(arr[0]))
 
 //! @brief Reads file with 'file_name' to dynamically allocated string
 //! and returns it. If some error happens, returns NULL.

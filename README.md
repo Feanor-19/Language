@@ -82,7 +82,7 @@ Note:
 
 Prog     ::= "ProgStart" Op+ "ProgEnd"
 Op       ::= VarBirth | VarDeath | Assign | If | While
-VarBirth ::= "VarBirthOp" Expr "UnitsOf" Var "Dot"
+VarBirth ::= "VarBirthOp" Num "UnitsOf" Var "Dot"
 VarDeath ::= "VarDeathOp" Var "Dot"
 Assign   ::= "Asgn1" Expr "Asgn2" Var "Dot"
 Expr     ::= Mulive ( ("AddOp" | "SubOp") Mulive )*
@@ -105,36 +105,38 @@ While    ::= "While1" "Cond" ?CmpOp (group)? Expr "than" Expr "While2" Op+ "Whil
 |VarDeathOp|Throw Away|
 |Asgn1|Place|
 |Asgn2|Right Into|
-|Dot|!|
 |AddOp|Angrily Mixed With|
 |SubOp|Unfortunately Without|
 |MulOp|Thoroughly Fried With|
 |DivOp|Thickly Spread On|
-|UnrOp::minus|Rinsed|
-|UnrOp::sqrt|Peeled|
-|UnrOp::exp|Grated|
-|UnrOp::ln|Squeezed|
-|UnrOp::sin|Sliced|
-|UnrOp::cos|Diced|
+|UnrOp_minus|Rinsed|
+|UnrOp_sqrt|Peeled|
+|UnrOp_exp|Grated|
+|UnrOp_ln|Squeezed|
+|UnrOp_sin|Sliced|
+|UnrOp_cos|Diced|
 |BracketOpn|The Following Prepared Beforehand:|
-|BracketCls|,|
 |If1|In Case|
 |Cond|There Happens To Be|
-|CmpOp::>|More|
-|CmpOp::>=|More Or The Same Amount Of|
-|CmpOp::==|Just The Same Amount Of|
-|CmpOp::<=|Less Or The Same Amount Of|
-|CmpOp::<|Less|
-|CmpOp::!=|Not The Same Amount Of|
-|than|Than|
+|CmpOp_more|More|
+|CmpOp_moreOrEqual|More Or The Same Amount Of|
+|CmpOp_equal|Just The Same Amount Of|
+|CmpOp_lessOrEqual|Less Or The Same Amount Of|
+|CmpOp_less|Less|
+|CmpOp_notEqual|Not The Same Amount Of|
+|Than|Than|
 |If2|Urgently Do The Following Steps:|
 |IfEnd|Now, Breathe Out And Continue Whatever Your Were Doing!|
 |While1|As long as|
 |While2|Repeat the following:|
 |WhileEnd|Go Further If You Are Tired Of Repetition!|
-|||
-|||
-|||
+
+### Separating symbols
+
+|Designation in grammar|Designation in program|Comment|
+|-|-|-|
+|Dot|!|
+|BracketCls|,|
 
 ### Program examples
 

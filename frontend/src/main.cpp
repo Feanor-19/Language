@@ -25,7 +25,12 @@ int main( int argc, const char *argv[])
         return STATUS_ERROR_CANT_READ_INPUT_FILE;
     }
 
+    // debug
     printf("<%s>\n", prog_str);
+
+
+
+
 
     log_end();
 
