@@ -1,6 +1,6 @@
-[LOG START TIME: 2023-12-13_19-05-10]
+[LOG START TIME: 2023-12-15_18-14-25]
 The following configuration is set:
-data source:                               <.\..\prog.txt>
-output destination:                        <.\..\compiler_tree.txt>
+data source:                               <.\prog.txt>
+output destination:                        <.\compiler_tree.txt>
 log:                                       <.\logs\log.txt>
-[LOG END TIME: 2023-12-13_19-05-10]
+ERROR_CANT_READ_INPUT_FILE

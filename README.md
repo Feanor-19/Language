@@ -119,9 +119,9 @@ While    ::= "While1" "Cond" ?CmpOp (group)? Expr "than" Expr "While2" Op+ "Whil
 |If1|In Case|
 |Cond|There Happens To Be|
 |CmpOp_more|More|
-|CmpOp_moreOrEqual|More Or The Same Amount Of|
+|CmpOp_moreOrEqual|The Same Amount Or More Of|
 |CmpOp_equal|Just The Same Amount Of|
-|CmpOp_lessOrEqual|Less Or The Same Amount Of|
+|CmpOp_lessOrEqual|The Same Amount Or Less Of|
 |CmpOp_less|Less|
 |CmpOp_notEqual|Not The Same Amount Of|
 |Than|Than|

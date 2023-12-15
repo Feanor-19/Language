@@ -33,6 +33,7 @@ LATEX_FOLDER 	= .\LaTeX
 
 $(OUT) : $(OBJFILES) $(CMN_OBJFILES)
 	@$(CC) -o $@ $(CFLAGS) $^ $(LIB_HEADERS) $(LIBS)
+	@echo cc -o $@  $^
 
 $(OBJ)/%.o : $(SRC)/%.cpp
 	@$(CC) -c $(CFLAGS) -o $@ $<
@@ -42,7 +43,7 @@ $(CMN)/$(OBJ)/%.o : $(CMN)/$(SRC)/%.cpp
 
 .PHONY: run
 run:
-	@$(OUT) -l $(LOGS)\log.txt
+	@$(OUT) -l $(LOGS)\log.txt -i .\prog.txt -o .\compiler_tree.txt
 
 .PHONY: clean
 clean:
