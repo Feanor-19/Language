@@ -84,4 +84,21 @@ struct Token
 };
 
 
+
+//! @brief Retutns token, found in the prefix of the given 'str'.
+//! See struct Token for details.
+Token get_token( const char *str );
+
+//! @brief Returns 1 if given token is a keyword and is the specfied keyword,
+//! 0 otherwise.
+int is_tkn_keyword( Token tkn, KeywordName keyword );
+
+//! @brief Returns 1 if given token is a separating char
+//! and is the specfied separating char, 0 otherwise.
+int is_tkn_sep_char( Token tkn, SepCharName sep_char );
+
+//! @brief Returns 1 if given identificators are equal,
+//! i.e. if the const strings they point to are equal, otherwise 0.
+int cmp_idents( Identificator a, Identificator b );
+
 #endif /* TOKENIZER_H */

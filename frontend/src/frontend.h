@@ -28,29 +28,25 @@ const char * const status_messages[] =
 #undef DEF_STATUS
 
 
-enum NametableElemType
+
+struct Nametable
 {
-    NT_ELEM_TYPE_VAR,
+    Identificator *list;
+    size_t list_curr_len;
+    size_t list_cap;
 };
 
-//! @note 'start' points at the place in the _original_ string.
-//! It's not a c-string, so it doesn't end with '\0'! It must NOT be sent to free()!
-struct NametableElem
+struct Nametables
 {
-    NametableElemType type;
-    const char *name_start;
-    size_t name_len;
+    Nametable global_vars;
+    Nametable funcs;
+    Nametable func_vars; //NOTE - переиспользуется внутри каждой функции, обязательно чистить после использования!
 };
 
 struct CompiledProgram
 {
     Tree tree;
-    struct
-    {
-        NametableElem *nametable;
-        size_t nametable_ind;
-        size_t nametable_cap;
-    };
+    Nametables nametables;
 };
 
 
@@ -71,10 +67,6 @@ void print_status_message( FILE *stream, Status status );
 //! @brief Inits log according to given config.
 int init_log( Config cfg );
 
-//! @brief Retutns token, found in the prefix of the given 'str'.
-//! See struct Token for details.
-Token get_token( const char *str );
-
 CompiledProgram compile_prog( const char *prog );
 
 void CompiledProgram_dtor( CompiledProgram *comp_prog_ptr );
@@ -82,5 +74,13 @@ void CompiledProgram_dtor( CompiledProgram *comp_prog_ptr );
 void print_tree_node_data( FILE *stream, void *data_ptr );
 
 void print_rec_fall_err_msg( const char *str, const char *expected );
+
+Status nametable_ctor( Nametable *nt_ptr );
+
+Status Nametables_ctor( Nametables *nametables );
+
+void nametable_dtor( Nametable *nametable );
+
+void Nametables_dtor( Nametables *nametables );
 
 #endif /* FRONTEND_H */

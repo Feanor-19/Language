@@ -78,17 +78,18 @@ Note:
 3. `*` means `zero or more`.
 4. `?...?` means some special case.
 
-```c
+```py
 Prog     ::= "ProgStart" Op+ "ProgEnd"
 Op       ::= VarBirth | VarDeath | Assign | If | While
-VarBirth ::= "VarBirthOp" Num "UnitsOf" Var "Dot"
-VarDeath ::= "VarDeathOp" Var "Dot"
-Assign   ::= "Asgn1" Expr "Asgn2" Var "Dot"
+VarBirth ::= "VarBirthOp" Num "UnitsOf" Id "Dot"
+VarDeath ::= "VarDeathOp" Id<Var> "Dot"
+Assign   ::= "Asgn1" Expr "Asgn2" Id<Var> "Dot"
 Expr     ::= Mulive ( ?Amp (group)? ("OpAdd" | "OpSub") Mulive )*
 Mulive   ::= Unr (  ?Amp (group)? ( "OpMul" | "OpDiv" ) Unr )*
 Unr      ::= (  ?Amp (group)? ?UnrOp (group)? Primal ) | Primal
-Primal   ::= ("BracketOpn" Expr "BracketCls") | Var
-Var      ::= ['a'-'z','A'-'Z']['a'-'z','A'-'Z','_','0'-'9']*
+Primal   ::= ("BracketOpn" Expr "BracketCls") | Id<Var>
+Id       ::= ['a'-'z','A'-'Z']['a'-'z','A'-'Z','_','0'-'9']*
+Num      ::= <float number>
 If       ::= "If1" "Cond" ?CmpOp (group)? Expr "than" Expr "If2" Op+ "IfEnd"
 While    ::= "While1" "Cond" ?CmpOp (group)? Expr "than" Expr "While2" Op+ "WhileEnd"
 ```

@@ -74,7 +74,7 @@ int is_node_id( TreeNode *node_ptr, id_t id );
 void realloc_arr_if_needed( void **arr, size_t *arr_cap_ptr, size_t arr_ind, size_t elem_size );
 
 #define REALLOC_ARR_WRP(arr, elem_t) do {                                               \
-    realloc_arr_if_needed( (void**) &arr, &arr##_cap, arr##_ind, sizeof(elem_t) );      \
+    realloc_arr_if_needed( (void**) &arr, &arr##_cap, arr##_curr_len, sizeof(elem_t) );      \
     if (!arr)                                                                           \
         ERROR("REALLOC ERROR: array named \"%s\", "                                     \
               "attempt to request %d elems of size %d. "                                \

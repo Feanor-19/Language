@@ -125,3 +125,27 @@ Token get_token( const char *str )
 
     ASSERT_UNREACHEABLE();
 }
+
+int is_tkn_keyword( Token tkn, KeywordName keyword )
+{
+    return tkn.type == TKN_TYPE_KEYWORD && tkn.keyword == keyword;
+}
+
+int is_tkn_sep_char( Token tkn, SepCharName sep_char )
+{
+    return tkn.type == TKN_TYPE_SEP_CHAR && tkn.sep_char == sep_char;
+}
+
+int cmp_idents( Identificator a, Identificator b )
+{
+    if ( a.len != b.len || !a.start || !b.start )
+        return 0;
+
+    for (size_t ind = 0; ind < a.len; ind++)
+    {
+        if ( a.start[ind] != b.start[ind] )
+            return 0;
+    }
+
+    return 1;
+}

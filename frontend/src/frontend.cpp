@@ -5,51 +5,47 @@
 #include ".\..\..\common\src\compiler_tree_dump.h"
 
 
-static TreeNode *get_while( CompiledProgram *comp_prog, const char *str );
-static TreeNode *get_if( CompiledProgram *comp_prog, const char *str );
-static TreeNode *get_assign( CompiledProgram *comp_prog, const char *str );
-static TreeNode *get_var_death( CompiledProgram *comp_prog, const char *str );
-static TreeNode *get_var_birth( CompiledProgram *comp_prog, const char *str );
-static TreeNode *get_op(  CompiledProgram *comp_prog, const char *str );
-static TreeNode *get_prog( CompiledProgram *comp_prog, const char *str );
 
-
-void print_status_message( FILE *stream, Status status )
-{
-    fprintf(stream, "%s", status_messages[status]);
-}
-
-int init_log( Config cfg )
-{
-    if (cfg.log_file_name)
-    {
-        if (!logger_init_log( cfg.log_file_name ))
-        {
-            return 0;
-        }
-    }
-    else
-    {
-        if (!logger_init_log( stdout ))
-        {
-            return 0;
-        }
-    }
-
-    return 1;
-}
-
-
-// TODO - норм дефайны? вроде и сокращают, и вроде пониманию не мешают
+// TODO - норм дефайны? вроде и сокращают, и вроде бы пониманию не мешают... "вродеы"
 #define CURR (*curr_ptr)
-#define ARGS comp_prog, prog, curr_ptr
+#define FACT_REC_FALL_ARGS comp_prog, prog, curr_ptr
+#define FORMAL_REC_FALL_ARGS CompiledProgram *comp_prog, const char *prog, char **curr_ptr
 #define TREE &comp_prog->tree
 
 
+static TreeNode *get_num        ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_while      ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_if         ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_assign     ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_var_death  ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_var_birth  ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_op         ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_prog       ( FORMAL_REC_FALL_ARGS );
 
-static TreeNode *get_var_death( CompiledProgram *comp_prog,
-                                const char *prog,
-                                char **curr_ptr )
+
+
+//! @brief Returns index of given 'ident' in the 'nametable', if found;
+//! otherwise returns -1;
+inline int find_ident_in_nametable( Nametable nametable, Identificator ident )
+{
+    for (size_t ind = 0; ind < nametable.list_curr_len; ind++)
+    {
+        if ( cmp_idents( ident, nametable.list[ind] ) )
+            return ind;
+    }
+
+    return -1;
+}
+
+//! @brief Returns 1 if ident is not found in any of the comp_prog's nametables, 0 otherwise.
+inline int check_is_ident_fresh( CompiledProgram *comp_prog, Identificator ident )
+{
+    return find_ident_in_nametable( comp_prog->nametables.global_vars, ident )  == -1
+        && find_ident_in_nametable( comp_prog->nametables.funcs,       ident )  == -1
+        && find_ident_in_nametable( comp_prog->nametables.func_vars,   ident )  == -1;
+}
+
+static TreeNode *get_var( FORMAL_REC_FALL_ARGS )
 {
     assert(comp_prog);
     assert(prog);
@@ -58,9 +54,7 @@ static TreeNode *get_var_death( CompiledProgram *comp_prog,
 
 }
 
-static TreeNode *get_assign( CompiledProgram *comp_prog,
-                             const char *prog,
-                             char **curr_ptr )
+static TreeNode *get_num( FORMAL_REC_FALL_ARGS )
 {
     assert(comp_prog);
     assert(prog);
@@ -69,9 +63,7 @@ static TreeNode *get_assign( CompiledProgram *comp_prog,
 
 }
 
-static TreeNode *get_if( CompiledProgram *comp_prog,
-                         const char *prog,
-                         char **curr_ptr )
+static TreeNode *get_num( FORMAL_REC_FALL_ARGS )
 {
     assert(comp_prog);
     assert(prog);
@@ -80,9 +72,34 @@ static TreeNode *get_if( CompiledProgram *comp_prog,
 
 }
 
-static TreeNode *get_while( CompiledProgram *comp_prog,
-                            const char *prog,
-                            char **curr_ptr )
+static TreeNode *get_var_death( FORMAL_REC_FALL_ARGS )
+{
+    assert(comp_prog);
+    assert(prog);
+    assert(curr_ptr);
+
+
+}
+
+static TreeNode *get_assign( FORMAL_REC_FALL_ARGS )
+{
+    assert(comp_prog);
+    assert(prog);
+    assert(curr_ptr);
+
+
+}
+
+static TreeNode *get_if( FORMAL_REC_FALL_ARGS )
+{
+    assert(comp_prog);
+    assert(prog);
+    assert(curr_ptr);
+
+
+}
+
+static TreeNode *get_while( FORMAL_REC_FALL_ARGS )
 {
     assert(comp_prog);
     assert(prog);
@@ -90,22 +107,36 @@ static TreeNode *get_while( CompiledProgram *comp_prog,
 
 }
 
-static TreeNode *get_var_birth( CompiledProgram *comp_prog,
-                                const char *prog,
-                                char **curr_ptr )
+static TreeNode *get_var_birth( FORMAL_REC_FALL_ARGS )
 {
     assert(comp_prog);
     assert(prog);
     assert(curr_ptr);
 
-    Token var_birth_op = get_token( CURR );
-    SYN_ASSERT( var_birth_op.type == TKN_TYPE_KEYWORD && var_birth_op.keyword == KW_VarBirthOp,
-                 )
+    Token var_birth = get_token( CURR );
+    if ( !is_tkn_keyword( var_birth, KW_VarBirthOp ) )
+        return NULL;
+    CURR += var_birth.len;
+
+    TreeNode *node_num = get_num( FACT_REC_FALL_ARGS );
+    SYN_ASSERT(node_num, CURR, "Number");
+
+    Token units_of = get_token( CURR );
+    SYN_ASSERT( is_tkn_keyword(units_of, KW_UnitsOf), CURR, KEYWORDS[KW_UnitsOf].str );
+    CURR += units_of.len;
+
+    Token tkn_id = get_token( CURR );
+    SYN_ASSERT( tkn_id.type != TKN_TYPE_ID || check_is_ident_fresh( comp_prog, tkn_id.id ) != -1,
+                CURR, "Not mentioned before identificator" );
+
+    Token dot = get_token( CURR );
+    SYN_ASSERT( is_tkn_sep_char(dot, SEP_Dot), CURR, "\'!\'" );
+    CURR += units_of.len;
+
+    // TODO -
 }
 
-static TreeNode *get_op( CompiledProgram *comp_prog,
-                         const char *prog,
-                         char **curr_ptr )
+static TreeNode *get_op( FORMAL_REC_FALL_ARGS )
 {
     assert(comp_prog);
     assert(prog);
@@ -115,18 +146,16 @@ static TreeNode *get_op( CompiledProgram *comp_prog,
 
     // TODO - норм идея?
 
-       ( node_op = get_var_birth( ARGS ) )
-    || ( node_op = get_var_death( ARGS ) )
-    || ( node_op =    get_assign( ARGS ) )
-    || ( node_op =        get_if( ARGS ) )
-    || ( node_op =     get_while( ARGS ) );
+       ( node_op = get_var_birth( FACT_REC_FALL_ARGS ) )
+    || ( node_op = get_var_death( FACT_REC_FALL_ARGS ) )
+    || ( node_op =    get_assign( FACT_REC_FALL_ARGS ) )
+    || ( node_op =        get_if( FACT_REC_FALL_ARGS ) )
+    || ( node_op =     get_while( FACT_REC_FALL_ARGS ) );
 
     return node_op;
 }
 
-static TreeNode *get_prog( CompiledProgram *comp_prog,
-                           const char *prog,
-                           char **curr_ptr )
+static TreeNode *get_prog( FORMAL_REC_FALL_ARGS )
 {
     assert(comp_prog);
     assert(prog);
@@ -134,18 +163,17 @@ static TreeNode *get_prog( CompiledProgram *comp_prog,
 
     // ProgStart
     Token prog_start = get_token( CURR );
-    SYN_ASSERT( prog_start.type == TKN_TYPE_KEYWORD && prog_start.keyword == KW_ProgStart,
-                CURR, KEYWORDS[KW_ProgStart].str );
+    SYN_ASSERT( is_tkn_keyword(prog_start, KW_ProgStart), CURR, KEYWORDS[KW_ProgStart].str );
     CURR += prog_start.len;
 
     // first operator (obligatory)
-    TreeNode *node_first_op = get_op( ARGS );
+    TreeNode *node_first_op = get_op( FACT_REC_FALL_ARGS );
     SYN_ASSERT( node_first_op, CURR, "Operator" );
 
     // other operators (optional)
     TreeNode *node_new_op   = NULL;
     TreeNode *node_curr_op  = NULL;
-    while ( (node_new_op = get_op( ARGS )) )
+    while ( (node_new_op = get_op( FACT_REC_FALL_ARGS )) )
     {
         if ( !node_curr_op )
         {
@@ -167,8 +195,7 @@ static TreeNode *get_prog( CompiledProgram *comp_prog,
 
     //ProgEnd
     Token prog_end = get_token( CURR );
-    SYN_ASSERT( prog_start.type == TKN_TYPE_KEYWORD && prog_start.keyword == KW_ProgEnd,
-                CURR, KEYWORDS[KW_ProgEnd].str );
+    SYN_ASSERT( is_tkn_keyword(prog_end, KW_ProgEnd), CURR, KEYWORDS[KW_ProgEnd].str );
     CURR += prog_start.len;
 
     return node_first_op;
@@ -181,16 +208,17 @@ CompiledProgram compile_prog( const char *prog )
     Tree tree = {};
     tree_ctor( &tree, sizeof( TreeNodeData ), NULL, print_tree_node_data );
 
-    NametableElem *nametable = (NametableElem*) calloc( NAMES_DEFAULT_COUNT, sizeof( NametableElem ) );
-
     CompiledProgram comp_prog = {};
     comp_prog.tree = tree;
-    comp_prog.nametable = nametable;
-    comp_prog.nametable_ind = 0;
-    comp_prog.nametable_cap = NAMES_DEFAULT_COUNT;
+    Nametables_ctor( &comp_prog.nametables );
 
     char *curr = 0;
     TreeNode *root = get_prog( &comp_prog, prog, &curr );
+    if (!root)
+    {
+        tree_dtor( &tree ); // TODO - как-то вернуть ошибку в main
+        return comp_prog;
+    }
 
     tree_hang_loose_node_as_root( &tree, root );
 
@@ -201,7 +229,7 @@ void CompiledProgram_dtor( CompiledProgram *comp_prog_ptr )
 {
     if ( comp_prog_ptr )
     {
-        FREE( comp_prog_ptr->nametable );
+        Nametables_dtor( &comp_prog_ptr->nametables );
 
         tree_dtor(&comp_prog_ptr->tree);
         comp_prog_ptr->tree = {};
@@ -242,4 +270,88 @@ void print_rec_fall_err_msg( const char *str, const char *expected )
         ERROR( "%c", str[ind] );
     }
     ERROR( "%c", '\n' );
+}
+
+void print_status_message( FILE *stream, Status status )
+{
+    fprintf(stream, "%s", status_messages[status]);
+}
+
+int init_log( Config cfg )
+{
+    if (cfg.log_file_name)
+    {
+        if (!logger_init_log( cfg.log_file_name ))
+        {
+            return 0;
+        }
+    }
+    else
+    {
+        if (!logger_init_log( stdout ))
+        {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+Status nametable_ctor( Nametable *nt_ptr )
+{
+    assert(nt_ptr);
+
+    nt_ptr->list = (Identificator*) calloc( NAMES_DEFAULT_COUNT, sizeof(Identificator) );
+    if (!nt_ptr->list)
+    {
+        ERROR(  "Memory allocation error: attempt to allocate %llu bytes",
+                NAMES_DEFAULT_COUNT * sizeof(Identificator));
+        return STATUS_ERROR_MEMORY_ALLOC_ERROR;
+    }
+
+    nt_ptr->list_curr_len = 0;
+    nt_ptr->list_cap = NAMES_DEFAULT_COUNT;
+
+    return STATUS_OK;
+}
+
+Status Nametables_ctor( Nametables *nametables )
+{
+    assert(nametables);
+
+    if ( !nametable_ctor( &nametables->global_vars ) )
+        return STATUS_ERROR_MEMORY_ALLOC_ERROR;
+
+    if ( !nametable_ctor( &nametables->funcs ) )
+    {
+        FREE(nametables->global_vars.list);
+        return STATUS_ERROR_MEMORY_ALLOC_ERROR;
+    }
+
+    if ( !nametable_ctor( &nametables->func_vars ) )
+    {
+        FREE(nametables->global_vars.list);
+        FREE(nametables->funcs.list);
+        return STATUS_ERROR_MEMORY_ALLOC_ERROR;
+    }
+
+    return STATUS_OK;
+}
+
+void nametable_dtor( Nametable *nametable )
+{
+    assert(nametable);
+
+    FREE(nametable->list);
+    nametable->list_cap = 0;
+    nametable->list_curr_len = 0;
+}
+
+void Nametables_dtor( Nametables *nametables )
+{
+    assert(nametables);
+
+    nametable_dtor( &nametables->global_vars );
+    nametable_dtor( &nametables->funcs );
+    nametable_dtor( &nametables->func_vars );
 }
