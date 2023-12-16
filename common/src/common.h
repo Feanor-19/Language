@@ -5,7 +5,9 @@
 #include "logger.h"
 
 
-typedef uint32_t node_cmn_type_t;
+typedef uint32_t op_t;
+typedef uint32_t id_t;
+typedef float num_t;
 
 
 enum TreeNodeType
@@ -18,12 +20,19 @@ enum TreeNodeType
 struct TreeNodeData
 {
     TreeNodeType type;
-    node_cmn_type_t value;
+    union
+    {
+        op_t op;
+        num_t num;
+        id_t id;
+    };
+
 };
 
 
 
 const size_t REALLOC_DEFAULT_MULTIPLIER = 2;
+const double DBL_PRECISION              = 1E-10;
 
 
 
@@ -43,18 +52,24 @@ char *read_file_to_str( const char *file_name );
 const char *skip_spaces( const char *str );
 
 //! @brief Returns new node of type operator and writes value 'op' into it.
-TreeNode *new_node_op( Tree *tree_ptr, node_cmn_type_t op );
+TreeNode *new_node_op( Tree *tree_ptr, op_t op );
 
 //! @brief Returns new node of type number and writes value 'num' into it.
-TreeNode *new_node_num( Tree *tree_ptr, node_cmn_type_t num );
+TreeNode *new_node_num( Tree *tree_ptr, num_t num );
 
 //! @brief Returns new node of type identificator and writes value 'id' into it.
-TreeNode *new_node_id( Tree *tree_ptr, node_cmn_type_t id );
+TreeNode *new_node_id( Tree *tree_ptr, id_t id );
 
 TreeNodeData get_node_data( TreeNode *node_ptr );
 
 //! @brief Checks given node's type and value.
-int is_node( TreeNode *node_ptr, TreeNodeType type, node_cmn_type_t value );
+int is_node_op( TreeNode *node_ptr, op_t op );
+
+//! @brief Checks given node's type and value.
+int is_node_num( TreeNode *node_ptr, num_t num );
+
+//! @brief Checks given node's type and value.
+int is_node_id( TreeNode *node_ptr, id_t id );
 
 void realloc_arr_if_needed( void **arr, size_t *arr_cap_ptr, size_t arr_ind, size_t elem_size );
 
@@ -66,5 +81,9 @@ void realloc_arr_if_needed( void **arr, size_t *arr_cap_ptr, size_t arr_ind, siz
               "Closing log automatically...",                                           \
               #arr, 2 * arr##_cap, sizeof(elem_t))                                      \
 } while (0)
+
+int is_dbl_zero( double a );
+
+int are_dbls_equal( double a, double b );
 
 #endif /* COMMON_H */

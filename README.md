@@ -79,15 +79,14 @@ Note:
 4. `?...?` means some special case.
 
 ```c
-
 Prog     ::= "ProgStart" Op+ "ProgEnd"
 Op       ::= VarBirth | VarDeath | Assign | If | While
 VarBirth ::= "VarBirthOp" Num "UnitsOf" Var "Dot"
 VarDeath ::= "VarDeathOp" Var "Dot"
 Assign   ::= "Asgn1" Expr "Asgn2" Var "Dot"
-Expr     ::= Mulive ( ("AddOp" | "SubOp") Mulive )*
-Mulive   ::= Unr ( ( "MulOp" | "DivOp" ) Unr )*
-Unr      ::= ( ?UnrOp (group)? Primal ) | Primal
+Expr     ::= Mulive ( ?Amp (group)? ("OpAdd" | "OpSub") Mulive )*
+Mulive   ::= Unr (  ?Amp (group)? ( "OpMul" | "OpDiv" ) Unr )*
+Unr      ::= (  ?Amp (group)? ?UnrOp (group)? Primal ) | Primal
 Primal   ::= ("BracketOpn" Expr "BracketCls") | Var
 Var      ::= ['a'-'z','A'-'Z']['a'-'z','A'-'Z','_','0'-'9']*
 If       ::= "If1" "Cond" ?CmpOp (group)? Expr "than" Expr "If2" Op+ "IfEnd"
@@ -98,35 +97,39 @@ While    ::= "While1" "Cond" ?CmpOp (group)? Expr "than" Expr "While2" Op+ "Whil
 
 |Designation in grammar|Designation in program|Comment
 |-|-|-|
-|ProgStart|The Recipe Of The Most Delicious Dish One Can Ever Imagine!|
-|ProgEnd|That's All! Don't Forget To Check It On Your Friends Before Tasting Yourself!|
-|VarBirthOp|Quickly Obtain|
-|UnitsOf|Units Of|
-|VarDeathOp|Throw Away|
+|Amp_1|Angrily|
+|Amp_2|Unfortunately|
+|Amp_3|Thoroughly|
+|Amp_4|Thickly|
 |Asgn1|Place|
 |Asgn2|Right Into|
-|AddOp|Angrily Mixed With|
-|SubOp|Unfortunately Without|
-|MulOp|Thoroughly Fried With|
-|DivOp|Thickly Spread On|
-|UnrOp_minus|Rinsed|
-|UnrOp_sqrt|Peeled|
-|UnrOp_exp|Grated|
-|UnrOp_ln|Squeezed|
-|UnrOp_sin|Sliced|
-|UnrOp_cos|Diced|
 |BracketOpn|The Following Prepared Beforehand:|
-|If1|In Case|
-|Cond|There Happens To Be|
-|CmpOp_more|More|
-|CmpOp_moreOrEqual|The Same Amount Or More Of|
 |CmpOp_equal|Just The Same Amount Of|
 |CmpOp_lessOrEqual|The Same Amount Or Less Of|
 |CmpOp_less|Less|
+|CmpOp_moreOrEqual|The Same Amount Or More Of|
+|CmpOp_more|More|
 |CmpOp_notEqual|Not The Same Amount Of|
-|Than|Than|
+|Cond|There Happens To Be|
+|If1|In Case|
 |If2|Urgently Do The Following Steps:|
 |IfEnd|Now, Breathe Out And Continue Whatever Your Were Doing!|
+|OpAdd|Mixed With|
+|OpDiv|Spread On|
+|OpMul|Fried With|
+|OpSub|Without|
+|ProgEnd|That's All! Don't Forget To Check It On Your Friends Before Tasting Yourself!|
+|ProgStart|The Recipe Of The Most Delicious Dish One Can Ever Imagine!|
+|Than|Than|
+|UnitsOf|Units Of|
+|UnrOp_cos|Diced|
+|UnrOp_exp|Grated|
+|UnrOp_ln|Squeezed|
+|UnrOp_minus|Rinsed|
+|UnrOp_sin|Sliced|
+|UnrOp_sqrt|Peeled|
+|VarBirthOp|Quickly Obtain|
+|VarDeathOp|Throw Away|
 |While1|As long as|
 |While2|Repeat the following:|
 |WhileEnd|Go Further If You Are Tired Of Repetition!|

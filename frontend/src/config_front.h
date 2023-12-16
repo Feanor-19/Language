@@ -25,10 +25,11 @@
 
 enum ConfigError
 {
-    CONFIG_NO_ERROR     = 0,
-    CONFIG_ERROR_INPUT  = 1,
-    CONFIG_ERROR_OUTPUT = 2,
-    CONFIG_ERROR_LOG    = 3,
+    CONFIG_NO_ERROR = 0,
+    CONFIG_ERROR_INPUT,
+    CONFIG_ERROR_OUTPUT,
+    CONFIG_ERROR_LOG,
+    CONFIG_ERROR_IMG_DUMPS_FOLDER,
 };
 
 /*!
@@ -39,6 +40,7 @@ struct Config
     const char *input_file_name;        //!< Source of the data.
     const char *output_file_name;       //!< Destination for the output.
     const char *log_file_name;          //!< Log file name.
+    const char *img_dumps_folder;       //!< Path to the folder for image dumps.
     ConfigError error;                  //!< ConfigError enum value.
     int unread_flags;                   //!< Number of unrecognized flags.
 };

@@ -1,0 +1,36 @@
+|OpAdd|Mixed With|
+|Amp_1|Angrily|
+|Amp_2|Unfortunately|
+|Amp_3|Thoroughly|
+|Amp_4|Thickly|
+|Asgn1|Place|
+|Asgn2|Right Into|
+|BracketOpn|The Following Prepared Beforehand:|
+|CmpOp_equal|Just The Same Amount Of|
+|CmpOp_lessOrEqual|The Same Amount Or Less Of|
+|CmpOp_less|Less|
+|CmpOp_moreOrEqual|The Same Amount Or More Of|
+|CmpOp_more|More|
+|CmpOp_notEqual|Not The Same Amount Of|
+|Cond|There Happens To Be|
+|OpDiv|Spread On|
+|If1|In Case|
+|If2|Urgently Do The Following Steps:|
+|IfEnd|Now, Breathe Out And Continue Whatever Your Were Doing!|
+|OpMul|Fried With|
+|ProgEnd|That's All! Don't Forget To Check It On Your Friends Before Tasting Yourself!|
+|ProgStart|The Recipe Of The Most Delicious Dish One Can Ever Imagine!|
+|OpSub|Without|
+|Than|Than|
+|UnitsOf|Units Of|
+|UnrOp_cos|Diced|
+|UnrOp_exp|Grated|
+|UnrOp_ln|Squeezed|
+|UnrOp_minus|Rinsed|
+|UnrOp_sin|Sliced|
+|UnrOp_sqrt|Peeled|
+|VarBirthOp|Quickly Obtain|
+|VarDeathOp|Throw Away|
+|While1|As long as|
+|While2|Repeat the following:|
+|WhileEnd|Go Further If You Are Tired Of Repetition!|

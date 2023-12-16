@@ -8,7 +8,7 @@
             "type": "cppdbg",
             "name": "Launch",
             "request": "launch",
-            "program": "${workspaceFolder}/main.exe",
+            "program": "${workspaceFolder}/bin/frontend.exe",
             "args": [],
             "cwd": "${workspaceFolder}",
             "preLaunchTask": "Make",

@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "frontend.h"
+#include ".\..\..\common\src\compiler_tree_dump.h"
 
 int main( int argc, const char *argv[])
 {
@@ -17,6 +18,9 @@ int main( int argc, const char *argv[])
     }
     print_config(log_get_stream(), cfg);
 
+
+    if (cfg.img_dumps_folder)
+       init_img_dumps( cfg.img_dumps_folder );
 
     char *prog_str = read_file_to_str( cfg.input_file_name );
     if (!prog_str)

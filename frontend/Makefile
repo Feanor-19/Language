@@ -13,8 +13,8 @@ CFLAGS = 	-Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef 				\
 OBJ 	= obj
 SRC 	= src
 BIN 	= bin
-CMN 	= .\..\common
-LOGS 	= .\logs
+CMN 	= ./../common
+LOGS 	= ./logs
 
 COMMON_LIB_FOLDER = ./../../../mylibs/
 LIB_NAMES 			= tree onegin
@@ -27,9 +27,9 @@ SOURCES 		= $(wildcard $(SRC)/*.cpp)
 OBJFILES 		= $(patsubst $(SRC)/%,$(OBJ)/%,$(SOURCES:.cpp=.o))
 CMN_SOURCES		= $(wildcard $(CMN)/$(SRC)/*.cpp)
 CMN_OBJFILES	= $(patsubst $(CMN)/$(SRC)/%,$(CMN)/$(OBJ)/%,$(CMN_SOURCES:.cpp=.o))
-OUT 			= $(BIN)\frontend.exe
-DUMP_FOLDER 	= .\dumps
-LATEX_FOLDER 	= .\LaTeX
+OUT 			= $(BIN)/frontend.exe
+DUMP_FOLDER 	= ./dumps
+LATEX_FOLDER 	= ./LaTeX
 
 $(OUT) : $(OBJFILES) $(CMN_OBJFILES)
 	@$(CC) -o $@ $(CFLAGS) $^ $(LIB_HEADERS) $(LIBS)
@@ -43,7 +43,7 @@ $(CMN)/$(OBJ)/%.o : $(CMN)/$(SRC)/%.cpp
 
 .PHONY: run
 run:
-	@$(OUT) -l $(LOGS)\log.txt -i .\prog.txt -o .\compiler_tree.txt
+	@$(OUT) -l $(LOGS)/log.txt -i ./prog.txt -o ./compiler_tree.txt --img-dumps $(DUMP_FOLDER)
 
 .PHONY: clean
 clean:

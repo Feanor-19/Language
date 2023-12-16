@@ -55,27 +55,33 @@ const char *skip_spaces( const char *str )
     return NULL;
 }
 
-TreeNode *new_node_op( Tree *tree_ptr, node_cmn_type_t op )
+TreeNode *new_node_op( Tree *tree_ptr, op_t op )
 {
     assert(tree_ptr);
 
-    TreeNodeData data = { TREE_NODE_TYPE_OP, op };
+    TreeNodeData data = {};
+    data.type = TREE_NODE_TYPE_OP;
+    data.op = op;
     return op_new_TreeNode( tree_ptr, &data );
 }
 
-TreeNode *new_node_num( Tree *tree_ptr, node_cmn_type_t num )
+TreeNode *new_node_num( Tree *tree_ptr, num_t num )
 {
     assert(tree_ptr);
 
-    TreeNodeData data = { TREE_NODE_TYPE_NUM, num };
+    TreeNodeData data = {};
+    data.type = TREE_NODE_TYPE_NUM;
+    data.num = num;
     return op_new_TreeNode( tree_ptr, &data );
 }
 
-TreeNode *new_node_id( Tree *tree_ptr, node_cmn_type_t id )
+TreeNode *new_node_id( Tree *tree_ptr, id_t id )
 {
     assert(tree_ptr);
 
-    TreeNodeData data = { TREE_NODE_TYPE_ID, id };
+    TreeNodeData data = {};
+    data.type = TREE_NODE_TYPE_ID;
+    data.id = id;
     return op_new_TreeNode( tree_ptr, &data );
 }
 
@@ -86,11 +92,26 @@ TreeNodeData get_node_data( TreeNode *node_ptr )
     return *((TreeNodeData*)node_ptr->data_ptr);
 }
 
-int is_node( TreeNode *node_ptr, TreeNodeType type, node_cmn_type_t value )
+int is_node_op( TreeNode *node_ptr, op_t op )
 {
     assert(node_ptr);
 
-    return get_node_data(node_ptr).type == type && get_node_data(node_ptr).value == value;
+    return get_node_data(node_ptr).type == TREE_NODE_TYPE_OP && get_node_data(node_ptr).op == op;
+}
+
+int is_node_num( TreeNode *node_ptr, num_t num )
+{
+    assert(node_ptr);
+
+    return get_node_data(node_ptr).type == TREE_NODE_TYPE_NUM
+        && are_dbls_equal(get_node_data(node_ptr).num, num);
+}
+
+int is_node_id( TreeNode *node_ptr, id_t id )
+{
+    assert(node_ptr);
+
+    return get_node_data(node_ptr).type == TREE_NODE_TYPE_ID && get_node_data(node_ptr).id == id;
 }
 
 void realloc_arr_if_needed( void **arr_ptr, size_t *arr_cap_ptr, size_t arr_ind, size_t elem_size )
@@ -107,4 +128,14 @@ void realloc_arr_if_needed( void **arr_ptr, size_t *arr_cap_ptr, size_t arr_ind,
         *arr_ptr = new_mem;
         *arr_cap_ptr = new_cap;
     }
+}
+
+int is_dbl_zero( double a )
+{
+    return DBL_PRECISION <= a && a <= DBL_PRECISION;
+}
+
+int are_dbls_equal( double a, double b )
+{
+    return is_dbl_zero(a - b);
 }
