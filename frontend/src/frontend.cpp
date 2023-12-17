@@ -11,22 +11,32 @@
 #define FACT_REC_FALL_ARGS comp_prog, prog, curr_ptr
 #define FORMAL_REC_FALL_ARGS CompiledProgram *comp_prog, const char *prog, char **curr_ptr
 #define TREE &comp_prog->tree
+#define NT_GLOBAL comp_prog->nametables.global_vars
+#define NT_FUNCS comp_prog->nametables.funcs
+#define NT_FUNC_VARS comp_prog->nametables.func_vars
+
 
 
 static TreeNode *get_num        ( FORMAL_REC_FALL_ARGS );
 static TreeNode *get_while      ( FORMAL_REC_FALL_ARGS );
 static TreeNode *get_if         ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_primal     ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_unr        ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_mulive     ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_expr       ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_var        ( FORMAL_REC_FALL_ARGS );
 static TreeNode *get_assign     ( FORMAL_REC_FALL_ARGS );
 static TreeNode *get_var_death  ( FORMAL_REC_FALL_ARGS );
 static TreeNode *get_var_birth  ( FORMAL_REC_FALL_ARGS );
 static TreeNode *get_op         ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_operators  ( FORMAL_REC_FALL_ARGS );
 static TreeNode *get_prog       ( FORMAL_REC_FALL_ARGS );
 
 
 
 //! @brief Returns index of given 'ident' in the 'nametable', if found;
-//! otherwise returns -1;
-inline int find_ident_in_nametable( Nametable nametable, Identificator ident )
+//! otherwise returns ABSENT_ID;
+inline id_t find_ident_in_nametable( Nametable nametable, Identificator ident )
 {
     for (size_t ind = 0; ind < nametable.list_curr_len; ind++)
     {
@@ -34,24 +44,62 @@ inline int find_ident_in_nametable( Nametable nametable, Identificator ident )
             return ind;
     }
 
-    return -1;
+    return ABSENT_ID;
 }
 
 //! @brief Returns 1 if ident is not found in any of the comp_prog's nametables, 0 otherwise.
 inline int check_is_ident_fresh( CompiledProgram *comp_prog, Identificator ident )
 {
-    return find_ident_in_nametable( comp_prog->nametables.global_vars, ident )  == -1
-        && find_ident_in_nametable( comp_prog->nametables.funcs,       ident )  == -1
-        && find_ident_in_nametable( comp_prog->nametables.func_vars,   ident )  == -1;
+    return find_ident_in_nametable( NT_GLOBAL, ident )      == ABSENT_ID
+        && find_ident_in_nametable( NT_FUNCS, ident )       == ABSENT_ID
+        && find_ident_in_nametable( NT_FUNC_VARS, ident )   == ABSENT_ID;
 }
 
-static TreeNode *get_var( FORMAL_REC_FALL_ARGS )
+//! @brief States what 'empty identificator' means.
+inline int is_ident_empty( Identificator ident )
 {
-    assert(comp_prog);
-    assert(prog);
-    assert(curr_ptr);
+    return ident.len == 0;
+}
 
+//! @brief Adds given 'ident' into given 'nametable', placing it in
+//! the free place with the least index. If needed, does reallocation.
+//! @return index where 'ident' was placed.
+inline id_t add_ident_into_nametable( Nametable *nametable, Identificator ident )
+{
+    assert(nametable);
 
+    for (size_t ind = 0; ind < nametable->list_curr_len; ind++)
+    {
+        if ( is_ident_empty(nametable->list[ind])  )
+        {
+            nametable->list[ind] = ident;
+            return ind;
+        }
+    }
+
+    REALLOC_ARR_WRP( nametable->list, Identificator );
+    nametable->list[nametable->list_curr_len++] = ident;
+    return nametable->list_curr_len - 1;
+}
+
+//! @brief Founds given 'ident' in the 'nametable' and deletes it.
+//! (replaces it with 'empty identificator'). If this identificator isn't found,
+//! returns 0, otherwise (no errors) returns 1.
+inline int del_ident_from_nametable( Nametable *nametable, Identificator ident )
+{
+    assert(nametable);
+
+    for (size_t ind = 0; ind < nametable->list_curr_len; ind++)
+    {
+        if ( cmp_idents( nametable->list[ind], ident ) )
+        {
+            nametable->list[ind].start = NULL;
+            nametable->list[ind].len = 0;
+            return 1;
+        }
+    }
+
+    return 0;
 }
 
 static TreeNode *get_num( FORMAL_REC_FALL_ARGS )
@@ -60,34 +108,41 @@ static TreeNode *get_num( FORMAL_REC_FALL_ARGS )
     assert(prog);
     assert(curr_ptr);
 
+    Token tkn_num = get_token( CURR );
+    SYN_ASSERT( tkn_num.type == TKN_TYPE_NUM, CURR, "Number" );
 
+    return new_node_num( TREE, tkn_num.num );
 }
 
-static TreeNode *get_num( FORMAL_REC_FALL_ARGS )
+//! @brief Checks is 'tkn' of type 'Keyword' and belongs to
+//! group 'CmpOp'. If yes, returns corresponding OpsInTree,
+//! otherwise returns TREE_OP_DUMMY.
+inline OpsInTree translate_kw_cmp_op( Token tkn )
 {
-    assert(comp_prog);
-    assert(prog);
-    assert(curr_ptr);
-
-
-}
-
-static TreeNode *get_var_death( FORMAL_REC_FALL_ARGS )
-{
-    assert(comp_prog);
-    assert(prog);
-    assert(curr_ptr);
-
-
-}
-
-static TreeNode *get_assign( FORMAL_REC_FALL_ARGS )
-{
-    assert(comp_prog);
-    assert(prog);
-    assert(curr_ptr);
-
-
+    switch (tkn.keyword)
+    {
+    case KW_CmpOp_equal:
+        return TREE_OP_CMP_EQUAL;
+        break;
+    case KW_CmpOp_less:
+        return TREE_OP_CMP_LESS;
+        break;
+    case KW_CmpOp_lessOrEqual:
+        return TREE_OP_CMP_LESS_EQ;
+        break;
+    case KW_CmpOp_more:
+        return TREE_OP_CMP_MORE;
+        break;
+    case KW_CmpOp_moreOrEqual:
+        return TREE_OP_CMP_MORE_EQ;
+        break;
+    case KW_CmpOp_notEqual:
+        return TREE_OP_CMP_NOT_EQ;
+        break;
+    default:
+        return TREE_OP_DUMMY;
+        break;
+    }
 }
 
 static TreeNode *get_if( FORMAL_REC_FALL_ARGS )
@@ -96,7 +151,50 @@ static TreeNode *get_if( FORMAL_REC_FALL_ARGS )
     assert(prog);
     assert(curr_ptr);
 
+    Token tkn_if1 = get_token( CURR );
+    if ( !is_tkn_keyword( tkn_if1, KW_If1 ) )
+        return NULL;
+    CURR += tkn_if1.len;
 
+    TreeNode *node_if = new_node_op( TREE, TREE_OP_IF );
+
+    Token tkn_cond = get_token( CURR );
+    SYN_ASSERT( is_tkn_keyword( tkn_cond, KW_Cond ), CURR, "Keyword Cond" );
+    CURR += tkn_cond.len;
+
+    Token tkn_cmp_op = get_token( CURR );
+    SYN_ASSERT( translate_kw_cmp_op( tkn_cmp_op ) != TREE_OP_DUMMY, CURR, "Comparing operator" );
+    CURR += tkn_cmp_op.len;
+
+    TreeNode *node_cmp_op = new_node_op( TREE, translate_kw_cmp_op(tkn_cmp_op) );
+
+    tree_hang_loose_node_at_left( TREE, node_cmp_op, node_if );
+
+    TreeNode *node_expr_left = get_expr(FACT_REC_FALL_ARGS);
+    SYN_ASSERT( node_expr_left, CURR, "Expression");
+    tree_hang_loose_node_at_left( TREE, node_expr_left, node_cmp_op );
+
+    Token tkn_than = get_token( CURR );
+    SYN_ASSERT( is_tkn_keyword( tkn_than, KW_Than ), CURR, KEYWORDS[KW_Than].str );
+    CURR += tkn_than.len;
+
+    TreeNode *node_expr_right = get_expr(FACT_REC_FALL_ARGS);
+    SYN_ASSERT( node_expr_right, CURR, "Expression");
+    tree_hang_loose_node_at_right( TREE, node_expr_right, node_cmp_op );
+
+    Token tkn_if2 = get_token( CURR );
+    SYN_ASSERT( is_tkn_keyword(tkn_if2, KW_If2), CURR, KEYWORDS[KW_If2].str );
+    CURR += tkn_if2.len;
+
+    TreeNode *node_operators = get_operators( FACT_REC_FALL_ARGS );
+    SYN_ASSERT( node_operators, CURR, "Operators" );
+    tree_hang_loose_node_at_right( TREE, node_operators, node_if );
+
+    Token tkn_if_end = get_token( CURR );
+    SYN_ASSERT( is_tkn_keyword( tkn_if_end, KW_IfEnd ), CURR, KEYWORDS[KW_IfEnd].str )
+    CURR += tkn_if_end.len;
+
+    return node_if;
 }
 
 static TreeNode *get_while( FORMAL_REC_FALL_ARGS )
@@ -105,6 +203,288 @@ static TreeNode *get_while( FORMAL_REC_FALL_ARGS )
     assert(prog);
     assert(curr_ptr);
 
+    Token tkn_while1 = get_token( CURR );
+    if ( !is_tkn_keyword( tkn_while1, KW_While1 ) )
+        return NULL;
+    CURR += tkn_while1.len;
+
+    TreeNode *node_while = new_node_op( TREE, TREE_OP_WHILE );
+
+    Token tkn_cond = get_token( CURR );
+    SYN_ASSERT( is_tkn_keyword( tkn_cond, KW_Cond ), CURR, "Keyword Cond" );
+    CURR += tkn_cond.len;
+
+    Token tkn_cmp_op = get_token( CURR );
+    SYN_ASSERT( translate_kw_cmp_op( tkn_cmp_op ) != TREE_OP_DUMMY, CURR, "Comparing operator" );
+    CURR += tkn_cmp_op.len;
+
+    TreeNode *node_cmp_op = new_node_op( TREE, translate_kw_cmp_op(tkn_cmp_op) );
+
+    tree_hang_loose_node_at_left( TREE, node_cmp_op, node_while );
+
+    TreeNode *node_expr_left = get_expr(FACT_REC_FALL_ARGS);
+    SYN_ASSERT( node_expr_left, CURR, "Expression");
+    tree_hang_loose_node_at_left( TREE, node_expr_left, node_cmp_op );
+
+    Token tkn_than = get_token( CURR );
+    SYN_ASSERT( is_tkn_keyword( tkn_than, KW_Than ), CURR, KEYWORDS[KW_Than].str );
+    CURR += tkn_than.len;
+
+    TreeNode *node_expr_right = get_expr(FACT_REC_FALL_ARGS);
+    SYN_ASSERT( node_expr_right, CURR, "Expression");
+    tree_hang_loose_node_at_right( TREE, node_expr_right, node_cmp_op );
+
+    Token tkn_while2 = get_token( CURR );
+    SYN_ASSERT( is_tkn_keyword(tkn_while2, KW_While2), CURR, KEYWORDS[KW_While2].str );
+    CURR += tkn_while2.len;
+
+    TreeNode *node_operators = get_operators( FACT_REC_FALL_ARGS );
+    SYN_ASSERT( node_operators, CURR, "Operators" );
+    tree_hang_loose_node_at_right( TREE, node_operators, node_while );
+
+    Token tkn_while_end = get_token( CURR );
+    SYN_ASSERT( is_tkn_keyword( tkn_while_end, KW_WhileEnd ), CURR, KEYWORDS[KW_WhileEnd].str )
+    CURR += tkn_while_end.len;
+
+    return node_while;
+}
+
+static TreeNode *get_primal( FORMAL_REC_FALL_ARGS )
+{
+    assert(comp_prog);
+    assert(prog);
+    assert(curr_ptr);
+
+    Token tkn = get_token( CURR );
+    if ( is_tkn_keyword( tkn, KW_BracketOpn ) )
+    {
+        CURR += tkn.len;
+
+        TreeNode *node_expr = get_expr(FACT_REC_FALL_ARGS);
+        SYN_ASSERT(node_expr, CURR, "Expression");
+
+        tkn = get_token( CURR );
+        SYN_ASSERT( is_tkn_sep_char( tkn, SEP_BracketCls ), CURR, "," );
+        CURR += tkn.len;
+
+        return node_expr;
+    }
+    else
+    {
+        TreeNode *node_var = get_var(FACT_REC_FALL_ARGS);
+        SYN_ASSERT( node_var, CURR, "Variable" );
+    }
+
+    SYN_ASSERT( 0, CURR, "BracketOpn or Variable" );
+}
+
+//! @brief Checks is 'tkn' of type 'Keyword' and belongs to
+//! group 'UnrOp'. If yes, returns corresponding OpsInTree,
+//! otherwise returns TREE_OP_DUMMY.
+inline OpsInTree translate_tkn_unr_op( Token tkn )
+{
+    switch (tkn.keyword)
+    {
+    case KW_UnrOp_cos:
+        return TREE_OP_COS;
+        break;
+    case KW_UnrOp_exp:
+        return TREE_OP_EXP;
+        break;
+    case KW_UnrOp_ln:
+        return TREE_OP_LN;
+        break;
+    case KW_UnrOp_minus:
+        return TREE_OP_MINUS;
+        break;
+    case KW_UnrOp_sin:
+        return TREE_OP_SIN;
+        break;
+    case KW_UnrOp_sqrt:
+        return TREE_OP_SQRT;
+        break;
+    default:
+        return TREE_OP_DUMMY;
+        break;
+    }
+}
+
+static TreeNode *get_unr( FORMAL_REC_FALL_ARGS )
+{
+    assert(comp_prog);
+    assert(prog);
+    assert(curr_ptr);
+
+    Token tkn_amp = get_token( CURR );
+    Token tkn_op = get_token( CURR + tkn_amp.len );
+    if ( is_tkn_amp( tkn_amp ) && translate_tkn_unr_op( tkn_op ) != TREE_OP_DUMMY  )
+    {
+        // TODO - отмечать в списке использованных амлпификаторов
+
+        CURR += tkn_amp.len + tkn_op.len;
+
+        TreeNode *node_op = new_node_op( TREE, translate_tkn_unr_op( tkn_op ) );
+
+        TreeNode *node_primal = get_primal( FACT_REC_FALL_ARGS );
+        SYN_ASSERT( node_primal, CURR, "Primal" );
+
+        tree_hang_loose_node_at_right( TREE, node_primal, node_op );
+
+        return node_op;
+    }
+    else
+    {
+        TreeNode *node_primal = get_primal( FACT_REC_FALL_ARGS );
+        SYN_ASSERT( node_primal, CURR, "Primal" );
+        return node_primal;
+    }
+}
+
+static TreeNode *get_mulive( FORMAL_REC_FALL_ARGS )
+{
+    assert(comp_prog);
+    assert(prog);
+    assert(curr_ptr);
+
+    TreeNode *node_mulive = get_unr( FACT_REC_FALL_ARGS );
+    SYN_ASSERT( node_mulive, CURR, "Expression part: unr" );
+
+    Token tkn_amp = {};
+    while ( tkn_amp = get_token(CURR), is_tkn_amp( tkn_amp ) )
+    {
+        // TODO - отмечать в списке использованных амлпификаторов
+
+        Token tkn_op = get_token( CURR + tkn_amp.len ); // not yet sure it is our case
+        if ( tkn_op.type != TKN_TYPE_KEYWORD )
+            break;
+        TreeNode *node_op = NULL;
+        if      ( is_tkn_keyword( tkn_op, KW_OpMul ) )
+            node_op = new_node_op( TREE, TREE_OP_MUL );
+        else if ( is_tkn_keyword( tkn_op, KW_OpDiv ) )
+            node_op = new_node_op( TREE, TREE_OP_DIV );
+        else
+            break;
+        CURR += tkn_amp.len + tkn_op.len; // now sure it is really our case
+
+        TreeNode *node_new_unr = get_unr( FACT_REC_FALL_ARGS );
+        SYN_ASSERT( node_new_unr, CURR, "Unr" );
+
+        tree_hang_loose_node_at_left( TREE, node_mulive, node_op );
+        tree_hang_loose_node_at_right( TREE, node_new_unr, node_op );
+        node_mulive = node_op;
+    }
+
+    return node_mulive;
+}
+
+static TreeNode *get_expr( FORMAL_REC_FALL_ARGS )
+{
+    assert(comp_prog);
+    assert(prog);
+    assert(curr_ptr);
+
+    TreeNode *node_expr = get_mulive( FACT_REC_FALL_ARGS );
+    SYN_ASSERT( node_expr, CURR, "Expression part: mulive" );
+
+    Token tkn_amp = {};
+    while ( tkn_amp = get_token(CURR), is_tkn_amp( tkn_amp ) )
+    {
+        // TODO - отмечать в списке использованных амлпификаторов
+
+        Token tkn_op = get_token( CURR + tkn_amp.len ); // not yet sure it is our case
+        if ( tkn_op.type != TKN_TYPE_KEYWORD )
+            break;
+        TreeNode *node_op = NULL;
+        if      ( is_tkn_keyword( tkn_op, KW_OpAdd ) )
+            node_op = new_node_op( TREE, TREE_OP_ADD );
+        else if ( is_tkn_keyword( tkn_op, KW_OpSub ) )
+            node_op = new_node_op( TREE, TREE_OP_SUB );
+        else
+            break;
+        CURR += tkn_amp.len + tkn_op.len; // now sure it is really our case
+
+        TreeNode *node_new_mulive = get_mulive( FACT_REC_FALL_ARGS );
+        SYN_ASSERT( node_new_mulive, CURR, "Mulive" );
+
+        tree_hang_loose_node_at_left( TREE, node_expr, node_op );
+        tree_hang_loose_node_at_right( TREE, node_new_mulive, node_op );
+        node_expr = node_op;
+    }
+
+    return node_expr;
+}
+
+static TreeNode *get_var( FORMAL_REC_FALL_ARGS )
+{
+    assert(comp_prog);
+    assert(prog);
+    assert(curr_ptr);
+
+    Token tkn_ident = get_token( CURR );
+    if ( tkn_ident.type != TKN_TYPE_ID )
+        return NULL;
+
+    int id = find_ident_in_nametable( NT_GLOBAL, tkn_ident.id );
+    SYN_ASSERT( id != ABSENT_ID, CURR, "Variable" );
+    CURR += tkn_ident.len;
+
+    return new_node_id( TREE, id );
+}
+
+static TreeNode *get_assign( FORMAL_REC_FALL_ARGS )
+{
+    assert(comp_prog);
+    assert(prog);
+    assert(curr_ptr);
+
+    Token asgn1 = get_token( CURR );
+    if ( !is_tkn_keyword( asgn1, KW_Asgn1 ) )
+        return NULL;
+    CURR += asgn1.len;
+
+    TreeNode *node_expr = get_expr( FACT_REC_FALL_ARGS );
+    SYN_ASSERT( node_expr, CURR, "Expression" );
+
+    Token asgn2 = get_token( CURR );
+    SYN_ASSERT( is_tkn_keyword( asgn2, KW_Asgn2 ), CURR, KEYWORDS[KW_Asgn2].str );
+    CURR += asgn2.len;
+
+    TreeNode *node_var = get_var( FACT_REC_FALL_ARGS );
+    SYN_ASSERT( node_var, CURR, "Variable" );
+
+
+    TreeNode *node_assign = new_node_op( TREE, TREE_OP_ASSIGN );
+    tree_hang_loose_node_at_left( TREE, node_expr, node_assign );
+    tree_hang_loose_node_at_right( TREE, node_var, node_assign );
+
+
+    Token dot = get_token( CURR );
+    SYN_ASSERT( is_tkn_sep_char( dot, SEP_Dot ), CURR, "!" );
+    CURR += dot.len;
+
+    return node_assign;
+}
+
+static TreeNode *get_var_death( FORMAL_REC_FALL_ARGS )
+{
+    assert(comp_prog);
+    assert(prog);
+    assert(curr_ptr);
+
+    Token var_death = get_token( CURR );
+    if ( !is_tkn_keyword( var_death, KW_VarDeathOp ) )
+        return NULL;
+    CURR += var_death.len;
+
+    Token var_ident = get_token( CURR );
+    SYN_ASSERT( var_ident.type == TKN_TYPE_ID, CURR, "Identificator" );
+    int res = del_ident_from_nametable( &NT_GLOBAL, var_ident.id );
+    SYN_ASSERT( res == 1, CURR, "Variable" );
+    CURR += var_ident.len;
+
+    TreeNode *node_dummy = new_node_op( TREE, TREE_OP_DUMMY );
+
+    return node_dummy;
 }
 
 static TreeNode *get_var_birth( FORMAL_REC_FALL_ARGS )
@@ -126,14 +506,22 @@ static TreeNode *get_var_birth( FORMAL_REC_FALL_ARGS )
     CURR += units_of.len;
 
     Token tkn_id = get_token( CURR );
-    SYN_ASSERT( tkn_id.type != TKN_TYPE_ID || check_is_ident_fresh( comp_prog, tkn_id.id ) != -1,
-                CURR, "Not mentioned before identificator" );
+    SYN_ASSERT( tkn_id.type != TKN_TYPE_ID || !check_is_ident_fresh( comp_prog, tkn_id.id ),
+                CURR, "A fresh identificator" );
+    CURR += tkn_id.len;
+
+    id_t var_id = add_ident_into_nametable( &NT_GLOBAL, tkn_id.id );
+
+    TreeNode *node_assign = new_node_op( TREE, TREE_OP_ASSIGN );
+    tree_hang_loose_node_at_left( TREE, node_num, node_assign );
+    TreeNode *node_var = new_node_id( TREE, var_id );
+    tree_hang_loose_node_at_right( TREE, node_var, node_assign );
 
     Token dot = get_token( CURR );
     SYN_ASSERT( is_tkn_sep_char(dot, SEP_Dot), CURR, "\'!\'" );
     CURR += units_of.len;
 
-    // TODO -
+    return node_assign;
 }
 
 static TreeNode *get_op( FORMAL_REC_FALL_ARGS )
@@ -155,16 +543,11 @@ static TreeNode *get_op( FORMAL_REC_FALL_ARGS )
     return node_op;
 }
 
-static TreeNode *get_prog( FORMAL_REC_FALL_ARGS )
+static TreeNode *get_operators( FORMAL_REC_FALL_ARGS )
 {
     assert(comp_prog);
     assert(prog);
     assert(curr_ptr);
-
-    // ProgStart
-    Token prog_start = get_token( CURR );
-    SYN_ASSERT( is_tkn_keyword(prog_start, KW_ProgStart), CURR, KEYWORDS[KW_ProgStart].str );
-    CURR += prog_start.len;
 
     // first operator (obligatory)
     TreeNode *node_first_op = get_op( FACT_REC_FALL_ARGS );
@@ -193,12 +576,27 @@ static TreeNode *get_prog( FORMAL_REC_FALL_ARGS )
     if (node_curr_op)
         tree_migrate_into_right( TREE, tree_get_parent(node_curr_op), node_new_op );
 
-    //ProgEnd
-    Token prog_end = get_token( CURR );
-    SYN_ASSERT( is_tkn_keyword(prog_end, KW_ProgEnd), CURR, KEYWORDS[KW_ProgEnd].str );
+    return node_first_op;
+}
+
+static TreeNode *get_prog( FORMAL_REC_FALL_ARGS )
+{
+    assert(comp_prog);
+    assert(prog);
+    assert(curr_ptr);
+
+    Token prog_start = get_token( CURR );
+    SYN_ASSERT( is_tkn_keyword(prog_start, KW_ProgStart), CURR, KEYWORDS[KW_ProgStart].str );
     CURR += prog_start.len;
 
-    return node_first_op;
+    TreeNode *node_operators = get_operators( FACT_REC_FALL_ARGS );
+    SYN_ASSERT( node_operators, CURR, "Operators" );
+
+    Token prog_end = get_token( CURR );
+    SYN_ASSERT( is_tkn_keyword(prog_end, KW_ProgEnd), CURR, KEYWORDS[KW_ProgEnd].str );
+    CURR += prog_end.len;
+
+    return node_operators;
 }
 
 CompiledProgram compile_prog( const char *prog )

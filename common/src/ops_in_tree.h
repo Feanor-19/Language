@@ -4,6 +4,7 @@
 enum OpsInTree
 {
     TREE_OP_SEQ_EXEC            = 1,
+    TREE_OP_DUMMY               = 2,
 
     TREE_OP_ASSIGN              = 51,
     TREE_OP_CMP_MORE            = 52,
@@ -34,6 +35,7 @@ enum OpsInTree
     TREE_OP_SQRT                = 305,
     TREE_OP_LN                  = 306,
     TREE_OP_EXP                 = 307,
+    TREE_OP_MINUS               = 308,
 };
 
 #endif /* OPS_IN_TREE_H */

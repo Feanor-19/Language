@@ -149,3 +149,13 @@ int cmp_idents( Identificator a, Identificator b )
 
     return 1;
 }
+
+// NOTE - не забывать обновлять список амплифайеров
+int is_tkn_amp( Token tkn )
+{
+    return tkn.type == TKN_TYPE_KEYWORD &&
+           (tkn.keyword == KW_Amp_1
+         || tkn.keyword == KW_Amp_2
+         || tkn.keyword == KW_Amp_3
+         || tkn.keyword == KW_Amp_4);
+}

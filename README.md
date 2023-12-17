@@ -67,7 +67,8 @@ Programs written in this programming language try to look like crazy recipes of 
 ### Some notes and details
 
 1. All space symbols are ignored, new line symbols also don't matter, but they separate keywords and other constructions from each other.
-2. Everything surrounded by single `#` is considered a comment and is ignored, e.g. `Quickly Obtain #comment# 10 Units Of Milk!`.
+2. Everything surrounded by single `#` is considered a comment and is ignored, e.g. `Quickly Obtain #comment# 10 Units Of Milk!`. (NOT IMPLEMENTED YET)
+3. Inside functions global variables can't be seen, only formal paramatres and local vars. (NOT IMPLEMENTED YET)
 
 ### Grammar
 
@@ -79,19 +80,20 @@ Note:
 4. `?...?` means some special case.
 
 ```py
-Prog     ::= "ProgStart" Op+ "ProgEnd"
-Op       ::= VarBirth | VarDeath | Assign | If | While
-VarBirth ::= "VarBirthOp" Num "UnitsOf" Id "Dot"
-VarDeath ::= "VarDeathOp" Id<Var> "Dot"
-Assign   ::= "Asgn1" Expr "Asgn2" Id<Var> "Dot"
-Expr     ::= Mulive ( ?Amp (group)? ("OpAdd" | "OpSub") Mulive )*
-Mulive   ::= Unr (  ?Amp (group)? ( "OpMul" | "OpDiv" ) Unr )*
-Unr      ::= (  ?Amp (group)? ?UnrOp (group)? Primal ) | Primal
-Primal   ::= ("BracketOpn" Expr "BracketCls") | Id<Var>
-Id       ::= ['a'-'z','A'-'Z']['a'-'z','A'-'Z','_','0'-'9']*
-Num      ::= <float number>
-If       ::= "If1" "Cond" ?CmpOp (group)? Expr "than" Expr "If2" Op+ "IfEnd"
-While    ::= "While1" "Cond" ?CmpOp (group)? Expr "than" Expr "While2" Op+ "WhileEnd"
+Prog      ::= "ProgStart" Operators "ProgEnd"
+Operators ::= Op+
+Op        ::= VarBirth | VarDeath | Assign | If | While
+VarBirth  ::= "VarBirthOp" Num "UnitsOf" Id "Dot"
+VarDeath  ::= "VarDeathOp" Id<Var> "Dot"
+Assign    ::= "Asgn1" Expr "Asgn2" Id<Var> "Dot"
+Expr      ::= Mulive ( ?Amp (group)? ("OpAdd" | "OpSub") Mulive )*
+Mulive    ::= Unr (  ?Amp (group)? ( "OpMul" | "OpDiv" ) Unr )*
+Unr       ::= (  ?Amp (group)? ?UnrOp (group)? Primal ) | Primal
+Primal    ::= ("BracketOpn" Expr "BracketCls") | Id<Var>
+Id        ::= ['a'-'z','A'-'Z']['a'-'z','A'-'Z','_','0'-'9']*
+Num       ::= <float number>
+If        ::= "If1" "Cond" ?CmpOp (group)? Expr "Than" Expr "If2" Operators "IfEnd"
+While     ::= "While1" "Cond" ?CmpOp (group)? Expr "Than" Expr "While2" Operators "WhileEnd"
 ```
 
 ### Keywords

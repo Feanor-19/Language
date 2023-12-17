@@ -93,6 +93,9 @@ Token get_token( const char *str );
 //! 0 otherwise.
 int is_tkn_keyword( Token tkn, KeywordName keyword );
 
+//! @brief Returns 1 if given token is one of the amplifiers, 0 otherwise.
+int is_tkn_amp( Token tkn );
+
 //! @brief Returns 1 if given token is a separating char
 //! and is the specfied separating char, 0 otherwise.
 int is_tkn_sep_char( Token tkn, SepCharName sep_char );

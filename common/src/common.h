@@ -6,7 +6,8 @@
 
 
 typedef uint32_t op_t;
-typedef uint32_t id_t;
+typedef int32_t id_t;
+#define ABSENT_ID ((id_t) -1)
 typedef float num_t;
 
 
@@ -73,13 +74,12 @@ int is_node_id( TreeNode *node_ptr, id_t id );
 
 void realloc_arr_if_needed( void **arr, size_t *arr_cap_ptr, size_t arr_ind, size_t elem_size );
 
-#define REALLOC_ARR_WRP(arr, elem_t) do {                                               \
-    realloc_arr_if_needed( (void**) &arr, &arr##_cap, arr##_curr_len, sizeof(elem_t) );      \
-    if (!arr)                                                                           \
-        ERROR("REALLOC ERROR: array named \"%s\", "                                     \
-              "attempt to request %d elems of size %d. "                                \
-              "Closing log automatically...",                                           \
-              #arr, 2 * arr##_cap, sizeof(elem_t))                                      \
+#define REALLOC_ARR_WRP(arr, elem_t) do {                                                       \
+    realloc_arr_if_needed( (void**) &(arr), &(arr##_cap), (arr##_curr_len), sizeof(elem_t) );   \
+    if (!(arr))                                                                                 \
+        ERROR("REALLOC ERROR: array named \"%s\", "                                             \
+              "attempt to request %d elems of size %d.",                                        \
+              #arr, 2 * (arr##_cap), sizeof(elem_t));                                           \
 } while (0)
 
 int is_dbl_zero( double a );
