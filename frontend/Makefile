@@ -43,7 +43,7 @@ $(CMN)/$(OBJ)/%.o : $(CMN)/$(SRC)/%.cpp
 
 .PHONY: run
 run:
-	$(OUT) -i prog.txt -o compiler_tree.txt --img-dumps $(DUMP_FOLDER)
+	$(OUT) -i .\\..\\prog.txt -o .\\..\\compiler_tree.txt --img-dumps $(DUMP_FOLDER)\\image_dumps\\
 
 .PHONY: clean
 clean:

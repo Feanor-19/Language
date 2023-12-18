@@ -35,15 +35,18 @@ inline void assemble_cmn_file_name()
 {
     FREE(CMN_FILE_NAME);
 
-    CMN_FILE_NAME = (char *) calloc( FILE_NAME_LEN, sizeof(char) );
+    CMN_FILE_NAME = (char *) calloc( FILE_NAME_LEN + 1, sizeof(char) );
 
     char *name_ptr = CMN_FILE_NAME;
 
     strcpy( name_ptr, FOLDER_PATH );
     name_ptr += FOLDER_PATH_LEN;
 
-    *name_ptr = '\\';
-    name_ptr += 1;
+    if ( FOLDER_PATH[FOLDER_PATH_LEN - 1] != '\\' )
+    {
+        *name_ptr = '\\';
+        name_ptr += 1;
+    }
 
     sprintf( name_ptr, "%0" DUMP_FILE_DIGITS_COUNT_AS_STR "d", 0 );
     name_ptr += DUMP_FILE_DIGITS_COUNT_AS_NUM;
@@ -55,7 +58,7 @@ inline void assemble_cmn_cmd()
 {
     FREE(CMN_CMD);
 
-    CMN_CMD = (char*) calloc(  CMD_PART_1_LEN + 2*FILE_NAME_LEN + CMD_PART_2_LEN, sizeof(char) );
+    CMN_CMD = (char*) calloc(  CMD_PART_1_LEN + 2*FILE_NAME_LEN + CMD_PART_2_LEN + 1, sizeof(char) );
 
     char *ptr = CMN_CMD;
 
@@ -93,7 +96,8 @@ void init_img_dumps( const char *folder_path )
         FOLDER_PATH = folder_path;
         FOLDER_PATH_LEN = strlen(FOLDER_PATH);
         EXTENSION_LEN = strlen(DUMP_DOT_EXTENSION);
-        FILE_NAME_LEN = FOLDER_PATH_LEN + 1 + DUMP_FILE_DIGITS_COUNT_AS_NUM + 1 + EXTENSION_LEN;
+        FILE_NAME_LEN = FOLDER_PATH_LEN + ( FOLDER_PATH[FOLDER_PATH_LEN - 1] != '\\' )
+                        + DUMP_FILE_DIGITS_COUNT_AS_NUM + 1 + EXTENSION_LEN;
 
         assemble_cmn_file_name();
 
@@ -127,11 +131,11 @@ inline FILE *create_and_open_dot_file()
 
 inline void run_dot_to_create_database_img()
 {
-    size_t dot_file_digits_start = CMD_PART_1_LEN + FOLDER_PATH_LEN + 1;
+    size_t dot_file_digits_start = CMD_PART_1_LEN + FOLDER_PATH_LEN;
     sprintf( CMN_CMD + dot_file_digits_start, "%0" DUMP_FILE_DIGITS_COUNT_AS_STR "d", counter );
     CMN_CMD[dot_file_digits_start + DUMP_FILE_DIGITS_COUNT_AS_NUM] = '.';
 
-    size_t img_file_digits_start = CMD_PART_1_LEN + FILE_NAME_LEN + CMD_PART_2_LEN + FOLDER_PATH_LEN + 1;
+    size_t img_file_digits_start = CMD_PART_1_LEN + FILE_NAME_LEN + CMD_PART_2_LEN + FOLDER_PATH_LEN;
     sprintf( CMN_CMD + img_file_digits_start, "%0" DUMP_FILE_DIGITS_COUNT_AS_STR "d", counter );
     CMN_CMD[img_file_digits_start + DUMP_FILE_DIGITS_COUNT_AS_NUM] = '.';
 

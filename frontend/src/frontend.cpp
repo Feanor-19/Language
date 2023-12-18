@@ -633,7 +633,7 @@ CompiledProgram compile_prog( const char *prog )
 
     tree_hang_loose_node_as_root( &comp_prog.tree, root );
 
-    // dump_compiler_tree( &comp_prog.tree );
+    dump_compiler_tree( &comp_prog.tree );
 
     return comp_prog;
 }

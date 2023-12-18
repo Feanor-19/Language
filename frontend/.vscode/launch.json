@@ -15,7 +15,7 @@
                     "-o",
                     ".\\..\\compiler_tree.txt",
                     "--img-dumps",
-                    ".\\dumps\\image_dumps"
+                    ".\\dumps\\image_dumps\\"
                     ],
             "cwd": "${workspaceFolder}",
             "preLaunchTask": "Make",
