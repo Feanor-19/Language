@@ -53,10 +53,10 @@ const size_t NAMES_DEFAULT_COUNT    = 5;
 const size_t ERROR_MSG_LEN          = 20;
 
 
-#define SYN_ASSERT( cond, str, expected ) if (!(cond))    \
-{                                                       \
-    print_rec_fall_err_msg( str, expected );            \
-    return NULL;                                        \
+#define SYN_ASSERT( cond, prog, error_ptr, expected ) if (!(cond))  \
+{                                                                   \
+    print_rec_fall_err_msg( prog, error_ptr, expected );            \
+    return NULL;                                                    \
 }
 
 
@@ -72,7 +72,7 @@ void CompiledProgram_dtor( CompiledProgram *comp_prog_ptr );
 
 void print_tree_node_data( FILE *stream, void *data_ptr );
 
-void print_rec_fall_err_msg( const char *str, const char *expected );
+void print_rec_fall_err_msg( const char *prog, const char *error_ptr, const char *expected );
 
 Status nametable_ctor( Nametable *nt_ptr );
 

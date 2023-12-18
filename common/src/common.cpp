@@ -278,3 +278,13 @@ int are_dbls_equal( double a, double b )
 {
     return is_dbl_zero(a - b);
 }
+
+void put_n_chars( FILE *stream, char c, size_t n )
+{
+    assert(stream);
+
+    while (n-- > 0)
+    {
+        putc( c, stream );
+    }
+}

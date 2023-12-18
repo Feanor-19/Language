@@ -96,4 +96,6 @@ int is_dbl_zero( double a );
 
 int are_dbls_equal( double a, double b );
 
+void put_n_chars( FILE *stream, char c, size_t n );
+
 #endif /* COMMON_H */

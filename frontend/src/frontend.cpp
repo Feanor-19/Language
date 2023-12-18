@@ -109,7 +109,7 @@ static TreeNode *get_num( FORMAL_REC_FALL_ARGS )
     assert(curr_ptr);
 
     Token tkn_num = get_token( CURR );
-    SYN_ASSERT( tkn_num.type == TKN_TYPE_NUM, CURR, "Number" );
+    SYN_ASSERT( tkn_num.type == TKN_TYPE_NUM, prog, CURR, "Number" );
     MOVE_CURR_TO_END_OF_TOKEN( tkn_num );
 
     return new_node_num( TREE, tkn_num.num );
@@ -166,11 +166,11 @@ static TreeNode *get_if( FORMAL_REC_FALL_ARGS )
     TreeNode *node_if = new_node_op( TREE, TREE_OP_IF );
 
     Token tkn_cond = get_token( CURR );
-    SYN_ASSERT( is_tkn_keyword( tkn_cond, KW_Cond ), CURR, "Keyword Cond" );
+    SYN_ASSERT( is_tkn_keyword( tkn_cond, KW_Cond ), prog, CURR, "Keyword Cond" );
     MOVE_CURR_TO_END_OF_TOKEN(tkn_cond);
 
     Token tkn_cmp_op = get_token( CURR );
-    SYN_ASSERT( translate_kw_cmp_op( tkn_cmp_op ) != TREE_OP_DUMMY, CURR, "Comparing operator" );
+    SYN_ASSERT( translate_kw_cmp_op( tkn_cmp_op ) != TREE_OP_DUMMY, prog, CURR, "Comparing operator" );
     MOVE_CURR_TO_END_OF_TOKEN(tkn_cmp_op);
 
     TreeNode *node_cmp_op = new_node_op( TREE, translate_kw_cmp_op(tkn_cmp_op) );
@@ -178,27 +178,27 @@ static TreeNode *get_if( FORMAL_REC_FALL_ARGS )
     tree_hang_loose_node_at_left( TREE, node_cmp_op, node_if );
 
     TreeNode *node_expr_left = get_expr(FACT_REC_FALL_ARGS);
-    SYN_ASSERT( node_expr_left, CURR, "Expression");
+    SYN_ASSERT( node_expr_left, prog, CURR, "Expression");
     tree_hang_loose_node_at_left( TREE, node_expr_left, node_cmp_op );
 
     Token tkn_than = get_token( CURR );
-    SYN_ASSERT( is_tkn_keyword( tkn_than, KW_Than ), CURR, KEYWORDS[KW_Than].str );
+    SYN_ASSERT( is_tkn_keyword( tkn_than, KW_Than ), prog, CURR, KEYWORDS[KW_Than].str );
     MOVE_CURR_TO_END_OF_TOKEN(tkn_than);
 
     TreeNode *node_expr_right = get_expr(FACT_REC_FALL_ARGS);
-    SYN_ASSERT( node_expr_right, CURR, "Expression");
+    SYN_ASSERT( node_expr_right, prog, CURR, "Expression");
     tree_hang_loose_node_at_right( TREE, node_expr_right, node_cmp_op );
 
     Token tkn_if2 = get_token( CURR );
-    SYN_ASSERT( is_tkn_keyword(tkn_if2, KW_If2), CURR, KEYWORDS[KW_If2].str );
+    SYN_ASSERT( is_tkn_keyword(tkn_if2, KW_If2), prog, CURR, KEYWORDS[KW_If2].str );
     MOVE_CURR_TO_END_OF_TOKEN(tkn_if2);
 
     TreeNode *node_operators = get_operators( FACT_REC_FALL_ARGS );
-    SYN_ASSERT( node_operators, CURR, "Operators" );
+    SYN_ASSERT( node_operators, prog, CURR, "Operators" );
     tree_hang_loose_node_at_right( TREE, node_operators, node_if );
 
     Token tkn_if_end = get_token( CURR );
-    SYN_ASSERT( is_tkn_keyword( tkn_if_end, KW_IfEnd ), CURR, KEYWORDS[KW_IfEnd].str )
+    SYN_ASSERT( is_tkn_keyword( tkn_if_end, KW_IfEnd ), prog, CURR, KEYWORDS[KW_IfEnd].str )
     MOVE_CURR_TO_END_OF_TOKEN(tkn_if_end);
 
     return node_if;
@@ -218,11 +218,11 @@ static TreeNode *get_while( FORMAL_REC_FALL_ARGS )
     TreeNode *node_while = new_node_op( TREE, TREE_OP_WHILE );
 
     Token tkn_cond = get_token( CURR );
-    SYN_ASSERT( is_tkn_keyword( tkn_cond, KW_Cond ), CURR, "Keyword Cond" );
+    SYN_ASSERT( is_tkn_keyword( tkn_cond, KW_Cond ), prog, CURR, "Keyword Cond" );
     MOVE_CURR_TO_END_OF_TOKEN(tkn_cond);
 
     Token tkn_cmp_op = get_token( CURR );
-    SYN_ASSERT( translate_kw_cmp_op( tkn_cmp_op ) != TREE_OP_DUMMY, CURR, "Comparing operator" );
+    SYN_ASSERT( translate_kw_cmp_op( tkn_cmp_op ) != TREE_OP_DUMMY, prog, CURR, "Comparing operator" );
     MOVE_CURR_TO_END_OF_TOKEN(tkn_cmp_op);
 
     TreeNode *node_cmp_op = new_node_op( TREE, translate_kw_cmp_op(tkn_cmp_op) );
@@ -230,27 +230,27 @@ static TreeNode *get_while( FORMAL_REC_FALL_ARGS )
     tree_hang_loose_node_at_left( TREE, node_cmp_op, node_while );
 
     TreeNode *node_expr_left = get_expr(FACT_REC_FALL_ARGS);
-    SYN_ASSERT( node_expr_left, CURR, "Expression");
+    SYN_ASSERT( node_expr_left, prog, CURR, "Expression");
     tree_hang_loose_node_at_left( TREE, node_expr_left, node_cmp_op );
 
     Token tkn_than = get_token( CURR );
-    SYN_ASSERT( is_tkn_keyword( tkn_than, KW_Than ), CURR, KEYWORDS[KW_Than].str );
+    SYN_ASSERT( is_tkn_keyword( tkn_than, KW_Than ), prog, CURR, KEYWORDS[KW_Than].str );
     MOVE_CURR_TO_END_OF_TOKEN(tkn_than);
 
     TreeNode *node_expr_right = get_expr(FACT_REC_FALL_ARGS);
-    SYN_ASSERT( node_expr_right, CURR, "Expression");
+    SYN_ASSERT( node_expr_right, prog, CURR, "Expression");
     tree_hang_loose_node_at_right( TREE, node_expr_right, node_cmp_op );
 
     Token tkn_while2 = get_token( CURR );
-    SYN_ASSERT( is_tkn_keyword(tkn_while2, KW_While2), CURR, KEYWORDS[KW_While2].str );
+    SYN_ASSERT( is_tkn_keyword(tkn_while2, KW_While2), prog, CURR, KEYWORDS[KW_While2].str );
     MOVE_CURR_TO_END_OF_TOKEN(tkn_while2);
 
     TreeNode *node_operators = get_operators( FACT_REC_FALL_ARGS );
-    SYN_ASSERT( node_operators, CURR, "Operators" );
+    SYN_ASSERT( node_operators, prog, CURR, "Operators" );
     tree_hang_loose_node_at_right( TREE, node_operators, node_while );
 
     Token tkn_while_end = get_token( CURR );
-    SYN_ASSERT( is_tkn_keyword( tkn_while_end, KW_WhileEnd ), CURR, KEYWORDS[KW_WhileEnd].str )
+    SYN_ASSERT( is_tkn_keyword( tkn_while_end, KW_WhileEnd ), prog, CURR, KEYWORDS[KW_WhileEnd].str )
     MOVE_CURR_TO_END_OF_TOKEN(tkn_while_end);
 
     return node_while;
@@ -268,10 +268,10 @@ static TreeNode *get_primal( FORMAL_REC_FALL_ARGS )
         MOVE_CURR_TO_END_OF_TOKEN(tkn);
 
         TreeNode *node_expr = get_expr(FACT_REC_FALL_ARGS);
-        SYN_ASSERT(node_expr, CURR, "Expression");
+        SYN_ASSERT(node_expr, prog, CURR, "Expression");
 
         tkn = get_token( CURR );
-        SYN_ASSERT( is_tkn_sep_char( tkn, SEP_BracketCls ), CURR, "," );
+        SYN_ASSERT( is_tkn_sep_char( tkn, SEP_BracketCls ), prog, CURR, "," );
         MOVE_CURR_TO_END_OF_TOKEN(tkn);
 
         return node_expr;
@@ -279,12 +279,12 @@ static TreeNode *get_primal( FORMAL_REC_FALL_ARGS )
     else
     {
         TreeNode *node_var = get_var(FACT_REC_FALL_ARGS);
-        SYN_ASSERT( node_var, CURR, "Variable" );
+        SYN_ASSERT( node_var, prog, CURR, "Variable" );
 
         return node_var;
     }
 
-    SYN_ASSERT( 0, CURR, "BracketOpn or Variable" );
+    SYN_ASSERT( 0, prog, CURR, "BracketOpn or Variable" );
 }
 
 //! @brief Checks is 'tkn' of type 'Keyword' and belongs to
@@ -340,7 +340,7 @@ static TreeNode *get_unr( FORMAL_REC_FALL_ARGS )
         TreeNode *node_op = new_node_op( TREE, translate_tkn_unr_op( tkn_op ) );
 
         TreeNode *node_primal = get_primal( FACT_REC_FALL_ARGS );
-        SYN_ASSERT( node_primal, CURR, "Primal" );
+        SYN_ASSERT( node_primal, prog, CURR, "Primal" );
 
         tree_hang_loose_node_at_right( TREE, node_primal, node_op );
 
@@ -349,7 +349,7 @@ static TreeNode *get_unr( FORMAL_REC_FALL_ARGS )
     else
     {
         TreeNode *node_primal = get_primal( FACT_REC_FALL_ARGS );
-        SYN_ASSERT( node_primal, CURR, "Primal" );
+        SYN_ASSERT( node_primal, prog, CURR, "Primal" );
         return node_primal;
     }
 }
@@ -361,7 +361,7 @@ static TreeNode *get_mulive( FORMAL_REC_FALL_ARGS )
     assert(curr_ptr);
 
     TreeNode *node_mulive = get_unr( FACT_REC_FALL_ARGS );
-    SYN_ASSERT( node_mulive, CURR, "Expression part: unr" );
+    SYN_ASSERT( node_mulive, prog, CURR, "Expression part: unr" );
 
     Token tkn_amp = {};
     while ( tkn_amp = get_token(CURR), is_tkn_amp( tkn_amp ) )
@@ -381,7 +381,7 @@ static TreeNode *get_mulive( FORMAL_REC_FALL_ARGS )
         MOVE_CURR_TO_END_OF_TOKEN(tkn_op); // now sure it is really our case
 
         TreeNode *node_new_unr = get_unr( FACT_REC_FALL_ARGS );
-        SYN_ASSERT( node_new_unr, CURR, "Unr" );
+        SYN_ASSERT( node_new_unr, prog, CURR, "Unr" );
 
         tree_hang_loose_node_at_left( TREE, node_mulive, node_op );
         tree_hang_loose_node_at_right( TREE, node_new_unr, node_op );
@@ -398,7 +398,7 @@ static TreeNode *get_expr( FORMAL_REC_FALL_ARGS )
     assert(curr_ptr);
 
     TreeNode *node_expr = get_mulive( FACT_REC_FALL_ARGS );
-    SYN_ASSERT( node_expr, CURR, "Expression part: mulive" );
+    SYN_ASSERT( node_expr, prog, CURR, "Expression part: mulive" );
 
     Token tkn_amp = {};
     while ( tkn_amp = get_token(CURR), is_tkn_amp( tkn_amp ) )
@@ -418,7 +418,7 @@ static TreeNode *get_expr( FORMAL_REC_FALL_ARGS )
         MOVE_CURR_TO_END_OF_TOKEN(tkn_op); // now sure it is really our case
 
         TreeNode *node_new_mulive = get_mulive( FACT_REC_FALL_ARGS );
-        SYN_ASSERT( node_new_mulive, CURR, "Mulive" );
+        SYN_ASSERT( node_new_mulive, prog, CURR, "Mulive" );
 
         tree_hang_loose_node_at_left( TREE, node_expr, node_op );
         tree_hang_loose_node_at_right( TREE, node_new_mulive, node_op );
@@ -439,7 +439,7 @@ static TreeNode *get_var( FORMAL_REC_FALL_ARGS )
         return NULL;
 
     id_t id = find_ident_in_nametable( NT_GLOBAL, tkn_ident.id );
-    SYN_ASSERT( id != ABSENT_ID, CURR, "Variable" );
+    SYN_ASSERT( id != ABSENT_ID, prog, CURR, "Variable" );
     MOVE_CURR_TO_END_OF_TOKEN(tkn_ident);
 
     return new_node_id( TREE, id );
@@ -457,14 +457,14 @@ static TreeNode *get_assign( FORMAL_REC_FALL_ARGS )
     MOVE_CURR_TO_END_OF_TOKEN(asgn1);
 
     TreeNode *node_expr = get_expr( FACT_REC_FALL_ARGS );
-    SYN_ASSERT( node_expr, CURR, "Expression" );
+    SYN_ASSERT( node_expr, prog, CURR, "Expression" );
 
     Token asgn2 = get_token( CURR );
-    SYN_ASSERT( is_tkn_keyword( asgn2, KW_Asgn2 ), CURR, KEYWORDS[KW_Asgn2].str );
+    SYN_ASSERT( is_tkn_keyword( asgn2, KW_Asgn2 ), prog, CURR, KEYWORDS[KW_Asgn2].str );
     MOVE_CURR_TO_END_OF_TOKEN(asgn2);
 
     TreeNode *node_var = get_var( FACT_REC_FALL_ARGS );
-    SYN_ASSERT( node_var, CURR, "Variable" );
+    SYN_ASSERT( node_var, prog, CURR, "Variable" );
 
 
     TreeNode *node_assign = new_node_op( TREE, TREE_OP_ASSIGN );
@@ -473,7 +473,7 @@ static TreeNode *get_assign( FORMAL_REC_FALL_ARGS )
 
 
     Token dot = get_token( CURR );
-    SYN_ASSERT( is_tkn_sep_char( dot, SEP_Dot ), CURR, "!" );
+    SYN_ASSERT( is_tkn_sep_char( dot, SEP_Dot ), prog, CURR, "!" );
     MOVE_CURR_TO_END_OF_TOKEN(dot);
 
     return node_assign;
@@ -491,15 +491,15 @@ static TreeNode *get_var_death( FORMAL_REC_FALL_ARGS )
     MOVE_CURR_TO_END_OF_TOKEN(var_death);
 
     Token var_ident = get_token( CURR );
-    SYN_ASSERT( var_ident.type == TKN_TYPE_ID, CURR, "Identificator" );
+    SYN_ASSERT( var_ident.type == TKN_TYPE_ID, prog, CURR, "Identificator" );
     int res = del_ident_from_nametable( &NT_GLOBAL, var_ident.id );
-    SYN_ASSERT( res == 1, CURR, "Variable" );
+    SYN_ASSERT( res == 1, prog, CURR, "Variable" );
     MOVE_CURR_TO_END_OF_TOKEN(var_ident);
 
     TreeNode *node_dummy = new_node_op( TREE, TREE_OP_DUMMY );
 
     Token dot = get_token( CURR );
-    SYN_ASSERT( is_tkn_sep_char(dot, SEP_Dot), CURR, "\'!\'" );
+    SYN_ASSERT( is_tkn_sep_char(dot, SEP_Dot), prog, CURR, "\'!\'" );
     MOVE_CURR_TO_END_OF_TOKEN(dot);
 
     return node_dummy;
@@ -517,14 +517,14 @@ static TreeNode *get_var_birth( FORMAL_REC_FALL_ARGS )
     MOVE_CURR_TO_END_OF_TOKEN(var_birth);
 
     TreeNode *node_num = get_num( FACT_REC_FALL_ARGS );
-    SYN_ASSERT(node_num, CURR, "Number");
+    SYN_ASSERT(node_num, prog, CURR, "Number");
 
     Token units_of = get_token( CURR );
-    SYN_ASSERT( is_tkn_keyword(units_of, KW_UnitsOf), CURR, KEYWORDS[KW_UnitsOf].str );
+    SYN_ASSERT( is_tkn_keyword(units_of, KW_UnitsOf), prog, CURR, KEYWORDS[KW_UnitsOf].str );
     MOVE_CURR_TO_END_OF_TOKEN(units_of);
 
     Token tkn_id = get_token( CURR );
-    SYN_ASSERT( tkn_id.type != TKN_TYPE_ID || check_is_ident_fresh( comp_prog, tkn_id.id ),
+    SYN_ASSERT( tkn_id.type != TKN_TYPE_ID || check_is_ident_fresh( comp_prog, tkn_id.id ), prog,
                 CURR, "A fresh identificator" );
     MOVE_CURR_TO_END_OF_TOKEN(tkn_id);
 
@@ -536,7 +536,7 @@ static TreeNode *get_var_birth( FORMAL_REC_FALL_ARGS )
     tree_hang_loose_node_at_right( TREE, node_var, node_assign );
 
     Token dot = get_token( CURR );
-    SYN_ASSERT( is_tkn_sep_char(dot, SEP_Dot), CURR, "\'!\'" );
+    SYN_ASSERT( is_tkn_sep_char(dot, SEP_Dot), prog, CURR, "\'!\'" );
     MOVE_CURR_TO_END_OF_TOKEN(dot);
 
     return node_assign;
@@ -567,7 +567,7 @@ static TreeNode *get_operators( FORMAL_REC_FALL_ARGS )
 
     // first operator (obligatory)
     TreeNode *node_first_op = get_op( FACT_REC_FALL_ARGS );
-    SYN_ASSERT( node_first_op, CURR, "Operator" );
+    SYN_ASSERT( node_first_op, prog, CURR, "Operator" );
 
     // other operators (optional)
     TreeNode *node_new_op   = NULL;
@@ -602,14 +602,14 @@ static TreeNode *get_prog( FORMAL_REC_FALL_ARGS )
     assert(curr_ptr);
 
     Token prog_start = get_token( CURR );
-    SYN_ASSERT( is_tkn_keyword(prog_start, KW_ProgStart), CURR, KEYWORDS[KW_ProgStart].str );
+    SYN_ASSERT( is_tkn_keyword(prog_start, KW_ProgStart), prog, CURR, KEYWORDS[KW_ProgStart].str );
     MOVE_CURR_TO_END_OF_TOKEN(prog_start);
 
     TreeNode *node_operators = get_operators( FACT_REC_FALL_ARGS );
-    SYN_ASSERT( node_operators, CURR, "Operators" );
+    SYN_ASSERT( node_operators, prog, CURR, "Operators" );
 
     Token prog_end = get_token( CURR );
-    SYN_ASSERT( is_tkn_keyword(prog_end, KW_ProgEnd), CURR, KEYWORDS[KW_ProgEnd].str );
+    SYN_ASSERT( is_tkn_keyword(prog_end, KW_ProgEnd), prog, CURR, KEYWORDS[KW_ProgEnd].str );
     MOVE_CURR_TO_END_OF_TOKEN(prog_end);
 
     return node_operators;
@@ -670,18 +670,39 @@ void print_tree_node_data( FILE *stream, void *data_ptr )
     }
 }
 
-void print_rec_fall_err_msg( const char *str, const char *expected )
+void print_rec_fall_err_msg( const char *prog, const char *error_ptr, const char *expected )
 {
-    assert(str);
+    assert(prog);
+    assert(error_ptr);
     assert(expected);
 
+    // TODO - ИДЕЯ ПРО КОММЕНТАРИИ: сделать свой ISSPACE, который с помощью
+    // static переменной понимает, находится ли он внутри комментария или нет, и соответственно выдает
+    while ( isspace(*error_ptr) )
+        error_ptr++;
+
     ERROR("Syntax error: expected <%s>, found:", expected);
-    char found[ERROR_MSG_LEN + 1] = "";
-    for (size_t ind = 0; ind < ERROR_MSG_LEN && str[ind] != '\0'; ind++)
+
+    const char *line_start = error_ptr;
+    while ( *line_start != '\n' && line_start != prog )
+        line_start--;
+
+    if ( *line_start == '\n' )
+        line_start++;
+
+    FILE *err_stream = log_get_stream();
+
+    const char *ptr = line_start;
+    while ( *ptr != '\n' && *ptr != '\0' )
     {
-        found[ind] = str[ind];
+        putc( *ptr, err_stream );
+        ptr++;
     }
-    ERROR( "%s\n", found );
+    putc( '\n', err_stream );
+
+    put_n_chars( err_stream, ' ', error_ptr - line_start );
+    putc( '^', err_stream );
+    putc( '\n', err_stream );
 }
 
 void print_status_message( FILE *stream, Status status )
