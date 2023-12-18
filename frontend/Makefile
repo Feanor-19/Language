@@ -27,8 +27,8 @@ SOURCES 		= $(wildcard $(SRC)/*.cpp)
 OBJFILES 		= $(patsubst $(SRC)/%,$(OBJ)/%,$(SOURCES:.cpp=.o))
 CMN_SOURCES		= $(wildcard $(CMN)/$(SRC)/*.cpp)
 CMN_OBJFILES	= $(patsubst $(CMN)/$(SRC)/%,$(CMN)/$(OBJ)/%,$(CMN_SOURCES:.cpp=.o))
-OUT 			= $(BIN)/frontend.exe
-DUMP_FOLDER 	= ./dumps
+OUT 			= ./$(BIN)/frontend.exe
+DUMP_FOLDER 	= dumps
 LATEX_FOLDER 	= ./LaTeX
 
 $(OUT) : $(OBJFILES) $(CMN_OBJFILES)
@@ -43,7 +43,7 @@ $(CMN)/$(OBJ)/%.o : $(CMN)/$(SRC)/%.cpp
 
 .PHONY: run
 run:
-	@$(OUT) -l $(LOGS)/log.txt -i ./prog.txt -o ./compiler_tree.txt --img-dumps $(DUMP_FOLDER)
+	$(OUT) -i prog.txt -o compiler_tree.txt --img-dumps $(DUMP_FOLDER)
 
 .PHONY: clean
 clean:

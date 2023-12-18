@@ -38,6 +38,10 @@ Default configuration (all files are located in the root folder):
 2. Output file: `compiler_tree.txt`.
 3. Log file: `stdout`.
 
+#### Speicifc command line flags
+
+1. `--img-dumps` - turns on image dumps and specifies folder for this dumps.
+
 ### Compiler Middleend
 
 Run `middleend.exe` or `make run_middle` from root folder.

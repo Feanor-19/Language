@@ -9,7 +9,7 @@
             "name": "Launch",
             "request": "launch",
             "program": "${workspaceFolder}/bin/frontend.exe",
-            "args": [],
+            "args": ["--img-dumps", "dumps"],
             "cwd": "${workspaceFolder}",
             "preLaunchTask": "Make",
         }

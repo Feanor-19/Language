@@ -29,22 +29,6 @@ int main( int argc, const char *argv[])
         return STATUS_ERROR_CANT_READ_INPUT_FILE;
     }
 
-    // DEBUG
-    printf("<%s>\n", prog_str);
-
-    const char *str = "The Following Prepared Beforehand: blah blah blah";
-    Token tkn = get_token( str );
-    if ( tkn.type == TKN_TYPE_KEYWORD )
-    {
-        printf( "Found keyword: <%s>\n", KEYWORDS[tkn.keyword].str );
-        printf( "<%s>\n", str + tkn.len );
-    }
-    else
-    {
-        printf( "not found keyword :(\n");
-    }
-    // DEBUG
-
     CompiledProgram compiled_prog = compile_prog( prog_str );
 
     // write into file(s)
