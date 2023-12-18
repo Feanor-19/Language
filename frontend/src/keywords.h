@@ -1,12 +1,10 @@
 DEF_KEYWORD( Amp_1, "Angrily" )
 
-DEF_KEYWORD( While1, "As long as" )
+DEF_KEYWORD( While1, "As Long As" )
 
 DEF_KEYWORD( UnrOp_cos, "Diced" )
 
 DEF_KEYWORD( OpMul, "Fried With" )
-
-DEF_KEYWORD( WhileEnd, "Go Further If You Are Tired Of Repetition!" )
 
 DEF_KEYWORD( UnrOp_exp, "Grated" )
 
@@ -30,7 +28,9 @@ DEF_KEYWORD( Asgn1, "Place" )
 
 DEF_KEYWORD( VarBirthOp, "Quickly Obtain" )
 
-DEF_KEYWORD( While2, "Repeat the following:" )
+DEF_KEYWORD( While2, "Repeat The Following:" )
+
+DEF_KEYWORD( WhileEnd, "Repeat Until Ready And Then Go Further!" )
 
 DEF_KEYWORD( Asgn2, "Right Into" )
 

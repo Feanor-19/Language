@@ -30,7 +30,7 @@ Please, see corresponding `*_statuses.h`.
 
 ### Compiler Frontend
 
-Run `frontend.exe` or `make run_front` from root folder.
+Run `frontend.exe` or `make run_front` (sometimes doesn't work propely, I really don't know why) from root folder.
 
 Default configuration (all files are located in the root folder):
 
@@ -44,7 +44,7 @@ Default configuration (all files are located in the root folder):
 
 ### Compiler Middleend
 
-Run `middleend.exe` or `make run_middle` from root folder.
+Run `middleend.exe` or `make run_middle` (sometimes doesn't work propely, I really don't know why) from root folder.
 
 Default configuration (all files are located in the root folder):
 
@@ -54,7 +54,7 @@ Default configuration (all files are located in the root folder):
 
 ### Compiler Backend
 
-Run `backend.exe` or `make run_back` from root folder.
+Run `backend.exe` or `make run_back` (sometimes doesn't work propely, I really don't know why) from root folder.
 
 Default configuration (all files are located in the root folder):
 
@@ -137,9 +137,9 @@ While     ::= "While1" "Cond" ?CmpOp (group)? Expr "Than" Expr "While2" Operator
 |UnrOp_sqrt|Peeled|
 |VarBirthOp|Quickly Obtain|
 |VarDeathOp|Throw Away|
-|While1|As long as|
-|While2|Repeat the following:|
-|WhileEnd|Go Further If You Are Tired Of Repetition!|
+|While1|As Long As|
+|While2|Repeat The Following:|
+|WhileEnd|Repeat Until Ready And Then Go Further!|
 
 ### Separating symbols
 
