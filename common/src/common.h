@@ -13,9 +13,9 @@ typedef float num_t;
 
 enum TreeNodeType
 {
-    TREE_NODE_TYPE_OP,
-    TREE_NODE_TYPE_NUM,
-    TREE_NODE_TYPE_ID,
+    TREE_NODE_TYPE_OP   = 1,
+    TREE_NODE_TYPE_NUM  = 2,
+    TREE_NODE_TYPE_ID   = 3,
 };
 
 struct TreeNodeData
@@ -47,6 +47,16 @@ const double DBL_PRECISION              = 1E-10;
 //! @brief Reads file with 'file_name' to dynamically allocated string
 //! and returns it. If some error happens, returns NULL.
 char *read_file_to_str( const char *file_name );
+
+//! @brief Writes given tree to the given file. Returns 1 if
+//! all's ok, 0 if some error happens.
+int write_tree_to_file( const char *file_name, const Tree *tree_ptr );
+
+//! @brief Reads tree from the given file. Returns 1 if
+//! all's ok, 0 if some error happens.
+//! @note Given tree is NOT ctored() by this func, YOU NEED to do it
+//! BEFORE calling this function.
+int read_tree_from_file( const char *file_name, Tree *tree_ptr );
 
 //! @brief Returns pointer to the first non-space symbol.
 //! @note If '\0' is met, returns NULL!

@@ -279,3 +279,12 @@ void dump_compiler_tree( Tree *comp_tree )
 
     show_dump_img();
 }
+
+void close_img_dumps( void )
+{
+    FREE(CMN_FILE_NAME);
+
+    FREE(CMN_CMD);
+
+    FOLDER_PATH = NULL;
+}

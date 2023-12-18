@@ -12,6 +12,8 @@
 
 void init_img_dumps( const char *folder_path );
 
+void close_img_dumps( void );
+
 void dump_compiler_tree( Tree *comp_tree );
 
 #endif /* COMPILER_TREE_H */

@@ -42,6 +42,145 @@ char *read_file_to_str( const char *file_name )
     return str;
 }
 
+inline void write_tree_node( FILE *stream, TreeNode *node )
+{
+    putc('(', stream);
+
+    putc(' ', stream);
+    switch (get_node_data(node).type)
+    {
+    case TREE_NODE_TYPE_OP:
+        putc('1', stream);
+        fprintf(stream, " %d ", get_node_data(node).op);
+        break;
+    case TREE_NODE_TYPE_NUM:
+        putc('2', stream);
+        fprintf(stream, " %g ", get_node_data(node).num);
+        break;
+    case TREE_NODE_TYPE_ID:
+        putc('3', stream);
+        fprintf(stream, " %d ", get_node_data(node).id);
+        break;
+    default:
+        ASSERT_UNREACHEABLE();
+        break;
+    }
+
+    if ( tree_get_left_child( node ) )
+        write_tree_node( stream, tree_get_left_child( node ) );
+    else
+        putc('_', stream);
+
+    putc(' ', stream);
+
+    if ( tree_get_right_child( node ) )
+        write_tree_node( stream, tree_get_right_child( node ) );
+    else
+        putc('_', stream);
+
+    putc(' ', stream);
+    putc(')', stream);
+}
+
+int write_tree_to_file( const char *file_name, const Tree *tree_ptr )
+{
+    FILE *file = fopen( file_name, "w" );
+    if (!file)
+        return 0;
+
+    write_tree_node( file, tree_get_root( tree_ptr ) );
+
+    fclose(file);
+
+    return 1;
+}
+
+inline TreeNode *read_tree_node( FILE *stream, Tree *tree_ptr )
+{
+    if ( getc( stream ) != '(' )
+        return NULL;
+
+    if ( getc( stream ) != ' ' )
+        return NULL;
+
+    TreeNodeType type = (TreeNodeType) ( getc( stream ) - '0' );
+
+    TreeNode *node  = NULL;
+    op_t op         = 0;
+    num_t num       = 0;
+    id_t id         = 0;
+    switch (type)
+    {
+    case TREE_NODE_TYPE_OP:
+        scanf( "%d", &op );
+        node = new_node_op( tree_ptr, op );
+        break;
+    case TREE_NODE_TYPE_NUM:
+        scanf( "%f", &num );
+        node = new_node_num( tree_ptr, num );
+        break;
+    case TREE_NODE_TYPE_ID:
+        scanf( "%d", &id );
+        node = new_node_id( tree_ptr, id );
+        break;
+    default:
+        ASSERT_UNREACHEABLE();
+        break;
+    }
+
+    if ( getc( stream ) != ' ' )
+        return NULL;
+
+
+    int c = 0;
+    if ( (c = getc( stream ) ) != '_' )
+    {
+        ungetc( c, stream );
+        TreeNode *node_left = read_tree_node( stream, tree_ptr );
+        if ( !node_left )
+            return NULL;
+        tree_hang_loose_node_at_left( tree_ptr, node_left, node );
+    }
+
+    if ( getc( stream ) != ' ' )
+        return NULL;
+
+    if ( (c = getc( stream ) ) != '_' )
+    {
+        ungetc( c, stream );
+        TreeNode *node_right = read_tree_node( stream, tree_ptr );
+        if (!node_right)
+            return NULL;
+        tree_hang_loose_node_at_right( tree_ptr, node_right, node );
+    }
+
+    if ( getc( stream ) != ')' )
+        return NULL;
+
+    return node;
+}
+
+int read_tree_from_file( const char *file_name, Tree *tree_ptr )
+{
+    FILE *file = fopen( file_name, "w" );
+    if (!file)
+        return 0;
+
+    TreeNode *root = read_tree_node( file, tree_ptr );
+
+    if( !root )
+    {
+        tree_dtor( tree_ptr );
+        return 0;
+    }
+
+    tree_hang_loose_node_as_root( tree_ptr, root );
+
+    fclose(file);
+
+    return 1;
+}
+
 const char *skip_spaces( const char *str )
 {
     assert(str);
