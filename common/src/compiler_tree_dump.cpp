@@ -87,7 +87,7 @@ void init_img_dumps( const char *folder_path )
         DIR *dir = opendir( folder_path );
         if ( !dir )
         {
-            WARNING( "Can't create or open folder for image dumps. Image dumps won't be created!", 0 );
+            WARNING( "Can't create or open folder for image dumps. Image dumps won't be created!" );
             return;
         }
 
@@ -105,8 +105,8 @@ void init_img_dumps( const char *folder_path )
     }
     else
     {
-        // TODO - загадка нуля
-        WARNING("Trying to reinit folder path for image dumps again. It's strange...", 0);
+        // TODO - переделать на ф-ии
+        WARNING("Trying to reinit folder path for image dumps again. It's strange...");
     }
 }
 
@@ -120,7 +120,7 @@ inline FILE *create_and_open_dot_file()
         FILE *opened_file = fopen( CMN_FILE_NAME, "w" );
         if (!opened_file)
         {
-            WARNING( "Can't create or open dot file for image dumps. Image dumps won't be created!", 0 );
+            WARNING( "Can't create or open dot file for image dumps. Image dumps won't be created!" );
         }
 
         return opened_file;
@@ -171,7 +171,7 @@ inline void write_dot_file( FILE *dot_file, Tree *tree_ptr )
     {
         if ( curr_node == NULL )
         {
-            ERROR("ERROR DURING TREE DUMP: Something wrong with listing of nodes!\n", 0);
+            ERROR("ERROR DURING TREE DUMP: Something wrong with listing of nodes!\n");
             break;
         }
 

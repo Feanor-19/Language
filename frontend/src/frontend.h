@@ -1,10 +1,9 @@
 #ifndef FRONTEND_H
 #define FRONTEND_H
 
-// TODO - вторая попытка разобраться с этим
-#include ".\..\..\common\src\common.h"
+#include "common.h"
 #include "config_front.h"
-#include ".\..\..\common\src\ops_in_tree.h"
+#include "ops_in_tree.h"
 #include "tokenizer.h"
 
 
@@ -67,7 +66,7 @@ void print_status_message( FILE *stream, Status status );
 //! @brief Inits log according to given config.
 int init_log( Config cfg );
 
-CompiledProgram compile_prog( const char *prog );
+Status compile_prog( const char *prog, CompiledProgram *comp_prog );
 
 void CompiledProgram_dtor( CompiledProgram *comp_prog_ptr );
 

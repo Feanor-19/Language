@@ -1,8 +1,7 @@
 #ifndef BACKEND_H
 #define BACKEND_H
 
-// TODO - вторая попытка разобраться с этим
-#include ".\..\..\common\src\common.h"
+#include "common.h"
 #include "config_back.h"
 
 

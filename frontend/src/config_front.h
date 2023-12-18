@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../../common/src/parser_cmd_args.h"
+#include "parser_cmd_args.h"
 
 /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     HOW TO ADD A NEW FLAG

@@ -1,7 +1,7 @@
 #ifndef TOKENIZER_H
 #define TOKENIZER_H
 
-#include ".\..\..\common\src\common.h"
+#include "common.h"
 
 
 

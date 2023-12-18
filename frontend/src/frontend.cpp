@@ -2,11 +2,10 @@
 
 #include <ctype.h>
 #include <math.h>
-#include ".\..\..\common\src\compiler_tree_dump.h"
+#include "compiler_tree_dump.h"
 
 
 
-// TODO - норм дефайны? вроде и сокращают, и вроде бы пониманию не мешают... "вроде бы"
 #define CURR (*curr_ptr)
 #define FACT_REC_FALL_ARGS comp_prog, prog, curr_ptr
 #define FORMAL_REC_FALL_ARGS CompiledProgram *comp_prog, const char *prog, const char **curr_ptr
@@ -121,7 +120,9 @@ static TreeNode *get_num( FORMAL_REC_FALL_ARGS )
 //! otherwise returns TREE_OP_DUMMY.
 inline OpsInTree translate_kw_cmp_op( Token tkn )
 {
-// TODO - норм решение?
+
+// Only keywords from the group 'CmpOp' must be held in
+// in this switch, so the warning "-Wswitch-enum" must be ignored.
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wswitch-enum"
     switch (tkn.keyword)
@@ -291,6 +292,8 @@ static TreeNode *get_primal( FORMAL_REC_FALL_ARGS )
 //! otherwise returns TREE_OP_DUMMY.
 inline OpsInTree translate_tkn_unr_op( Token tkn )
 {
+// Only keywords from the group 'CmpOp' must be held in
+// in this switch, so the warning "-Wswitch-enum" must be ignored.
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wswitch-enum"
     switch (tkn.keyword)
@@ -547,8 +550,6 @@ static TreeNode *get_op( FORMAL_REC_FALL_ARGS )
 
     TreeNode *node_op = NULL;
 
-    // TODO - норм идея?
-
        ( node_op = get_var_birth( FACT_REC_FALL_ARGS ) )
     || ( node_op = get_var_death( FACT_REC_FALL_ARGS ) )
     || ( node_op =    get_assign( FACT_REC_FALL_ARGS ) )
@@ -614,28 +615,25 @@ static TreeNode *get_prog( FORMAL_REC_FALL_ARGS )
     return node_operators;
 }
 
-CompiledProgram compile_prog( const char *prog )
+Status compile_prog( const char *prog, CompiledProgram *comp_prog )
 {
     assert(prog);
 
-    CompiledProgram comp_prog = {};
-    comp_prog.tree = {};
-    tree_ctor( &comp_prog.tree, sizeof( TreeNodeData ), NULL, print_tree_node_data );
-    Nametables_ctor( &comp_prog.nametables );
+    *comp_prog = {};
+    comp_prog->tree = {};
+    tree_ctor( &comp_prog->tree, sizeof( TreeNodeData ), NULL, print_tree_node_data );
+    Nametables_ctor( &comp_prog->nametables );
 
     const char *curr = prog;
-    TreeNode *root = get_prog( &comp_prog, prog, &curr );
+    TreeNode *root = get_prog( comp_prog, prog, &curr );
     if (!root)
-    {
-        tree_dtor( &comp_prog.tree ); // TODO - как-то вернуть ошибку в main
-        return comp_prog;
-    }
+        return STATUS_ERROR_COMPILATION_ERROR;
 
-    tree_hang_loose_node_as_root( &comp_prog.tree, root );
+    tree_hang_loose_node_as_root( &comp_prog->tree, root );
 
-    dump_compiler_tree( &comp_prog.tree );
+    dump_compiler_tree( &comp_prog->tree );
 
-    return comp_prog;
+    return STATUS_OK;
 }
 
 void CompiledProgram_dtor( CompiledProgram *comp_prog_ptr )

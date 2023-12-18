@@ -32,10 +32,10 @@ DUMP_FOLDER 	= .\dumps
 LATEX_FOLDER 	= .\LaTeX
 
 $(OUT) : $(OBJFILES) $(CMN_OBJFILES)
-	@$(CC) -o $@ $(CFLAGS) $^ $(LIB_HEADERS) $(LIBS)
+	@$(CC) -o $@ $(CFLAGS) $^ $(LIB_HEADERS) $(LIBS) -I $(CMN)/$(SRC)
 
 $(OBJ)/%.o : $(SRC)/%.cpp
-	@$(CC) -c $(CFLAGS) -o $@ $<
+	@$(CC) -c $(CFLAGS) -o $@ $< -I $(CMN)/$(SRC)
 
 $(CMN)/$(OBJ)/%.o : $(CMN)/$(SRC)/%.cpp
 	@$(CC) -c $(CFLAGS) -o $@ $<

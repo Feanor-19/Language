@@ -2,8 +2,7 @@
 #define MIDDLEEND_H
 
 
-// TODO - вторая попытка разобраться с этим
-#include ".\..\..\common\src\common.h"
+#include "common.h"
 #include "config_middle.h"
 
 
