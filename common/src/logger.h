@@ -27,9 +27,9 @@ void log_( const char *type,
 
 #define LOG(format,...) log_( "LOG", __FILE__, __LINE__, __func__, format, ##__VA_ARGS__)
 
-#define WARNING(format,...) log_( "WRN", __FILE__, __LINE__, __func__, format, ##__VA_ARGS__ )
+#define WARNING(format,...) log_( "\033[1;93mWRN\033[0m", __FILE__, __LINE__, __func__, format, ##__VA_ARGS__ )
 
-#define ERROR(format,...) log_( "ERR", __FILE__, __LINE__, __func__, format, ##__VA_ARGS__ )
+#define ERROR(format,...) log_( "\033[1;91mERR\033[0m", __FILE__, __LINE__, __func__, format, ##__VA_ARGS__ )
 
 
 //! @brief Closes all opened logging streams.

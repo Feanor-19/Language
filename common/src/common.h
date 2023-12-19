@@ -3,9 +3,9 @@
 
 #include "..\..\..\..\mylibheaders\tree.h"
 #include "logger.h"
+#include "comp_tree_op_name.h"
 
 
-typedef uint32_t op_t;
 typedef int32_t id_t;
 #define ABSENT_ID ((id_t) -1)
 typedef float num_t;
@@ -23,7 +23,7 @@ struct TreeNodeData
     TreeNodeType type;
     union
     {
-        op_t op;
+        CompTreeOpName op;
         num_t num;
         id_t id;
     };
@@ -42,6 +42,8 @@ const double DBL_PRECISION              = 1E-10;
 #define ASSERT_UNREACHEABLE() assert( 0 && "Unreacheable line!" )
 
 #define SIZEARR(arr) (sizeof(arr)/sizeof(arr[0]))
+
+#define FCLOSE(file) do{if (file) fclose(file); }while(0)
 
 
 //! @brief Reads file with 'file_name' to dynamically allocated string
@@ -63,7 +65,7 @@ int read_tree_from_file( const char *file_name, Tree *tree_ptr );
 const char *skip_spaces( const char *str );
 
 //! @brief Returns new node of type operator and writes value 'op' into it.
-TreeNode *new_node_op( Tree *tree_ptr, op_t op );
+TreeNode *new_node_op( Tree *tree_ptr, CompTreeOpName op );
 
 //! @brief Returns new node of type number and writes value 'num' into it.
 TreeNode *new_node_num( Tree *tree_ptr, num_t num );
@@ -74,7 +76,7 @@ TreeNode *new_node_id( Tree *tree_ptr, id_t id );
 TreeNodeData get_node_data( TreeNode *node_ptr );
 
 //! @brief Checks given node's type and value.
-int is_node_op( TreeNode *node_ptr, op_t op );
+int is_node_op( TreeNode *node_ptr, CompTreeOpName op );
 
 //! @brief Checks given node's type and value.
 int is_node_num( TreeNode *node_ptr, num_t num );
@@ -91,6 +93,8 @@ void realloc_arr_if_needed( void **arr, size_t *arr_cap_ptr, size_t arr_ind, siz
               "attempt to request %d elems of size %d.",                                        \
               #arr, 2 * (arr##_cap), sizeof(elem_t));                                           \
 } while (0)
+
+void print_tree_node_data( FILE *stream, void *data_ptr );
 
 int is_dbl_zero( double a );
 

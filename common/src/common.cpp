@@ -44,6 +44,9 @@ char *read_file_to_str( const char *file_name )
 
 inline void write_tree_node( FILE *stream, TreeNode *node )
 {
+    assert(stream);
+    assert(node);
+
     putc('(', stream);
 
     putc(' ', stream);
@@ -84,6 +87,9 @@ inline void write_tree_node( FILE *stream, TreeNode *node )
 
 int write_tree_to_file( const char *file_name, const Tree *tree_ptr )
 {
+    assert(file_name);
+    assert(tree_ptr);
+
     FILE *file = fopen( file_name, "w" );
     if (!file)
         return 0;
@@ -95,32 +101,35 @@ int write_tree_to_file( const char *file_name, const Tree *tree_ptr )
     return 1;
 }
 
+#define CHECK( char ) do{if ( getc(stream) != char ) return NULL;}while(0);
+
 inline TreeNode *read_tree_node( FILE *stream, Tree *tree_ptr )
 {
-    if ( getc( stream ) != '(' )
-        return NULL;
+    assert(stream);
+    assert(tree_ptr);
 
-    if ( getc( stream ) != ' ' )
-        return NULL;
+    CHECK( '(' );
+
+    CHECK( ' ' );
 
     TreeNodeType type = (TreeNodeType) ( getc( stream ) - '0' );
 
-    TreeNode *node  = NULL;
-    op_t op         = 0;
-    num_t num       = 0;
-    id_t id         = 0;
+    TreeNode *node      = NULL;
+    CompTreeOpName op   = TREE_OP_DUMMY;
+    num_t num           = 0;
+    id_t id             = 0;
     switch (type)
     {
     case TREE_NODE_TYPE_OP:
-        scanf( "%d", &op );
+        fscanf( stream, "%d", (int*) &op );
         node = new_node_op( tree_ptr, op );
         break;
     case TREE_NODE_TYPE_NUM:
-        scanf( "%f", &num );
+        fscanf( stream, "%f", &num );
         node = new_node_num( tree_ptr, num );
         break;
     case TREE_NODE_TYPE_ID:
-        scanf( "%d", &id );
+        fscanf( stream, "%d", &id );
         node = new_node_id( tree_ptr, id );
         break;
     default:
@@ -128,9 +137,7 @@ inline TreeNode *read_tree_node( FILE *stream, Tree *tree_ptr )
         break;
     }
 
-    if ( getc( stream ) != ' ' )
-        return NULL;
-
+    CHECK( ' ' );
 
     int c = 0;
     if ( (c = getc( stream ) ) != '_' )
@@ -142,8 +149,7 @@ inline TreeNode *read_tree_node( FILE *stream, Tree *tree_ptr )
         tree_hang_loose_node_at_left( tree_ptr, node_left, node );
     }
 
-    if ( getc( stream ) != ' ' )
-        return NULL;
+    CHECK( ' ' );
 
     if ( (c = getc( stream ) ) != '_' )
     {
@@ -154,15 +160,19 @@ inline TreeNode *read_tree_node( FILE *stream, Tree *tree_ptr )
         tree_hang_loose_node_at_right( tree_ptr, node_right, node );
     }
 
-    if ( getc( stream ) != ')' )
-        return NULL;
+    CHECK( ' ' );
+
+    CHECK( ')' );
 
     return node;
 }
 
 int read_tree_from_file( const char *file_name, Tree *tree_ptr )
 {
-    FILE *file = fopen( file_name, "w" );
+    assert(file_name);
+    assert(tree_ptr);
+
+    FILE *file = fopen( file_name, "r" );
     if (!file)
         return 0;
 
@@ -194,7 +204,7 @@ const char *skip_spaces( const char *str )
     return NULL;
 }
 
-TreeNode *new_node_op( Tree *tree_ptr, op_t op )
+TreeNode *new_node_op( Tree *tree_ptr, CompTreeOpName op )
 {
     assert(tree_ptr);
 
@@ -231,7 +241,7 @@ TreeNodeData get_node_data( TreeNode *node_ptr )
     return *((TreeNodeData*)node_ptr->data_ptr);
 }
 
-int is_node_op( TreeNode *node_ptr, op_t op )
+int is_node_op( TreeNode *node_ptr, CompTreeOpName op )
 {
     assert(node_ptr);
 
@@ -266,6 +276,29 @@ void realloc_arr_if_needed( void **arr_ptr, size_t *arr_cap_ptr, size_t arr_ind,
         }
         *arr_ptr = new_mem;
         *arr_cap_ptr = new_cap;
+    }
+}
+
+void print_tree_node_data( FILE *stream, void *data_ptr )
+{
+    assert(data_ptr);
+
+    TreeNodeData data = *((TreeNodeData*)data_ptr);
+
+    switch (data.type)
+    {
+    case TREE_NODE_TYPE_NUM:
+        fprintf(stream, "data_type: NUM, data_value: %g", data.num);
+        break;
+    case TREE_NODE_TYPE_OP:
+        fprintf(stream, "data_type: OP, data_value: %d", data.op);
+        break;
+    case TREE_NODE_TYPE_ID:
+        fprintf(stream, "data_type: ID, data_value: %d", data.id);
+        break;
+    default:
+        ASSERT_UNREACHEABLE();
+        break;
     }
 }
 

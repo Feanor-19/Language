@@ -4,7 +4,16 @@
 #include <math.h>
 #include "compiler_tree_dump.h"
 
+// TODO - ИДЕЯ: сделать структуру Context, в которой будут поля
+// типа is_in_while, is_in_func и тд (вместо того чтобы создавать
+// отдельные правила)
 
+// TODO - В ГРАММАТИКЕ Вынести "Cond" ?CmpOp (group)? Expr "Than" Expr
+// в отдельное правило, а потом эти правила разрешить соединять с помощью NOT, AND
+// и OR (приоритет разный, придется всего три правила делать)
+
+// TODO - ИДЕЯ: добавление в грамматику умножения числа на переменную или выражение из
+// переменных, а именно: Unr выражается через XXX, XXX ::= (Num "UnitsOf" Primal) | Primal
 
 #define CURR (*curr_ptr)
 #define FACT_REC_FALL_ARGS comp_prog, prog, curr_ptr
@@ -116,9 +125,9 @@ static TreeNode *get_num( FORMAL_REC_FALL_ARGS )
 }
 
 //! @brief Checks is 'tkn' of type 'Keyword' and belongs to
-//! group 'CmpOp'. If yes, returns corresponding OpsInTree,
+//! group 'CmpOp'. If yes, returns corresponding CompTreeOpName,
 //! otherwise returns TREE_OP_DUMMY.
-inline OpsInTree translate_kw_cmp_op( Token tkn )
+inline CompTreeOpName translate_kw_cmp_op( Token tkn )
 {
 
 // Only keywords from the group 'CmpOp' must be held in
@@ -288,9 +297,9 @@ static TreeNode *get_primal( FORMAL_REC_FALL_ARGS )
 }
 
 //! @brief Checks is 'tkn' of type 'Keyword' and belongs to
-//! group 'UnrOp'. If yes, returns corresponding OpsInTree,
+//! group 'UnrOp'. If yes, returns corresponding CompTreeOpName,
 //! otherwise returns TREE_OP_DUMMY.
-inline OpsInTree translate_tkn_unr_op( Token tkn )
+inline CompTreeOpName translate_tkn_unr_op( Token tkn )
 {
 // Only keywords from the group 'CmpOp' must be held in
 // in this switch, so the warning "-Wswitch-enum" must be ignored.
@@ -644,29 +653,6 @@ void CompiledProgram_dtor( CompiledProgram *comp_prog_ptr )
 
         tree_dtor(&comp_prog_ptr->tree);
         comp_prog_ptr->tree = {};
-    }
-}
-
-void print_tree_node_data( FILE *stream, void *data_ptr )
-{
-    assert(data_ptr);
-
-    TreeNodeData data = *((TreeNodeData*)data_ptr);
-
-    switch (data.type)
-    {
-    case TREE_NODE_TYPE_NUM:
-        fprintf(stream, "data_type: NUM, data_value: %g", data.num);
-        break;
-    case TREE_NODE_TYPE_OP:
-        fprintf(stream, "data_type: OP, data_value: %d", data.op);
-        break;
-    case TREE_NODE_TYPE_ID:
-        fprintf(stream, "data_type: ID, data_value: %d", data.id);
-        break;
-    default:
-        ASSERT_UNREACHEABLE();
-        break;
     }
 }
 

@@ -33,6 +33,7 @@ LATEX_FOLDER 	= .\LaTeX
 
 $(OUT) : $(OBJFILES) $(CMN_OBJFILES)
 	@$(CC) -o $@ $(CFLAGS) $^ $(LIB_HEADERS) $(LIBS) -I $(CMN)/$(SRC)
+	@echo cc -o $@  $^
 
 $(OBJ)/%.o : $(SRC)/%.cpp
 	@$(CC) -c $(CFLAGS) -o $@ $< -I $(CMN)/$(SRC)

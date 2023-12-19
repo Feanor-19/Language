@@ -1,16 +1,16 @@
 #ifndef BACKEND_H
 #define BACKEND_H
 
-#include "common.h"
 #include "config_back.h"
+#include "tr_asm_text_funcs.h"
+#include "backend_common.h"
 
 
-#define DEF_STATUS(name, msg) STATUS_##name,
-enum Status
+struct CompTreeOp
 {
-    #include "back_statuses.h"
+    CompTreeOpName name;
+    Status (*tr_asm_text)(FILE*,const Tree*,TreeNode*,Counters*);
 };
-#undef DEF_STATUS
 
 
 #define DEF_STATUS(name, message) message,
@@ -21,6 +21,60 @@ const char * const status_messages[] =
 };
 #undef DEF_STATUS
 
+// REVIEW - ???
+#define DEF_CMD(name, id, is_im_const, is_reg, is_mem, is_label, ...) CMD_##name = id,
+enum Command
+{
+    #include ".\..\..\..\maybe_calculator\common\commands.h"
+};
+#undef DEF_CMD
+
+#define DEF_CMD(name, id, is_im_const, is_reg, is_mem, is_label, ...) #name,
+const char * const commands_list[] =
+{
+    #include ".\..\..\..\maybe_calculator\common\commands.h"
+    "FICTIONAL_CMD!"
+};
+#undef DEF_CMD
+// REVIEW - ???
+
+const size_t DUMMY_OP_INDEX = 0;
+
+const CompTreeOp COMP_TREE_OPS[] =
+{
+    { TREE_OP_DUMMY,                    tr_asm_text_dummy       },
+    { TREE_OP_SEQ_EXEC,                 tr_asm_text_seq_exec    },
+
+    { TREE_OP_ASSIGN,                   tr_asm_text_assign      },
+    { TREE_OP_CMP_MORE,                 tr_asm_text_cmp_more    },
+    { TREE_OP_CMP_LESS,                 tr_asm_text_cmp_less    },
+    { TREE_OP_CMP_MORE_EQ,              tr_asm_text_cmp_more_eq },
+    { TREE_OP_CMP_LESS_EQ,              tr_asm_text_cmp_less_eq },
+    { TREE_OP_CMP_EQUAL,                tr_asm_text_cmp_equal   },
+    { TREE_OP_CMP_NOT_EQ,               tr_asm_text_cmp_not_eq  },
+
+    { TREE_OP_ADD,                      tr_asm_text_add         },
+    { TREE_OP_SUB,                      tr_asm_text_sub         },
+    { TREE_OP_MUL,                      tr_asm_text_mul         },
+    { TREE_OP_DIV,                      tr_asm_text_div         },
+
+    { TREE_OP_IF,                       tr_asm_text_if          },
+    { TREE_OP_WHILE,                    tr_asm_text_while       },
+    { TREE_OP_AND,                      tr_asm_text_and         },
+    { TREE_OP_OR,                       tr_asm_text_or          },
+    { TREE_OP_NOT,                      tr_asm_text_not         },
+
+    { TREE_OP_SIN,                      tr_asm_text_sin         },
+    { TREE_OP_COS,                      tr_asm_text_cos         },
+    { TREE_OP_SQRT,                     tr_asm_text_sqrt        },
+    { TREE_OP_LN,                       tr_asm_text_ln          },
+    { TREE_OP_EXP,                      tr_asm_text_exp         },
+    { TREE_OP_MINUS,                    tr_asm_text_minus       }
+};
+
+Status tr_node_asm_text( FILE *stream, const Tree *tree_ptr, TreeNode *node, Counters *counters );
+
+Status translate_to_asm_text( const Tree *tree_ptr, FILE *stream );
 
 void print_status_message( FILE *stream, Status status );
 

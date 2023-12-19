@@ -9,7 +9,14 @@
             "name": "Launch",
             "request": "launch",
             "program": "${workspaceFolder}/bin/backend.exe",
-            "args": [],
+            "args": [
+                "-i",
+                ".\\..\\compiler_tree.txt",
+                "-o",
+                ".\\..\\asm.txt",
+                "--img-dumps",
+                ".\\dumps\\image_dumps\\"
+            ],
             "cwd": "${workspaceFolder}",
             "preLaunchTask": "Make",
         }

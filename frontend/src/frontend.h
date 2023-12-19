@@ -3,12 +3,7 @@
 
 #include "common.h"
 #include "config_front.h"
-#include "ops_in_tree.h"
 #include "tokenizer.h"
-
-
-typedef float num_t;
-
 
 
 #define DEF_STATUS(name, msg) STATUS_##name,
@@ -69,8 +64,6 @@ int init_log( Config cfg );
 Status compile_prog( const char *prog, CompiledProgram *comp_prog );
 
 void CompiledProgram_dtor( CompiledProgram *comp_prog_ptr );
-
-void print_tree_node_data( FILE *stream, void *data_ptr );
 
 void print_rec_fall_err_msg( const char *prog, const char *error_ptr, const char *expected );
 

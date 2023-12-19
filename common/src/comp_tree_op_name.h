@@ -1,7 +1,7 @@
 #ifndef OPS_IN_TREE_H
 #define OPS_IN_TREE_H
 
-enum OpsInTree
+enum CompTreeOpName
 {
     TREE_OP_SEQ_EXEC            = 1,
     TREE_OP_DUMMY               = 2,
@@ -27,6 +27,7 @@ enum OpsInTree
     TREE_OP_WHILE               = 202,
     TREE_OP_AND                 = 203,
     TREE_OP_OR                  = 204,
+    TREE_OP_NOT                 = 205,
 
     TREE_OP_SIN                 = 301,
     TREE_OP_COS                 = 302,
