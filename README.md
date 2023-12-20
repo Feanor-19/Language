@@ -94,8 +94,7 @@ FuncAction      ::= "FuncActionHeader" Id {"Using" FormalArgs "AsIngr"} "Colon" 
 FormalArgs      ::= Id<Var> ( "Comma" Id<Var> )*
 FactArgs        ::= Expr ( "Comma" Expr )*
 Operators       ::= Op+
-Op              ::= VarBirth | VarDeath | Assign | If | While | Return<in FuncRecipe> | CallFuncAction | Input
-Input           ::=
+Op              ::= VarBirth | VarDeath | Assign | If | While | Return<in FuncRecipe> | CallFuncAction
 Return          ::= "Return" Expr "Dot"
 VarBirth        ::= "VarBirthOp" Num "UnitsOf" Id "Dot"
 VarDeath        ::= "VarDeathOp" Id<Var> "Dot"
@@ -105,7 +104,7 @@ Mulive          ::= Unr ( ?Amp (group)? ( "OpMul" | "OpDiv" ) Unr )*
 Unr             ::= ( ?Amp (group)? ?UnrOp (group)? Primal ) | Primal
 Primal          ::= ("InBracketsStart" Expr "Semicolon") | CallFuncRecipe | Id<Var>
 Id              ::= ['a'-'z','A'-'Z']['a'-'z','A'-'Z','_','0'-'9']*
-Num             ::= ?float number?
+Num             ::= ( "InputOp" ) | ( ?float number? )
 If              ::= "If1" "Cond" ?CmpOp (group)? Expr "Than" Expr "If2" Operators "IfEnd"
 While           ::= "While1" "Cond" ?CmpOp (group)? Expr "Than" Expr "While2" Operators "WhileEnd"
 CallFuncRecipe  ::= "CallFuncRecipe" Id<func> {"Using" FactArgs "AsIngr"}
@@ -140,6 +139,7 @@ CallFuncAction  ::= "CallFuncAction" Id<func> {"Using" FactArgs "AsIngr"} "Dot"
 |If2|Urgently Do The Following Steps:|
 |IfEnd|Now, Breathe Out And Continue Whatever Your Were Doing!|
 |InBracketsStart|The Following Prepared Beforehand:|
+|InputOp|As Much As The Universe Says|
 |OpAdd|Mixed With|
 |OpDiv|Spread On|
 |OpMul|Fried With|

@@ -144,11 +144,26 @@ static TreeNode *get_num( FORMAL_REC_FALL_ARGS )
 
     UNUSED(context);
 
-    Token tkn_num = get_token( CURR );
-    SYN_ASSERT( tkn_num.type == TKN_TYPE_NUM, prog, CURR, "Number" );
-    MOVE_CURR_TO_END_OF_TOKEN( tkn_num );
+    TreeNode *node_num = NULL;
+    Token tkn_input = get_token( CURR );
+    if ( is_tkn_keyword( tkn_input, KW_InputOp ) )
+    {
+        MOVE_CURR_TO_END_OF_TOKEN( tkn_input );
 
-    return new_node_num( TREE, tkn_num.num );
+        node_num = new_node_op( TREE, TREE_OP_INPUT );
+    }
+    else
+    {
+        Token tkn_num = get_token( CURR );
+        SYN_ASSERT( tkn_num.type == TKN_TYPE_NUM, prog, CURR, "Number" );
+        MOVE_CURR_TO_END_OF_TOKEN( tkn_num );
+
+        node_num = new_node_num( TREE, tkn_num.num );
+    }
+
+    SYN_ASSERT( node_num, prog, CURR, "Input operator or a number" );
+
+    return node_num;
 }
 
 //! @brief Checks is 'tkn' of type 'Keyword' and belongs to

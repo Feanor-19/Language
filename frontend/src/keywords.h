@@ -4,6 +4,8 @@ DEF_KEYWORD( AsIngr, "As Ingredients" )
 
 DEF_KEYWORD( While1, "As Long As" )
 
+DEF_KEYWORD( InputOp, "As Much As The Universe Says" )
+
 DEF_KEYWORD( CallFuncRecipe, "Cooked Beforehand" )
 
 DEF_KEYWORD( UnrOp_cos, "Diced" )
