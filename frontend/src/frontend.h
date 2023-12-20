@@ -23,9 +23,32 @@ const char * const status_messages[] =
 
 
 
+enum NametableType
+{
+    NT_TYPE_GLOBAL_VAR,
+    NT_TYPE_FUNC,
+    NT_TYPE_FUNC_VAR,
+};
+
+struct FuncInfo
+{
+    FuncType func_type;
+    size_t func_args_count;
+};
+
+struct NametableElem
+{
+    Identificator ident;
+    union
+    {
+        FuncInfo func_info;
+    };
+};
+
 struct Nametable
 {
-    Identificator *list;
+    NametableType type;
+    NametableElem *list;
     size_t list_curr_len;
     size_t list_cap;
 };
@@ -35,6 +58,13 @@ struct Nametables
     Nametable global_vars;
     Nametable funcs;
     Nametable func_vars; //NOTE - переиспользуется внутри каждой функции, обязательно чистить после использования!
+};
+
+struct Context
+{
+    int in_func_action  = 0;
+    int in_func_recipe  = 0;
+    int in_while        = 0;
 };
 
 struct CompiledProgram
@@ -67,7 +97,7 @@ void CompiledProgram_dtor( CompiledProgram *comp_prog_ptr );
 
 void print_rec_fall_err_msg( const char *prog, const char *error_ptr, const char *expected );
 
-Status nametable_ctor( Nametable *nt_ptr );
+Status nametable_ctor( Nametable *nt_ptr, NametableType type );
 
 Status Nametables_ctor( Nametables *nametables );
 

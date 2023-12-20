@@ -2,9 +2,11 @@
 |Amp_2|Unfortunately|
 |Amp_3|Thoroughly|
 |Amp_4|Thickly|
+|AsIngr|As Ingredients|
 |Asgn1|Place|
 |Asgn2|Right Into|
-|InBracketsStart|The Following Prepared Beforehand:|
+|CallFuncAction|Perform|
+|CallFuncRecipe|Cooked Beforehand|
 |CmpOp_equal|Just The Same Amount Of|
 |CmpOp_lessOrEqual|The Same Amount Or Less Of|
 |CmpOp_less|Less|
@@ -19,6 +21,7 @@
 |If1|In Case|
 |If2|Urgently Do The Following Steps:|
 |IfEnd|Now, Breathe Out And Continue Whatever Your Were Doing!|
+|InBracketsStart|The Following Prepared Beforehand:|
 |OpAdd|Mixed With|
 |OpDiv|Spread On|
 |OpMul|Fried With|
@@ -40,6 +43,3 @@
 |While1|As Long As|
 |While2|Repeat The Following:|
 |WhileEnd|Repeat Until Ready And Then Go Further!|
-|CallFuncRecipe|Cooked Beforehand|
-|AsIngr|As Ingredients|
-|CallFuncAction|Perform|

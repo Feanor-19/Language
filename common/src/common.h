@@ -30,6 +30,12 @@ struct TreeNodeData
 
 };
 
+enum FuncType
+{
+    FUNC_TYPE_RECIPE,
+    FUNC_TYPE_ACTION,
+};
+
 
 
 const size_t REALLOC_DEFAULT_MULTIPLIER = 2;

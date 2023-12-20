@@ -5,6 +5,9 @@ enum CompTreeOpName
 {
     TREE_OP_SEQ_EXEC            = 1,
     TREE_OP_DUMMY               = 2,
+    TREE_OP_FUNC_DEF            = 3,
+    TREE_OP_FUNC_DEF_HELPER     = 4,
+    TREE_OP_LIST_CONNECTOR      = 5,
 
     TREE_OP_ASSIGN              = 51,
     TREE_OP_CMP_MORE            = 52,
@@ -37,6 +40,9 @@ enum CompTreeOpName
     TREE_OP_LN                  = 306,
     TREE_OP_EXP                 = 307,
     TREE_OP_MINUS               = 308,
+
+    TREE_OP_CALL_FUNC           = 401,
+    TREE_OP_RETURN              = 402,
 };
 
 #endif /* OPS_IN_TREE_H */

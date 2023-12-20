@@ -13,6 +13,7 @@
     if (_stat != STATUS_OK) return _stat;               \
 }while(0)
 
+//REVIEW -
 #define UNUSED(var) do{var = var;}while(0)
 
 #define PRINT( format, ... ) do{fprintf(stream, format, ##__VA_ARGS__); putc('\n', stream);}while(0)

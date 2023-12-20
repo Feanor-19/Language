@@ -66,7 +66,7 @@ Default configuration (all files are located in the root folder):
 
 ### Main idea
 
-Programs written in this programming language try to look like crazy recipes of some carzy dish. "Crazy" means that there is no list of ingredients in the beginning, or some other common sense things, which one can usually find in real-life recipes. So, the programmer plays the role of the author of a recipe, and the processor (SPU) - of the chef, who is going to cook it. That's why most of the verbs in the text of the program must be read in the imperative mood.
+Programs written in this programming language try to look like crazy recipes of some crazy dish. "Crazy" means that there is no list of ingredients in the beginning, or some other common sense things, which one can usually find in real-life recipes. So, the programmer plays the role of the author of a recipe, and the processor (SPU) - of the chef, who is going to cook it. That's why most of the verbs in the text of the program must be read in the imperative mood.
 
 ### Some notes and details
 
@@ -82,22 +82,34 @@ Note:
 2. `+` means `one or more`.
 3. `*` means `zero or more`.
 4. `?...?` means some special case.
+5. `<...>` means something connected with context.
+6. `{...}` means something which is not obligatory.
 
 ```py
-Prog      ::= "ProgStart" Operators "ProgEnd"
-Operators ::= Op+
-Op        ::= VarBirth | VarDeath | Assign | If | While
-VarBirth  ::= "VarBirthOp" Num "UnitsOf" Id "Dot"
-VarDeath  ::= "VarDeathOp" Id<Var> "Dot"
-Assign    ::= "Asgn1" Expr "Asgn2" Id<Var> "Dot"
-Expr      ::= Mulive ( ?Amp (group)? ("OpAdd" | "OpSub") Mulive )*
-Mulive    ::= Unr ( ?Amp (group)? ( "OpMul" | "OpDiv" ) Unr )*
-Unr       ::= ( ?Amp (group)? ?UnrOp (group)? Primal ) | Primal
-Primal    ::= ("BracketOpn" Expr "BracketCls") | Id<Var>
-Id        ::= ['a'-'z','A'-'Z']['a'-'z','A'-'Z','_','0'-'9']*
-Num       ::= <float number>
-If        ::= "If1" "Cond" ?CmpOp (group)? Expr "Than" Expr "If2" Operators "IfEnd"
-While     ::= "While1" "Cond" ?CmpOp (group)? Expr "Than" Expr "While2" Operators "WhileEnd"
+Prog            ::= "ProgStart" { FuncDefs } Operators "ProgEnd"
+FuncDefs        ::= "FuncDefsStart" FuncDef+ "FuncDefsEnd"
+FuncDef         ::= FuncRecipe | FuncAction
+FuncRecipe      ::= "FuncRecipeHeader" Id {"Using" FormalArgs "AsIngr"} "Colon" Operators
+FuncAction      ::= "FuncActionHeader" Id {"Using" FormalArgs "AsIngr"} "Colon" Operators
+FormalArgs      ::= Id<Var> ( "Comma" Id<Var> )*
+FactArgs        ::= Expr ( "Comma" Expr )*
+Operators       ::= Op+
+Op              ::= VarBirth | VarDeath | Assign | If | While | Return<in FuncRecipe> | CallFuncAction | Input
+Input           ::=
+Return          ::= "Return" Expr "Dot"
+VarBirth        ::= "VarBirthOp" Num "UnitsOf" Id "Dot"
+VarDeath        ::= "VarDeathOp" Id<Var> "Dot"
+Assign          ::= "Asgn1" Expr "Asgn2" Id<Var> "Dot"
+Expr            ::= Mulive ( ?Amp (group)? ("OpAdd" | "OpSub") Mulive )*
+Mulive          ::= Unr ( ?Amp (group)? ( "OpMul" | "OpDiv" ) Unr )*
+Unr             ::= ( ?Amp (group)? ?UnrOp (group)? Primal ) | Primal
+Primal          ::= ("InBracketsStart" Expr "Semicolon") | CallFuncRecipe | Id<Var>
+Id              ::= ['a'-'z','A'-'Z']['a'-'z','A'-'Z','_','0'-'9']*
+Num             ::= ?float number?
+If              ::= "If1" "Cond" ?CmpOp (group)? Expr "Than" Expr "If2" Operators "IfEnd"
+While           ::= "While1" "Cond" ?CmpOp (group)? Expr "Than" Expr "While2" Operators "WhileEnd"
+CallFuncRecipe  ::= "CallFuncRecipe" Id<func> {"Using" FactArgs "AsIngr"}
+CallFuncAction  ::= "CallFuncAction" Id<func> {"Using" FactArgs "AsIngr"} "Dot"
 ```
 
 ### Keywords
@@ -108,9 +120,11 @@ While     ::= "While1" "Cond" ?CmpOp (group)? Expr "Than" Expr "While2" Operator
 |Amp_2|Unfortunately|
 |Amp_3|Thoroughly|
 |Amp_4|Thickly|
+|AsIngr|As Ingredients|
 |Asgn1|Place|
 |Asgn2|Right Into|
-|BracketOpn|The Following Prepared Beforehand:|
+|CallFuncAction|Perform|
+|CallFuncRecipe|Cooked Beforehand|
 |CmpOp_equal|Just The Same Amount Of|
 |CmpOp_lessOrEqual|The Same Amount Or Less Of|
 |CmpOp_less|Less|
@@ -118,15 +132,21 @@ While     ::= "While1" "Cond" ?CmpOp (group)? Expr "Than" Expr "While2" Operator
 |CmpOp_more|More|
 |CmpOp_notEqual|Not The Same Amount Of|
 |Cond|There Happens To Be|
+|FuncActionHeader|Skill To Do|
+|FuncDefsEnd|Here Is The Recipe Itself:|
+|FuncDefsStart|Here Are Some Skills You Need To Have:|
+|FuncRecipeHeader|Skill To Cook|
 |If1|In Case|
 |If2|Urgently Do The Following Steps:|
 |IfEnd|Now, Breathe Out And Continue Whatever Your Were Doing!|
+|InBracketsStart|The Following Prepared Beforehand:|
 |OpAdd|Mixed With|
 |OpDiv|Spread On|
 |OpMul|Fried With|
 |OpSub|Without|
 |ProgEnd|That's All! Don't Forget To Check It On Your Friends Before Tasting Yourself!|
 |ProgStart|The Recipe Of The Most Delicious Dish One Can Ever Imagine!|
+|Return|The Result Of The Skill Is|
 |Than|Than|
 |UnitsOf|Units Of|
 |UnrOp_cos|Diced|
@@ -135,6 +155,7 @@ While     ::= "While1" "Cond" ?CmpOp (group)? Expr "Than" Expr "While2" Operator
 |UnrOp_minus|Rinsed|
 |UnrOp_sin|Sliced|
 |UnrOp_sqrt|Peeled|
+|Using|Using|
 |VarBirthOp|Quickly Obtain|
 |VarDeathOp|Throw Away|
 |While1|As Long As|
@@ -146,7 +167,9 @@ While     ::= "While1" "Cond" ?CmpOp (group)? Expr "Than" Expr "While2" Operator
 |Designation in grammar|Designation in program|Comment|
 |-|-|-|
 |Dot|!|
-|BracketCls|,|
+|Semicolon|;|
+|Colon|:|
+|Comma|,|
 
 ### Program examples
 
