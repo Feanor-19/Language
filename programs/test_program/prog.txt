@@ -1,16 +1,4 @@
 The Recipe Of The Most Delicious Dish One Can Ever Imagine!
-
-Here Are Some Skills You Need To Have:
-
-Skill To Do func_wo_ret_name Using var_1, var_2, var_3:
-Place var_1 Angrily Fried With var_2 Right Into var_3!
-Place var_2 Angrily Mixed With var_3 Right Into var_3!
-
-Skill To Cook func_with_ret_name Using var_1, var_2, var_3:
-Place var_1 Angrily Fried With var_2 Angrily Mixed With var_3 Right Into var_3!
-The Result Of The Skill Is var_3!
-
-Here Is The Recipe Itself:
 Quickly Obtain 5 Units Of Cheese!
 Quickly Obtain 10 Units Of Tomatoes!
 Quickly Obtain 2 Units Of Bre_ad1! # This shows how an ingredient's name may look like #
@@ -26,5 +14,4 @@ Throw Away Cheese!
 Now, Breathe Out And Continue Whatever Your Were Doing!
 Throw Away Tomatoes!
 Throw Away Bre_ad1!
-
 That's All! Don't Forget To Check It On Your Friends Before Tasting Yourself!

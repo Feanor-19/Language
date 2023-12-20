@@ -51,6 +51,7 @@ int main(int argc, const char *argv[])
         return STATUS_ERROR_CANT_OPEN_OUTPUT_FILE;
     }
 
+    LOG( "Starting translation to text asm..." );
     Status err = translate_to_asm_text( &compiler_tree, out_stream );
     if (err)
     {
@@ -59,6 +60,8 @@ int main(int argc, const char *argv[])
         putc( '\n', log_get_stream() );
         ERROR( "Shutting down." );
     }
+    else
+        LOG( "Translation to text asm is done!" );
 
     FCLOSE(out_stream);
     tree_dtor( &compiler_tree );

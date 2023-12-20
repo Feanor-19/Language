@@ -15,6 +15,7 @@ SRC 	= src
 BIN 	= bin
 CMN 	= .\..\common
 LOGS 	= .\logs
+TEST_PROGS = .\\..\\programs\\test_program
 
 COMMON_LIB_FOLDER = ./../../../mylibs/
 LIB_NAMES 			= tree onegin
@@ -43,7 +44,7 @@ $(CMN)/$(OBJ)/%.o : $(CMN)/$(SRC)/%.cpp
 
 .PHONY: run
 run:
-	@$(OUT) -i .\\..\\compiler_tree.txt -o .\\..\\asm.txt --img-dumps $(DUMP_FOLDER)\\image_dumps\\
+	@$(OUT) -i $(TEST_PROGS)\\compiler_tree.txt -o $(TEST_PROGS)\\asm.txt --img-dumps $(DUMP_FOLDER)\\image_dumps\\
 
 .PHONY: clean
 clean:

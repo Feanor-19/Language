@@ -65,3 +65,4 @@ if_end_0:
 
 ; dummy
 
+HLT

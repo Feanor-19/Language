@@ -25,20 +25,29 @@
 
 
 
-static TreeNode *get_num        ( FORMAL_REC_FALL_ARGS );
-static TreeNode *get_while      ( FORMAL_REC_FALL_ARGS );
-static TreeNode *get_if         ( FORMAL_REC_FALL_ARGS );
-static TreeNode *get_primal     ( FORMAL_REC_FALL_ARGS );
-static TreeNode *get_unr        ( FORMAL_REC_FALL_ARGS );
-static TreeNode *get_mulive     ( FORMAL_REC_FALL_ARGS );
-static TreeNode *get_expr       ( FORMAL_REC_FALL_ARGS );
-static TreeNode *get_var        ( FORMAL_REC_FALL_ARGS );
-static TreeNode *get_assign     ( FORMAL_REC_FALL_ARGS );
-static TreeNode *get_var_death  ( FORMAL_REC_FALL_ARGS );
-static TreeNode *get_var_birth  ( FORMAL_REC_FALL_ARGS );
-static TreeNode *get_op         ( FORMAL_REC_FALL_ARGS );
-static TreeNode *get_operators  ( FORMAL_REC_FALL_ARGS );
-static TreeNode *get_prog       ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_num               ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_if                ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_while             ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_primal            ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_unr               ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_mulive            ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_expr              ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_var               ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_assign            ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_var_death         ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_var_birth         ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_call_func_action  ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_call_func_recipe  ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_return            ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_op                ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_operators         ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_fact_args         ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_formal_args       ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_func_recipe       ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_func_action       ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_func_def          ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_func_defs         ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_prog              ( FORMAL_REC_FALL_ARGS );
 
 
 
@@ -133,8 +142,6 @@ inline size_t count_list_len( TreeNode *list_root )
 
     return num;
 }
-
-
 
 static TreeNode *get_num( FORMAL_REC_FALL_ARGS )
 {
