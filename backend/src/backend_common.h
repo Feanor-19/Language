@@ -25,4 +25,10 @@ struct Counters
     cnt_t not_c   = 0;
 };
 
+struct Context
+{
+    int in_func  = 0;
+    int in_while = 0;
+};
+
 #endif /* BACKEND_COMMON_H */

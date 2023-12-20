@@ -19,16 +19,16 @@
 #define END_BLOCK() do{ putc('\n', stream); }while(0)
 
 #define TR_LEFT_CHILD_CURR() \
-    WRP(tr_node_asm_text( stream, tree_ptr, tree_get_left_child (node), counters ))
+    WRP(tr_node_asm_text( stream, tree_ptr, tree_get_left_child (node), counters, context ))
 
 #define TR_RIGHT_CHILD_CURR() \
-    WRP(tr_node_asm_text( stream, tree_ptr, tree_get_right_child(node), counters ))
+    WRP(tr_node_asm_text( stream, tree_ptr, tree_get_right_child(node), counters, context ))
 
 #define TR_LEFT_CHILD_OF_NODE( _node )  \
-    WRP(tr_node_asm_text( stream, tree_ptr, tree_get_left_child (_node), counters ))
+    WRP(tr_node_asm_text( stream, tree_ptr, tree_get_left_child (_node), counters, context ))
 
 #define TR_RIGHT_CHILD_OF_NODE( _node ) \
-    WRP(tr_node_asm_text( stream, tree_ptr, tree_get_right_child(_node), counters ))
+    WRP(tr_node_asm_text( stream, tree_ptr, tree_get_right_child(_node), counters, context ))
 
 #define LEFT_CURR  (tree_get_left_child ( (node) ))
 #define RIGHT_CURR (tree_get_right_child( (node) ))
@@ -80,7 +80,9 @@ Status tr_asm_text_dummy( FORMAL_TR_ASM_TEXT_ARGS )
     assert( tree_ptr );
     assert( node );
 
+    // REVIEW - ?
     UNUSED(counters);
+    UNUSED(context);
 
     PRINT( "; dummy" );
     END_BLOCK();
@@ -108,7 +110,7 @@ Status tr_asm_text_cmp_more( FORMAL_TR_ASM_TEXT_ARGS )
     assert( tree_ptr );
     assert( node );
 
-    return helper_asm_text_cmp( _CMD_NAME(CMD_JA), stream, tree_ptr, node, counters );
+    return helper_asm_text_cmp( _CMD_NAME(CMD_JA), stream, tree_ptr, node, counters, context );
 }
 
 Status tr_asm_text_cmp_less( FORMAL_TR_ASM_TEXT_ARGS )
@@ -117,7 +119,7 @@ Status tr_asm_text_cmp_less( FORMAL_TR_ASM_TEXT_ARGS )
     assert( tree_ptr );
     assert( node );
 
-    return helper_asm_text_cmp( _CMD_NAME(CMD_JB), stream, tree_ptr, node, counters );
+    return helper_asm_text_cmp( _CMD_NAME(CMD_JB), stream, tree_ptr, node, counters, context );
 }
 
 Status tr_asm_text_cmp_more_eq( FORMAL_TR_ASM_TEXT_ARGS )
@@ -126,7 +128,7 @@ Status tr_asm_text_cmp_more_eq( FORMAL_TR_ASM_TEXT_ARGS )
     assert( tree_ptr );
     assert( node );
 
-    return helper_asm_text_cmp( _CMD_NAME(CMD_JAE), stream, tree_ptr, node, counters );
+    return helper_asm_text_cmp( _CMD_NAME(CMD_JAE), stream, tree_ptr, node, counters, context );
 }
 
 Status tr_asm_text_cmp_less_eq( FORMAL_TR_ASM_TEXT_ARGS )
@@ -135,7 +137,7 @@ Status tr_asm_text_cmp_less_eq( FORMAL_TR_ASM_TEXT_ARGS )
     assert( tree_ptr );
     assert( node );
 
-    return helper_asm_text_cmp( _CMD_NAME(CMD_JBE), stream, tree_ptr, node, counters );
+    return helper_asm_text_cmp( _CMD_NAME(CMD_JBE), stream, tree_ptr, node, counters, context );
 }
 
 Status tr_asm_text_cmp_equal( FORMAL_TR_ASM_TEXT_ARGS )
@@ -144,7 +146,7 @@ Status tr_asm_text_cmp_equal( FORMAL_TR_ASM_TEXT_ARGS )
     assert( tree_ptr );
     assert( node );
 
-    return helper_asm_text_cmp( _CMD_NAME(CMD_JE), stream, tree_ptr, node, counters );
+    return helper_asm_text_cmp( _CMD_NAME(CMD_JE), stream, tree_ptr, node, counters, context );
 }
 
 Status tr_asm_text_cmp_not_eq( FORMAL_TR_ASM_TEXT_ARGS )
@@ -153,7 +155,7 @@ Status tr_asm_text_cmp_not_eq( FORMAL_TR_ASM_TEXT_ARGS )
     assert( tree_ptr );
     assert( node );
 
-    return helper_asm_text_cmp( _CMD_NAME(CMD_JNE), stream, tree_ptr, node, counters );
+    return helper_asm_text_cmp( _CMD_NAME(CMD_JNE), stream, tree_ptr, node, counters, context );
 }
 
 
@@ -246,6 +248,8 @@ Status tr_asm_text_while( FORMAL_TR_ASM_TEXT_ARGS )
     assert( tree_ptr );
     assert( node );
 
+    context->in_while = 1;
+
     PRINT( "while_" SPECF_CNT_T ":", counters->while_c);
 
     TR_LEFT_CHILD_CURR();
@@ -260,6 +264,8 @@ Status tr_asm_text_while( FORMAL_TR_ASM_TEXT_ARGS )
     END_BLOCK();
 
     counters->while_c++;
+
+    context->in_while = 0;
 
     return STATUS_OK;
 }

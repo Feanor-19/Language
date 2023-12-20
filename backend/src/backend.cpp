@@ -15,7 +15,9 @@ inline size_t find_op_by_name( CompTreeOpName name )
     return DUMMY_OP_INDEX;
 }
 
-Status tr_node_asm_text( FILE *stream, const Tree *tree_ptr, TreeNode *node, Counters *counters )
+Status tr_node_asm_text( FILE *stream, const Tree *tree_ptr,
+                         TreeNode *node, Counters *counters,
+                         Context *context )
 {
     assert( stream );
     assert( tree_ptr );
@@ -25,19 +27,26 @@ Status tr_node_asm_text( FILE *stream, const Tree *tree_ptr, TreeNode *node, Cou
     switch (data.type)
     {
     case TREE_NODE_TYPE_NUM:
-        PRINT_ASM( "push %f", data.num );
+        PRINT_ASM( "%s %f", commands_list[CMD_PUSH], data.num );
         return STATUS_OK;
         break;
     case TREE_NODE_TYPE_ID:
-        // NOTE - Identifiers must be dealt in operators' functions.
-        ERROR( "Translation called for an alone identificator. Someting's wrong "
-        "with the compiler tree and/or operators' functions. Stopping translation..." );
-        return STATUS_ERROR_DURING_TRANSLATION;
+        // NOTE - Function identifiers must be dealt in operators' functions.
+        // Otherwise it is supposed that's a variable identificator.
+        if ( context->in_func )
+        {
+            // TODO -
+        }
+        else
+        {
+            PRINT_ASM( "%s [%d]", commands_list[CMD_PUSH], data.id );
+        }
+        return STATUS_OK;
         break;
     case TREE_NODE_TYPE_OP:
         // REVIEW - как нормально избавиться от crosses initialization??
         {size_t op_ind = find_op_by_name( data.op );
-        Status status = COMP_TREE_OPS[ op_ind ].tr_asm_text( stream, tree_ptr, node, counters );
+        Status status = COMP_TREE_OPS[ op_ind ].tr_asm_text( stream, tree_ptr, node, counters, context );
         return status;}
         break;
     default:
@@ -49,17 +58,24 @@ Status tr_node_asm_text( FILE *stream, const Tree *tree_ptr, TreeNode *node, Cou
     return STATUS_OK;
 }
 
-#undef PRINT_ASM
-
 Status translate_to_asm_text( const Tree *tree_ptr, FILE *stream )
 {
     assert(tree_ptr);
     assert(stream);
 
     Counters counters = {};
+    Context context   = {};
 
-    return tr_node_asm_text( stream, tree_ptr, tree_get_root( tree_ptr ), &counters );
+    Status err = tr_node_asm_text( stream, tree_ptr, tree_get_root( tree_ptr ), &counters, &context );
+    if (err)
+        return err;
+
+    PRINT_ASM( "%s", commands_list[CMD_HLT] );
+
+    return STATUS_OK;
 }
+
+#undef PRINT_ASM
 
 void print_status_message( FILE *stream, Status status )
 {

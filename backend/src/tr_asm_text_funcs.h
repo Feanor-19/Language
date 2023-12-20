@@ -3,7 +3,8 @@
 
 #include "backend_common.h"
 
-#define FORMAL_TR_ASM_TEXT_ARGS FILE *stream, const Tree *tree_ptr, TreeNode *node, Counters *counters
+#define FORMAL_TR_ASM_TEXT_ARGS FILE *stream, const Tree *tree_ptr, TreeNode *node, \
+                                Counters *counters, Context *context
 
 Status tr_asm_text_seq_exec     ( FORMAL_TR_ASM_TEXT_ARGS );
 Status tr_asm_text_dummy        ( FORMAL_TR_ASM_TEXT_ARGS );

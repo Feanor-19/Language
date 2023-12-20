@@ -9,7 +9,7 @@
 struct CompTreeOp
 {
     CompTreeOpName name;
-    Status (*tr_asm_text)(FILE*,const Tree*,TreeNode*,Counters*);
+    Status (*tr_asm_text)(FILE*,const Tree*,TreeNode*,Counters*,Context*);
 };
 
 
@@ -72,7 +72,9 @@ const CompTreeOp COMP_TREE_OPS[] =
     { TREE_OP_MINUS,                    tr_asm_text_minus       }
 };
 
-Status tr_node_asm_text( FILE *stream, const Tree *tree_ptr, TreeNode *node, Counters *counters );
+Status tr_node_asm_text( FILE *stream, const Tree *tree_ptr,
+                         TreeNode *node, Counters *counters,
+                         Context *context );
 
 Status translate_to_asm_text( const Tree *tree_ptr, FILE *stream );
 
