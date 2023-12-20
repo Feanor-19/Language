@@ -71,8 +71,8 @@ Programs written in this programming language try to look like crazy recipes of 
 ### Some notes and details
 
 1. All space symbols are ignored, new line symbols also don't matter, but they separate keywords and other constructions from each other.
-2. Everything surrounded by single `#` is considered a comment and is ignored, e.g. `Quickly Obtain #comment# 10 Units Of Milk!`. (NOT IMPLEMENTED YET)
-3. Inside functions global variables can't be seen, only formal paramatres and local vars. (NOT IMPLEMENTED YET)
+2. Everything surrounded by single `#` is considered a comment and is ignored, e.g. `Quickly Obtain #comment# 10 Units Of Milk!`.
+3. Inside functions global variables can't be seen, only formal parametres and local vars. (NOT IMPLEMENTED YET)
 
 ### Grammar
 

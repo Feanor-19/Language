@@ -105,7 +105,6 @@ void init_img_dumps( const char *folder_path )
     }
     else
     {
-        // TODO - переделать на ф-ии
         WARNING("Trying to reinit folder path for image dumps again. It's strange...");
     }
 }

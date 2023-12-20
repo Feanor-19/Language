@@ -85,6 +85,9 @@ struct Token
 
 
 
+const char COMMENT_SYMBOL = '#';
+
+
 //! @brief Retutns token, found in the prefix of the given 'str'.
 //! See struct Token for details.
 Token get_token( const char *str );
@@ -103,5 +106,9 @@ int is_tkn_sep_char( Token tkn, SepCharName sep_char );
 //! @brief Returns 1 if given identificators are equal,
 //! i.e. if the const strings they point to are equal, otherwise 0.
 int cmp_idents( Identificator a, Identificator b );
+
+//! @brief Returns pointer to the first non-space symbol.
+//! @note If '\0' is met, returns NULL!
+const char *skip_spaces( const char *str );
 
 #endif /* TOKENIZER_H */

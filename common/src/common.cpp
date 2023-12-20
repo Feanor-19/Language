@@ -191,19 +191,6 @@ int read_tree_from_file( const char *file_name, Tree *tree_ptr )
     return 1;
 }
 
-const char *skip_spaces( const char *str )
-{
-    assert(str);
-
-    while ( isspace(*str) )
-        str++;
-
-    if ( *str != '\0' )
-        return str;
-
-    return NULL;
-}
-
 TreeNode *new_node_op( Tree *tree_ptr, CompTreeOpName op )
 {
     assert(tree_ptr);

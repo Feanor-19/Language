@@ -159,3 +159,43 @@ int is_tkn_amp( Token tkn )
          || tkn.keyword == KW_Amp_3
          || tkn.keyword == KW_Amp_4);
 }
+
+inline int is_space_or_comment( char c )
+{
+    static int is_in_comment = 0;
+
+    if (!is_in_comment)
+    {
+        if (c == COMMENT_SYMBOL)
+        {
+            is_in_comment = 1;
+            return 1;
+        }
+        else
+        {
+            return isspace(c);
+        }
+    }
+    else if (is_in_comment)
+    {
+        if ( c == COMMENT_SYMBOL )
+            is_in_comment = 0;
+        return 1;
+    }
+
+    ASSERT_UNREACHEABLE();
+    return 0;
+}
+
+const char *skip_spaces( const char *str )
+{
+    assert(str);
+
+    while ( is_space_or_comment(*str) )
+        str++;
+
+    if ( *str != '\0' )
+        return str;
+
+    return NULL;
+}

@@ -4,10 +4,6 @@
 #include <math.h>
 #include "compiler_tree_dump.h"
 
-// TODO - ИДЕЯ: сделать структуру Context, в которой будут поля
-// типа is_in_while, is_in_func и тд (вместо того чтобы создавать
-// отдельные правила)
-
 // TODO - В ГРАММАТИКЕ Вынести "Cond" ?CmpOp (group)? Expr "Than" Expr
 // в отдельное правило, а потом эти правила разрешить соединять с помощью NOT, AND
 // и OR (приоритет разный, придется всего три правила делать)
@@ -662,10 +658,10 @@ void print_rec_fall_err_msg( const char *prog, const char *error_ptr, const char
     assert(error_ptr);
     assert(expected);
 
-    // TODO - ИДЕЯ ПРО КОММЕНТАРИИ: сделать свой ISSPACE, который с помощью
-    // static переменной понимает, находится ли он внутри комментария или нет, и соответственно выдает
-    while ( isspace(*error_ptr) )
-        error_ptr++;
+    error_ptr = skip_spaces(error_ptr);
+
+    if (!error_ptr)
+        error_ptr = prog + strlen( prog ) - 1;
 
     ERROR("Syntax error: expected <%s>, found:", expected);
 
@@ -774,3 +770,4 @@ void Nametables_dtor( Nametables *nametables )
     nametable_dtor( &nametables->funcs );
     nametable_dtor( &nametables->func_vars );
 }
+

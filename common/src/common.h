@@ -60,10 +60,6 @@ int write_tree_to_file( const char *file_name, const Tree *tree_ptr );
 //! BEFORE calling this function.
 int read_tree_from_file( const char *file_name, Tree *tree_ptr );
 
-//! @brief Returns pointer to the first non-space symbol.
-//! @note If '\0' is met, returns NULL!
-const char *skip_spaces( const char *str );
-
 //! @brief Returns new node of type operator and writes value 'op' into it.
 TreeNode *new_node_op( Tree *tree_ptr, CompTreeOpName op );
 
