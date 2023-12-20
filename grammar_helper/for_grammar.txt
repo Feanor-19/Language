@@ -22,10 +22,12 @@
 |If2|Urgently Do The Following Steps:|
 |IfEnd|Now, Breathe Out And Continue Whatever Your Were Doing!|
 |InBracketsStart|The Following Prepared Beforehand:|
+|InputOp|As Much As The Universe Says|
 |OpAdd|Mixed With|
 |OpDiv|Spread On|
 |OpMul|Fried With|
 |OpSub|Without|
+|PrintNum|Serve|
 |ProgEnd|That's All! Don't Forget To Check It On Your Friends Before Tasting Yourself!|
 |ProgStart|The Recipe Of The Most Delicious Dish One Can Ever Imagine!|
 |Return|The Result Of The Skill Is|

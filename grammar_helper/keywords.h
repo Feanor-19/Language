@@ -4,6 +4,8 @@ DEF_KEYWORD( AsIngr, "As Ingredients" )
 
 DEF_KEYWORD( While1, "As Long As" )
 
+DEF_KEYWORD( InputOp, "As Much As The Universe Says" )
+
 DEF_KEYWORD( CallFuncRecipe, "Cooked Beforehand" )
 
 DEF_KEYWORD( UnrOp_cos, "Diced" )
@@ -45,6 +47,8 @@ DEF_KEYWORD( WhileEnd, "Repeat Until Ready And Then Go Further!" )
 DEF_KEYWORD( Asgn2, "Right Into" )
 
 DEF_KEYWORD( UnrOp_minus, "Rinsed" )
+
+DEF_KEYWORD( PrintNum, "Serve" )
 
 DEF_KEYWORD( FuncRecipeHeader, "Skill To Cook" )
 

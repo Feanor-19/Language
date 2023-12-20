@@ -94,7 +94,8 @@ FuncAction      ::= "FuncActionHeader" Id {"Using" FormalArgs "AsIngr"} "Colon" 
 FormalArgs      ::= Id<Var> ( "Comma" Id<Var> )*
 FactArgs        ::= Expr ( "Comma" Expr )*
 Operators       ::= Op+
-Op              ::= VarBirth | VarDeath | Assign | If | While | Return<in FuncRecipe> | CallFuncAction
+Op              ::= VarBirth | VarDeath | Assign | If | While | Return<in FuncRecipe> | CallFuncAction | PrintNum
+PrintNum        ::= "PrintNum" Id<Var> "Dot"
 Return          ::= "Return" Expr "Dot"
 VarBirth        ::= "VarBirthOp" Num "UnitsOf" Id "Dot"
 VarDeath        ::= "VarDeathOp" Id<Var> "Dot"
@@ -144,6 +145,7 @@ CallFuncAction  ::= "CallFuncAction" Id<func> {"Using" FactArgs "AsIngr"} "Dot"
 |OpDiv|Spread On|
 |OpMul|Fried With|
 |OpSub|Without|
+|PrintNum|Serve|
 |ProgEnd|That's All! Don't Forget To Check It On Your Friends Before Tasting Yourself!|
 |ProgStart|The Recipe Of The Most Delicious Dish One Can Ever Imagine!|
 |Return|The Result Of The Skill Is|
@@ -161,6 +163,7 @@ CallFuncAction  ::= "CallFuncAction" Id<func> {"Using" FactArgs "AsIngr"} "Dot"
 |While1|As Long As|
 |While2|Repeat The Following:|
 |WhileEnd|Repeat Until Ready And Then Go Further!|
+
 
 ### Separating symbols
 

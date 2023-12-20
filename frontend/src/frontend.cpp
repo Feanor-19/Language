@@ -738,6 +738,30 @@ static TreeNode *get_return( FORMAL_REC_FALL_ARGS )
     return node_ret;
 }
 
+static TreeNode *get_print_num( FORMAL_REC_FALL_ARGS )
+{
+    assert(comp_prog);
+    assert(prog);
+    assert(curr_ptr);
+
+    Token tkn_print_num = get_token( CURR );
+    if ( !is_tkn_keyword( tkn_print_num, KW_PrintNum ) )
+        return NULL;
+    MOVE_CURR_TO_END_OF_TOKEN( tkn_print_num );
+
+    TreeNode *node_var = get_var( FACT_REC_FALL_ARGS );
+    SYN_ASSERT( node_var, prog, CURR, "Variable" );
+
+    TreeNode *node_print_num = new_node_op( TREE, TREE_OP_PRINT_NUM );
+    tree_hang_loose_node_at_right( TREE, node_var, node_print_num );
+
+    Token dot = get_token( CURR );
+    SYN_ASSERT( is_tkn_sep_char(dot, SEP_Dot), prog, CURR, "\'!\'" );
+    MOVE_CURR_TO_END_OF_TOKEN(dot);
+
+    return node_print_num;
+}
+
 static TreeNode *get_op( FORMAL_REC_FALL_ARGS )
 {
     assert(comp_prog);
