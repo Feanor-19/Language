@@ -188,7 +188,13 @@ int is_tkn_amp( Token tkn )
            (tkn.keyword == KW_Amp_1
          || tkn.keyword == KW_Amp_2
          || tkn.keyword == KW_Amp_3
-         || tkn.keyword == KW_Amp_4);
+         || tkn.keyword == KW_Amp_4
+         || tkn.keyword == KW_Amp_5
+         || tkn.keyword == KW_Amp_6
+         || tkn.keyword == KW_Amp_7
+         || tkn.keyword == KW_Amp_8
+         || tkn.keyword == KW_Amp_9
+         || tkn.keyword == KW_Amp_10);
 }
 
 inline int is_space_or_comment( char c )

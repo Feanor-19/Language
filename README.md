@@ -118,10 +118,16 @@ CallFuncAction  ::= "CallFuncAction" Id<func> {"BracketOpn" "Using" FactArgs "As
 
 |Designation in grammar|Designation in program|Comment
 |-|-|-|
+|Amp_10|Fanatically|
 |Amp_1|Angrily|
 |Amp_2|Unfortunately|
-|Amp_3|Thoroughly|
+|Amp_3|Madly|
 |Amp_4|Thickly|
+|Amp_5|Rapidly|
+|Amp_6|Hastily|
+|Amp_7|Emotionally|
+|Amp_8|Desperately|
+|Amp_9|Fiercely|
 |AsIngr|As Ingredients|
 |Asgn1|Place|
 |Asgn2|Right Into|

@@ -4,10 +4,6 @@
 #include <math.h>
 #include "compiler_tree_dump.h"
 
-// TODO - В ГРАММАТИКЕ Вынести "Cond" ?CmpOp (group)? Expr "Than" Expr
-// в отдельное правило, а потом эти правила разрешить соединять с помощью NOT, AND
-// и OR (приоритет разный, придется всего три правила делать)
-
 //REVIEW -
 #define UNUSED(var) do{var = var;}while(0)
 #define CURR (*curr_ptr)
@@ -20,6 +16,8 @@
 #define NT_FUNC_VARS comp_prog->nametables.func_vars
 #define MOVE_CURR_TO_END_OF_TOKEN( token ) (CURR = token.start + token.len)
 
+
+static KeywordName LAST_USED_AMPLIFIER = KW_FICTIONAL;
 
 
 static TreeNode *get_num               ( FORMAL_REC_FALL_ARGS );
@@ -498,7 +496,9 @@ static TreeNode *get_unr( FORMAL_REC_FALL_ARGS )
     Token tkn_op = get_token( tkn_amp.start + tkn_amp.len );
     if ( is_tkn_amp( tkn_amp ) && translate_tkn_unr_op( tkn_op ) != TREE_OP_DUMMY  )
     {
-        // TODO - отмечать в списке использованных амлпификаторов
+        SYN_ASSERT( tkn_amp.keyword != LAST_USED_AMPLIFIER, prog,
+                    CURR, "No tautology here!" );
+        LAST_USED_AMPLIFIER = tkn_amp.keyword;
 
         MOVE_CURR_TO_END_OF_TOKEN(tkn_op);
 
@@ -531,8 +531,6 @@ static TreeNode *get_mulive( FORMAL_REC_FALL_ARGS )
     Token tkn_amp = {};
     while ( tkn_amp = get_token(CURR), is_tkn_amp( tkn_amp ) )
     {
-        // TODO - отмечать в списке использованных амлпификаторов
-
         Token tkn_op = get_token( tkn_amp.start + tkn_amp.len ); // not yet sure it is our case
         if ( tkn_op.type != TKN_TYPE_KEYWORD )
             break;
@@ -543,6 +541,10 @@ static TreeNode *get_mulive( FORMAL_REC_FALL_ARGS )
             node_op = new_node_op( TREE, TREE_OP_DIV );
         else
             break;
+        SYN_ASSERT( tkn_amp.keyword != LAST_USED_AMPLIFIER, prog,
+                    CURR, "No tautology here!" );
+        LAST_USED_AMPLIFIER = tkn_amp.keyword;
+
         MOVE_CURR_TO_END_OF_TOKEN(tkn_op); // now sure it is really our case
 
         TreeNode *node_new_unr = get_unr( FACT_REC_FALL_ARGS );
@@ -568,8 +570,6 @@ static TreeNode *get_expr( FORMAL_REC_FALL_ARGS )
     Token tkn_amp = {};
     while ( tkn_amp = get_token(CURR), is_tkn_amp( tkn_amp ) )
     {
-        // TODO - отмечать в списке использованных амлпификаторов
-
         Token tkn_op = get_token( tkn_amp.start + tkn_amp.len ); // not yet sure it is our case
         if ( tkn_op.type != TKN_TYPE_KEYWORD )
             break;
@@ -580,6 +580,10 @@ static TreeNode *get_expr( FORMAL_REC_FALL_ARGS )
             node_op = new_node_op( TREE, TREE_OP_SUB );
         else
             break;
+        SYN_ASSERT( tkn_amp.keyword != LAST_USED_AMPLIFIER, prog,
+                    CURR, "No tautology here!" );
+        LAST_USED_AMPLIFIER = tkn_amp.keyword;
+
         MOVE_CURR_TO_END_OF_TOKEN(tkn_op); // now sure it is really our case
 
         TreeNode *node_new_mulive = get_mulive( FACT_REC_FALL_ARGS );

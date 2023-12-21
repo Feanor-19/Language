@@ -12,11 +12,21 @@ DEF_KEYWORD( CmpWith, "Comparing With" )
 
 DEF_KEYWORD( CallFuncRecipe, "Cooked Beforehand" )
 
+DEF_KEYWORD( Amp_8, "Desperately" )
+
 DEF_KEYWORD( UnrOp_cos, "Diced" )
+
+DEF_KEYWORD( Amp_7, "Emotionally" )
+
+DEF_KEYWORD( Amp_10, "Fanatically" )
+
+DEF_KEYWORD( Amp_9, "Fiercely" )
 
 DEF_KEYWORD( OpMul, "Fried With" )
 
 DEF_KEYWORD( UnrOp_exp, "Grated" )
+
+DEF_KEYWORD( Amp_6, "Hastily" )
 
 DEF_KEYWORD( FuncDefsStart, "Here Are Some Skills You Need To Have:" )
 
@@ -27,6 +37,8 @@ DEF_KEYWORD( If1, "In Case" )
 DEF_KEYWORD( CmpOp_equal, "Just The Same Amount Of" )
 
 DEF_KEYWORD( CmpOp_less, "Less" )
+
+DEF_KEYWORD( Amp_3, "Madly" )
 
 DEF_KEYWORD( OpAdd, "Mixed With" )
 
@@ -45,6 +57,8 @@ DEF_KEYWORD( CallFuncAction, "Perform" )
 DEF_KEYWORD( Asgn1, "Place" )
 
 DEF_KEYWORD( VarBirthOp, "Quickly Obtain" )
+
+DEF_KEYWORD( Amp_5, "Rapidly" )
 
 DEF_KEYWORD( While2, "Repeat The Following:" )
 
@@ -83,8 +97,6 @@ DEF_KEYWORD( Cond, "There Happens To Be" )
 DEF_KEYWORD( Return1, "There Is No Time To Explain, Use" )
 
 DEF_KEYWORD( Amp_4, "Thickly" )
-
-DEF_KEYWORD( Amp_3, "Thoroughly" )
 
 DEF_KEYWORD( VarDeathOp, "Throw Away" )
 
