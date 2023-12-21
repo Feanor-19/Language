@@ -107,7 +107,7 @@ Ingr            ::= ( Num "UnitsOf" Primal ) | Primal
 Primal          ::= ("InBracketsStart" Expr "Semicolon") | CallFuncRecipe | Id<Var>
 Id              ::= ['a'-'z','A'-'Z']['a'-'z','A'-'Z','_','0'-'9']*
 Num             ::= ( "InputOp" ) | ( ?float number? )
-If              ::= "If1" "Cond" ?CmpOp (group)? Expr "CmpWith" Expr "If2" Operators "IfEnd"
+If              ::= "If1" "Cond" ?CmpOp (group)? Expr "CmpWith" Expr "If2" Operators { "Else" Operators } "IfEnd"
 While           ::= "While1" "Cond" ?CmpOp (group)? Expr "CmpWith" Expr "While2" Operators "WhileEnd"
 CallFuncRecipe  ::= "CallFuncRecipe" Id<func> {"BracketOpn" "Using" FactArgs "AsIngr" "BracketCls"}
 CallFuncAction  ::= "CallFuncAction" Id<func> {"BracketOpn" "Using" FactArgs "AsIngr" "BracketCls"} "Dot"
@@ -134,6 +134,7 @@ CallFuncAction  ::= "CallFuncAction" Id<func> {"BracketOpn" "Using" FactArgs "As
 |CmpOp_notEqual|Not The Same Amount Of|
 |CmpWith|Comparing With|
 |Cond|There Happens To Be|
+|Else|Otherwise You Should Do A Completely Different Thing:|
 |FuncActionHeader|Skill To Do|
 |FuncDefsEnd|Here Is The Recipe Itself:|
 |FuncDefsStart|Here Are Some Skills You Need To Have:|

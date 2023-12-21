@@ -17,6 +17,9 @@ POP [2]
 PUSH 0.000000
 POP [3]
 
+PUSH 0.000000
+POP [4]
+
 PUSH [1]
 PUSH [1]
 MUL
@@ -31,6 +34,30 @@ MUL
 SUB
 
 POP [3]
+
+PUSH [3]
+PUSH [4]
+JAE cmp_yes_0
+PUSH 0
+JMP cmp_end_0
+cmp_yes_0:
+PUSH 1
+cmp_end_0:
+
+PUSH 0
+JE if_else_0
+PUSH [3]
+PRN
+
+JMP if_end_0
+if_else_0:
+PUSH 19.000000
+POP [5]
+
+PUSH [5]
+PRN
+
+if_end_0:
 
 PUSH [3]
 PRN

@@ -28,6 +28,7 @@ enum CompTreeOpName
     TREE_OP_AND                 = 203,
     TREE_OP_OR                  = 204,
     TREE_OP_NOT                 = 205,
+    TREE_OP_ELSE                = 206,
 
     TREE_OP_SIN                 = 301,
     TREE_OP_COS                 = 302,

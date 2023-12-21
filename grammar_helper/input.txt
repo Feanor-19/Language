@@ -27,6 +27,7 @@
 |OpAdd|Mixed With|
 |OpDiv|Spread On|
 |OpMul|Fried With|
+|Else|Otherwise You Should Do A Completely Different Thing:|
 |OpSub|Without|
 |PrintNum|Serve|
 |ProgEnd|That's All! Don't Forget To Check It On Your Friends Before Tasting Yourself!|

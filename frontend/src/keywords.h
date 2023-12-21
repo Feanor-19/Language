@@ -36,6 +36,8 @@ DEF_KEYWORD( CmpOp_notEqual, "Not The Same Amount Of" )
 
 DEF_KEYWORD( IfEnd, "Now, Breathe Out And Continue Whatever Your Were Doing!" )
 
+DEF_KEYWORD( Else, "Otherwise You Should Do A Completely Different Thing:" )
+
 DEF_KEYWORD( UnrOp_sqrt, "Peeled" )
 
 DEF_KEYWORD( CallFuncAction, "Perform" )

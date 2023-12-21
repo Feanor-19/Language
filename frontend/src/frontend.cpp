@@ -8,9 +8,6 @@
 // в отдельное правило, а потом эти правила разрешить соединять с помощью NOT, AND
 // и OR (приоритет разный, придется всего три правила делать)
 
-// TODO - ИДЕЯ: добавление в грамматику умножения числа на переменную или выражение из
-// переменных, а именно: Unr выражается через XXX, XXX ::= (Num "UnitsOf" Primal) | Primal
-
 //REVIEW -
 #define UNUSED(var) do{var = var;}while(0)
 #define CURR (*curr_ptr)
@@ -249,7 +246,24 @@ static TreeNode *get_if( FORMAL_REC_FALL_ARGS )
 
     TreeNode *node_operators = get_operators( FACT_REC_FALL_ARGS );
     SYN_ASSERT( node_operators, prog, CURR, "Operators" );
-    tree_hang_loose_node_at_right( TREE, node_operators, node_if );
+
+    Token tkn_else = get_token( CURR );
+    if ( is_tkn_keyword(tkn_else, KW_Else) )
+    {
+        MOVE_CURR_TO_END_OF_TOKEN( tkn_else );
+
+        TreeNode *node_else_ops = get_operators( FACT_REC_FALL_ARGS );
+        SYN_ASSERT( node_else_ops, prog, CURR, "Operators" );
+
+        TreeNode *node_else = new_node_op( TREE, TREE_OP_ELSE );
+        tree_hang_loose_node_at_left( TREE, node_operators, node_else );
+        tree_hang_loose_node_at_right( TREE, node_else_ops, node_else );
+        tree_hang_loose_node_at_right( TREE, node_else, node_if );
+    }
+    else
+    {
+        tree_hang_loose_node_at_right( TREE, node_operators, node_if );
+    }
 
     Token tkn_if_end = get_token( CURR );
     SYN_ASSERT( is_tkn_keyword( tkn_if_end, KW_IfEnd ), prog, CURR, KEYWORDS[KW_IfEnd].str )

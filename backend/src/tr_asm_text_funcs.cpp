@@ -319,16 +319,28 @@ Status tr_asm_text_if( FORMAL_TR_ASM_TEXT_ARGS )
 
     TR_LEFT_CHILD_CURR();
 
-    PRINT( "%s 0", _CMD_NAME(CMD_PUSH) );
-    PRINT( "%s if_end_" SPECF_CNT_T, _CMD_NAME(CMD_JE), counters->if_c );
-
-    TR_RIGHT_CHILD_CURR();
-
-    PRINT( "if_end_" SPECF_CNT_T ":", counters->if_c );
-
-    END_BLOCK();
-
+    cnt_t curr_cnt = counters->if_c;
     counters->if_c++;
+
+    PRINT( "%s 0", _CMD_NAME(CMD_PUSH) );
+
+    if ( GET_TYPE( RIGHT_CURR ) == TREE_NODE_TYPE_OP && GET_OP( RIGHT_CURR ) == TREE_OP_ELSE )
+    {
+        PRINT( "%s if_else_" SPECF_CNT_T, _CMD_NAME(CMD_JE), curr_cnt );
+        TR_LEFT_CHILD_OF_NODE( RIGHT_CURR );
+        PRINT( "%s if_end_" SPECF_CNT_T, _CMD_NAME(CMD_JMP), curr_cnt );
+        PRINT( "if_else_" SPECF_CNT_T ":", curr_cnt );
+        TR_RIGHT_CHILD_OF_NODE( RIGHT_CURR );
+        PRINT( "if_end_" SPECF_CNT_T ":", curr_cnt );
+        END_BLOCK();
+    }
+    else
+    {
+        PRINT( "%s if_end_" SPECF_CNT_T, _CMD_NAME(CMD_JE), curr_cnt );
+        TR_RIGHT_CHILD_CURR();
+        PRINT( "if_end_" SPECF_CNT_T ":", curr_cnt );
+        END_BLOCK();
+    }
 
     return STATUS_OK;
 }

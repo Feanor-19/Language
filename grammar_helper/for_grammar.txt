@@ -15,6 +15,7 @@
 |CmpOp_notEqual|Not The Same Amount Of|
 |CmpWith|Comparing With|
 |Cond|There Happens To Be|
+|Else|Otherwise You Should Do A Completely Different Thing:|
 |FuncActionHeader|Skill To Do|
 |FuncDefsEnd|Here Is The Recipe Itself:|
 |FuncDefsStart|Here Are Some Skills You Need To Have:|
