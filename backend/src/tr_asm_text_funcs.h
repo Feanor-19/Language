@@ -4,11 +4,12 @@
 #include "backend_common.h"
 
 #define FORMAL_TR_ASM_TEXT_ARGS FILE *stream, const Tree *tree_ptr, TreeNode *node, \
-                                Counters *counters, Context *context
+                                Counters *counters, Context *context, FuncFrames *frames
 
 Status tr_asm_text_seq_exec     ( FORMAL_TR_ASM_TEXT_ARGS );
 Status tr_asm_text_dummy        ( FORMAL_TR_ASM_TEXT_ARGS );
 Status tr_asm_text_func_def     ( FORMAL_TR_ASM_TEXT_ARGS );
+Status tr_asm_text_main_prog    ( FORMAL_TR_ASM_TEXT_ARGS );
 
 Status tr_asm_text_assign       ( FORMAL_TR_ASM_TEXT_ARGS );
 Status tr_asm_text_cmp_more     ( FORMAL_TR_ASM_TEXT_ARGS );

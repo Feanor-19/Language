@@ -8,6 +8,7 @@ enum CompTreeOpName
     TREE_OP_FUNC_DEF            = 3,
     TREE_OP_FUNC_DEF_HELPER     = 4,
     TREE_OP_LIST_CONNECTOR      = 5,
+    TREE_OP_MAIN_PROG           = 6,
 
     TREE_OP_ASSIGN              = 51,
     TREE_OP_CMP_MORE            = 52,
@@ -21,10 +22,6 @@ enum CompTreeOpName
     TREE_OP_SUB                 = 102,
     TREE_OP_MUL                 = 103,
     TREE_OP_DIV                 = 104,
-    TREE_OP_PRE_PLUS_PLUS       = 105,
-    TREE_OP_POST_PLUS_PLUS      = 106,
-    TREE_OP_PRE_MINUS_MINUS     = 107,
-    TREE_OP_POST_MINUS_MINUS    = 108,
 
     TREE_OP_IF                  = 201,
     TREE_OP_WHILE               = 202,

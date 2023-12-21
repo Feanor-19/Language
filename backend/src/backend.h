@@ -9,7 +9,7 @@
 struct CompTreeOp
 {
     CompTreeOpName name;
-    Status (*tr_asm_text)(FILE*,const Tree*,TreeNode*,Counters*,Context*);
+    Status (*tr_asm_text)(FILE*,const Tree*,TreeNode*,Counters*,Context*,FuncFrames*);
 };
 
 
@@ -38,13 +38,16 @@ const char * const commands_list[] =
 #undef DEF_CMD
 // REVIEW - ???
 
-const size_t DUMMY_OP_INDEX = 0;
+const size_t DUMMY_OP_INDEX       = 0;
+const size_t FUNCS_DEFAULT_NUMBER = 1;
+const size_t MEMORY_SIZE          = 1024;
 
 const CompTreeOp COMP_TREE_OPS[] =
 {
     { TREE_OP_DUMMY,                    tr_asm_text_dummy       },
     { TREE_OP_SEQ_EXEC,                 tr_asm_text_seq_exec    },
     { TREE_OP_FUNC_DEF,                 tr_asm_text_func_def    },
+    { TREE_OP_MAIN_PROG,                tr_asm_text_main_prog   },
 
     { TREE_OP_ASSIGN,                   tr_asm_text_assign      },
     { TREE_OP_CMP_MORE,                 tr_asm_text_cmp_more    },
@@ -80,7 +83,7 @@ const CompTreeOp COMP_TREE_OPS[] =
 
 Status tr_node_asm_text( FILE *stream, const Tree *tree_ptr,
                          TreeNode *node, Counters *counters,
-                         Context *context );
+                         Context *context, FuncFrames *frames );
 
 Status translate_to_asm_text( const Tree *tree_ptr, FILE *stream );
 

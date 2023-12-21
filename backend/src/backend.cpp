@@ -17,7 +17,7 @@ inline size_t find_op_by_name( CompTreeOpName name )
 
 Status tr_node_asm_text( FILE *stream, const Tree *tree_ptr,
                          TreeNode *node, Counters *counters,
-                         Context *context )
+                         Context *context, FuncFrames *frames )
 {
     assert( stream );
     assert( tree_ptr );
@@ -35,7 +35,11 @@ Status tr_node_asm_text( FILE *stream, const Tree *tree_ptr,
         // Otherwise it is supposed that's a variable identificator.
         if ( context->in_func )
         {
-            // TODO -
+            PRINT_ASM( "%s rbx", commands_list[CMD_PUSH] );
+            PRINT_ASM( "%s %d", commands_list[CMD_PUSH], data.id );
+            PRINT_ASM( "%s", commands_list[CMD_SUB] );
+            PRINT_ASM( "%s rdx", commands_list[CMD_POP] );
+            PRINT_ASM( "%s [rdx]", commands_list[CMD_PUSH] );
         }
         else
         {
@@ -46,7 +50,8 @@ Status tr_node_asm_text( FILE *stream, const Tree *tree_ptr,
     case TREE_NODE_TYPE_OP:
         // REVIEW - как нормально избавиться от crosses initialization??
         {size_t op_ind = find_op_by_name( data.op );
-        Status status = COMP_TREE_OPS[ op_ind ].tr_asm_text( stream, tree_ptr, node, counters, context );
+        Status status = COMP_TREE_OPS[ op_ind ].tr_asm_text( stream, tree_ptr, node,
+                                                             counters, context, frames );
         return status;}
         break;
     default:
@@ -65,8 +70,16 @@ Status translate_to_asm_text( const Tree *tree_ptr, FILE *stream )
 
     Counters counters = {};
     Context context   = {};
+    FuncFrames frames = {};
+    frames.list = (size_t*) calloc( FUNCS_DEFAULT_NUMBER, sizeof(size_t) );
+    frames.list_cap = FUNCS_DEFAULT_NUMBER;
 
-    Status err = tr_node_asm_text( stream, tree_ptr, tree_get_root( tree_ptr ), &counters, &context );
+    PRINT_ASM( "%s %d", commands_list[CMD_PUSH], (int) MEMORY_SIZE - 3 );
+    PRINT_ASM( "%s rcx", commands_list[CMD_POP] );
+    PRINT_ASM( "%s main", commands_list[CMD_JMP] );
+
+    Status err = tr_node_asm_text( stream, tree_ptr, tree_get_root( tree_ptr ),
+                                   &counters, &context, &frames );
     if (err)
         return err;
 

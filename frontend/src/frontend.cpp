@@ -1105,7 +1105,6 @@ static TreeNode *get_func_defs( FORMAL_REC_FALL_ARGS )
     if (node_curr_func)
         tree_migrate_into_right( TREE, tree_get_parent(node_curr_func), tree_get_left_child( node_curr_func ) );
 
-
     Token func_defs_end = get_token( CURR );
     SYN_ASSERT( is_tkn_keyword( func_defs_end, KW_FuncDefsEnd ),
                 prog, CURR, KEYWORDS[KW_FuncDefsStart].str );
@@ -1134,7 +1133,9 @@ static TreeNode *get_prog( FORMAL_REC_FALL_ARGS )
     {
         node_prog = new_node_op( TREE, TREE_OP_SEQ_EXEC );
         tree_hang_loose_node_at_left( TREE, node_func_defs, node_prog );
-        tree_hang_loose_node_at_right( TREE, node_operators, node_prog );
+        TreeNode *node_op_main = new_node_op( TREE, TREE_OP_MAIN_PROG );
+        tree_hang_loose_node_at_right( TREE, node_op_main, node_prog );
+        tree_hang_loose_node_at_right( TREE, node_operators, node_op_main );
     }
     else
     {
