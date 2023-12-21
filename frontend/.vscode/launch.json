@@ -11,9 +11,9 @@
             "program": "${workspaceFolder}/bin/frontend.exe",
             "args": [
                     "-i",
-                    ".\\..\\programs\\test_program\\prog.txt",
+                    ".\\..\\programs\\factorial\\prog.txt",
                     "-o",
-                    ".\\..\\programs\\test_program\\compiler_tree.txt",
+                    ".\\..\\programs\\factorial\\compiler_tree.txt",
                     "--img-dumps",
                     ".\\dumps\\image_dumps\\"
                     ],

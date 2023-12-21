@@ -13,6 +13,7 @@
 |CmpOp_moreOrEqual|The Same Amount Or More Of|
 |CmpOp_more|More|
 |CmpOp_notEqual|Not The Same Amount Of|
+|CmpWith|Comparing With|
 |Cond|There Happens To Be|
 |FuncActionHeader|Skill To Do|
 |FuncDefsEnd|Here Is The Recipe Itself:|
@@ -30,8 +31,8 @@
 |PrintNum|Serve|
 |ProgEnd|That's All! Don't Forget To Check It On Your Friends Before Tasting Yourself!|
 |ProgStart|The Recipe Of The Most Delicious Dish One Can Ever Imagine!|
-|Return|The Result Of The Skill Is|
-|Than|Than|
+|Return1|There Is No Time To Explain, Use|
+|Return2|As The Result Of This Skill!|
 |UnitsOf|Units Of|
 |UnrOp_cos|Diced|
 |UnrOp_exp|Grated|

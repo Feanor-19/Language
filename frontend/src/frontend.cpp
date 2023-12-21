@@ -239,9 +239,9 @@ static TreeNode *get_if( FORMAL_REC_FALL_ARGS )
     SYN_ASSERT( node_expr_left, prog, CURR, "Expression");
     tree_hang_loose_node_at_left( TREE, node_expr_left, node_cmp_op );
 
-    Token tkn_than = get_token( CURR );
-    SYN_ASSERT( is_tkn_keyword( tkn_than, KW_Than ), prog, CURR, KEYWORDS[KW_Than].str );
-    MOVE_CURR_TO_END_OF_TOKEN(tkn_than);
+    Token tkn_cmp_with = get_token( CURR );
+    SYN_ASSERT( is_tkn_keyword( tkn_cmp_with, KW_CmpWith ), prog, CURR, KEYWORDS[KW_CmpWith].str );
+    MOVE_CURR_TO_END_OF_TOKEN(tkn_cmp_with);
 
     TreeNode *node_expr_right = get_expr(FACT_REC_FALL_ARGS);
     SYN_ASSERT( node_expr_right, prog, CURR, "Expression");
@@ -268,12 +268,12 @@ static TreeNode *get_while( FORMAL_REC_FALL_ARGS )
     assert(prog);
     assert(curr_ptr);
 
-    context->in_while = 1;
-
     Token tkn_while1 = get_token( CURR );
     if ( !is_tkn_keyword( tkn_while1, KW_While1 ) )
         return NULL;
     MOVE_CURR_TO_END_OF_TOKEN(tkn_while1);
+
+    context->in_while = 1;
 
     TreeNode *node_while = new_node_op( TREE, TREE_OP_WHILE );
 
@@ -293,9 +293,9 @@ static TreeNode *get_while( FORMAL_REC_FALL_ARGS )
     SYN_ASSERT( node_expr_left, prog, CURR, "Expression");
     tree_hang_loose_node_at_left( TREE, node_expr_left, node_cmp_op );
 
-    Token tkn_than = get_token( CURR );
-    SYN_ASSERT( is_tkn_keyword( tkn_than, KW_Than ), prog, CURR, KEYWORDS[KW_Than].str );
-    MOVE_CURR_TO_END_OF_TOKEN(tkn_than);
+    Token tkn_cmp_with = get_token( CURR );
+    SYN_ASSERT( is_tkn_keyword( tkn_cmp_with, KW_CmpWith ), prog, CURR, KEYWORDS[KW_CmpWith].str );
+    MOVE_CURR_TO_END_OF_TOKEN(tkn_cmp_with);
 
     TreeNode *node_expr_right = get_expr(FACT_REC_FALL_ARGS);
     SYN_ASSERT( node_expr_right, prog, CURR, "Expression");
@@ -498,13 +498,15 @@ static TreeNode *get_var( FORMAL_REC_FALL_ARGS )
     assert(prog);
     assert(curr_ptr);
 
-    UNUSED(context);
-
     Token tkn_ident = get_token( CURR );
     if ( tkn_ident.type != TKN_TYPE_ID )
         return NULL;
 
-    id_t id = find_ident_in_nametable( NT_GLOBAL, tkn_ident.id );
+    id_t id = ABSENT_ID;
+    if ( context->in_func_action || context->in_func_recipe )
+        id = find_ident_in_nametable( NT_FUNC_VARS, tkn_ident.id );
+    else
+        id = find_ident_in_nametable( NT_GLOBAL, tkn_ident.id );
     SYN_ASSERT( id != ABSENT_ID, prog, CURR, "Variable" );
     MOVE_CURR_TO_END_OF_TOKEN(tkn_ident);
 
@@ -631,17 +633,25 @@ static TreeNode *get_call_func_action( FORMAL_REC_FALL_ARGS )
 
     Token tkn_func_id = get_token( CURR );
     SYN_ASSERT( tkn_func_id.type == TKN_TYPE_ID, prog, CURR, "Function name" );
+    MOVE_CURR_TO_END_OF_TOKEN( tkn_func_id );
 
     id_t func_id = find_ident_in_nametable( NT_FUNCS, tkn_func_id.id );
     SYN_ASSERT( func_id != ABSENT_ID, prog, CURR, "A defined function's name" );
+    SYN_ASSERT( NT_FUNCS.list[func_id].func_info.func_type == FUNC_TYPE_ACTION, prog,
+                CURR, "Name of an ACTION function" );
 
     TreeNode *node_func_id = new_node_id( TREE, func_id );
     TreeNode *node_call_op = new_node_op( TREE, TREE_OP_CALL_FUNC );
     tree_hang_loose_node_at_left( TREE, node_func_id, node_call_op );
 
-    Token tkn_using = get_token( CURR );
-    if ( is_tkn_keyword(tkn_using, KW_Using) )
+    Token tkn_bracket_opn = get_token( CURR );
+    if ( is_tkn_sep_char(tkn_bracket_opn, SEP_BracketOpn) )
     {
+        MOVE_CURR_TO_END_OF_TOKEN( tkn_bracket_opn );
+
+        Token tkn_using = get_token( CURR );
+        SYN_ASSERT( is_tkn_keyword( tkn_using, KW_Using ), prog,
+                    CURR, KEYWORDS[KW_Using].str );
         MOVE_CURR_TO_END_OF_TOKEN( tkn_using );
 
         TreeNode *node_fact_args = get_fact_args( FACT_REC_FALL_ARGS );
@@ -658,6 +668,11 @@ static TreeNode *get_call_func_action( FORMAL_REC_FALL_ARGS )
         SYN_ASSERT( is_tkn_keyword( tkn_as_ingr, KW_AsIngr ), prog,
                     CURR, KEYWORDS[KW_AsIngr].str );
         MOVE_CURR_TO_END_OF_TOKEN( tkn_as_ingr );
+
+        Token tkn_bracket_cls = get_token( CURR );
+        SYN_ASSERT( is_tkn_sep_char( tkn_bracket_cls, SEP_BracketCls ), prog,
+                    CURR, ")" );
+        MOVE_CURR_TO_END_OF_TOKEN( tkn_bracket_cls );
     }
 
     Token dot = get_token( CURR );
@@ -680,17 +695,25 @@ static TreeNode *get_call_func_recipe( FORMAL_REC_FALL_ARGS )
 
     Token tkn_func_id = get_token( CURR );
     SYN_ASSERT( tkn_func_id.type == TKN_TYPE_ID, prog, CURR, "Function name" );
+    MOVE_CURR_TO_END_OF_TOKEN( tkn_func_id );
 
     id_t func_id = find_ident_in_nametable( NT_FUNCS, tkn_func_id.id );
     SYN_ASSERT( func_id != ABSENT_ID, prog, CURR, "A defined function's name" );
+    SYN_ASSERT( NT_FUNCS.list[func_id].func_info.func_type == FUNC_TYPE_RECIPE, prog,
+                CURR, "Name of a RECIPE function" );
 
     TreeNode *node_func_id = new_node_id( TREE, func_id );
     TreeNode *node_call_op = new_node_op( TREE, TREE_OP_CALL_FUNC );
     tree_hang_loose_node_at_left( TREE, node_func_id, node_call_op );
 
-    Token tkn_using = get_token( CURR );
-    if ( is_tkn_keyword(tkn_using, KW_Using) )
+    Token tkn_bracket_opn = get_token( CURR );
+    if ( is_tkn_sep_char(tkn_bracket_opn, SEP_BracketOpn) )
     {
+        MOVE_CURR_TO_END_OF_TOKEN( tkn_bracket_opn );
+
+        Token tkn_using = get_token( CURR );
+        SYN_ASSERT( is_tkn_keyword( tkn_using, KW_Using ), prog,
+                    CURR, KEYWORDS[KW_Using].str );
         MOVE_CURR_TO_END_OF_TOKEN( tkn_using );
 
         TreeNode *node_fact_args = get_fact_args( FACT_REC_FALL_ARGS );
@@ -707,6 +730,11 @@ static TreeNode *get_call_func_recipe( FORMAL_REC_FALL_ARGS )
         SYN_ASSERT( is_tkn_keyword( tkn_as_ingr, KW_AsIngr ), prog,
                     CURR, KEYWORDS[KW_AsIngr].str );
         MOVE_CURR_TO_END_OF_TOKEN( tkn_as_ingr );
+
+        Token tkn_bracket_cls = get_token( CURR );
+        SYN_ASSERT( is_tkn_sep_char( tkn_bracket_cls, SEP_BracketCls ), prog,
+                    CURR, ")" );
+        MOVE_CURR_TO_END_OF_TOKEN( tkn_bracket_cls );
     }
 
     return node_call_op;
@@ -718,12 +746,12 @@ static TreeNode *get_return( FORMAL_REC_FALL_ARGS )
     assert(prog);
     assert(curr_ptr);
 
-    Token tkn_ret = get_token( CURR );
-    if ( !is_tkn_keyword( tkn_ret, KW_Return ) )
+    Token tkn_ret1 = get_token( CURR );
+    if ( !is_tkn_keyword( tkn_ret1, KW_Return1 ) )
         return NULL;
     SYN_ASSERT( context->in_func_recipe, prog, CURR,
                 "Return can be used only in Recipe Functions" );
-    MOVE_CURR_TO_END_OF_TOKEN( tkn_ret );
+    MOVE_CURR_TO_END_OF_TOKEN( tkn_ret1 );
 
     TreeNode *node_expr = get_expr( FACT_REC_FALL_ARGS );
     SYN_ASSERT( node_expr, prog, CURR, "An expression" );
@@ -731,9 +759,9 @@ static TreeNode *get_return( FORMAL_REC_FALL_ARGS )
     TreeNode *node_ret = new_node_op( TREE, TREE_OP_RETURN );
     tree_hang_loose_node_at_right( TREE, node_expr, node_ret );
 
-    Token dot = get_token( CURR );
-    SYN_ASSERT( is_tkn_sep_char(dot, SEP_Dot), prog, CURR, "\'!\'" );
-    MOVE_CURR_TO_END_OF_TOKEN(dot);
+    Token tkn_ret2 = get_token( CURR );
+    SYN_ASSERT( is_tkn_keyword( tkn_ret2, KW_Return2 ), prog, CURR, KEYWORDS[KW_Return2].str);
+    MOVE_CURR_TO_END_OF_TOKEN(tkn_ret2);
 
     return node_ret;
 }
@@ -776,7 +804,8 @@ static TreeNode *get_op( FORMAL_REC_FALL_ARGS )
     || ( node_op =               get_if( FACT_REC_FALL_ARGS ) )
     || ( node_op =            get_while( FACT_REC_FALL_ARGS ) )
     || ( node_op =           get_return( FACT_REC_FALL_ARGS ) )
-    || ( node_op = get_call_func_action( FACT_REC_FALL_ARGS ) );
+    || ( node_op = get_call_func_action( FACT_REC_FALL_ARGS ) )
+    || ( node_op =        get_print_num( FACT_REC_FALL_ARGS ) );
 
     return node_op;
 }
@@ -823,20 +852,16 @@ static TreeNode *get_fact_args( FORMAL_REC_FALL_ARGS )
     assert(prog);
     assert(curr_ptr);
 
-    TreeNode *node_list = get_expr( FACT_REC_FALL_ARGS );
-    SYN_ASSERT( node_list, prog, CURR, "At least one expression" );
+    TreeNode *node_list = new_node_op( TREE, TREE_OP_LIST_CONNECTOR );
+
+    TreeNode *node_first_expr = get_expr( FACT_REC_FALL_ARGS );
+    SYN_ASSERT( node_first_expr, prog, CURR, "At least one expression" );
+    tree_hang_loose_node_at_left( TREE, node_first_expr, node_list );
 
     Token tkn_comma = {};
-    TreeNode *curr_node = NULL;
+    TreeNode *curr_node = node_list;
     while ( is_tkn_sep_char( tkn_comma = get_token( CURR ), SEP_Comma) )
     {
-        if (!curr_node)
-        {
-            curr_node = new_node_op( TREE, TREE_OP_LIST_CONNECTOR );
-            tree_hang_loose_node_at_left( TREE, node_list, curr_node );
-            node_list = curr_node;
-        }
-
         MOVE_CURR_TO_END_OF_TOKEN(tkn_comma);
 
         TreeNode *node_new_expr = get_expr( FACT_REC_FALL_ARGS );
@@ -849,9 +874,6 @@ static TreeNode *get_fact_args( FORMAL_REC_FALL_ARGS )
         curr_node = node_connect;
     }
 
-    if ( curr_node )
-        tree_migrate_into_right( TREE, tree_get_parent( curr_node ), tree_get_left_child(curr_node) );
-
     return node_list;
 }
 
@@ -861,25 +883,21 @@ static TreeNode *get_formal_args( FORMAL_REC_FALL_ARGS )
     assert(prog);
     assert(curr_ptr);
 
+    TreeNode *node_list = new_node_op( TREE, TREE_OP_LIST_CONNECTOR );
+
     Token tkn_id = get_token( CURR );
     SYN_ASSERT( tkn_id.type == TKN_TYPE_ID && check_is_ident_fresh( comp_prog, tkn_id.id, context ),
                 prog, CURR, "At least one fresh variable name" );
     MOVE_CURR_TO_END_OF_TOKEN( tkn_id );
 
     id_t id = add_ident_into_nametable( &NT_FUNC_VARS, tkn_id.id );
-    TreeNode *node_list = new_node_id( TREE, id );
+    TreeNode *node_first_arg = new_node_id( TREE, id );
+    tree_hang_loose_node_at_left( TREE, node_first_arg, node_list );
 
     Token tkn_comma = {};
-    TreeNode *curr_node = NULL;
+    TreeNode *curr_node = node_list;
     while ( is_tkn_sep_char( tkn_comma = get_token( CURR ), SEP_Comma) )
     {
-        if (!curr_node)
-        {
-            curr_node = new_node_op( TREE, TREE_OP_LIST_CONNECTOR );
-            tree_hang_loose_node_at_left( TREE, node_list, curr_node );
-            node_list = curr_node;
-        }
-
         MOVE_CURR_TO_END_OF_TOKEN(tkn_comma);
 
         Token tkn_new_id = get_token( CURR );
@@ -897,9 +915,6 @@ static TreeNode *get_formal_args( FORMAL_REC_FALL_ARGS )
         curr_node = node_connect;
     }
 
-    if ( curr_node )
-        tree_migrate_into_right( TREE, tree_get_parent( curr_node ), tree_get_left_child(curr_node) );
-
     return node_list;
 }
 
@@ -909,12 +924,12 @@ static TreeNode *get_func_recipe( FORMAL_REC_FALL_ARGS )
     assert(prog);
     assert(curr_ptr);
 
-    context->in_func_recipe = 1;
-
     Token func_header = get_token( CURR );
     if ( !is_tkn_keyword(func_header, KW_FuncRecipeHeader) )
         return NULL;
     MOVE_CURR_TO_END_OF_TOKEN( func_header );
+
+    context->in_func_recipe = 1;
 
     Token func_ident = get_token( CURR );
     SYN_ASSERT( func_ident.type == TKN_TYPE_ID && check_is_ident_fresh(comp_prog, func_ident.id, context),
@@ -970,12 +985,12 @@ static TreeNode *get_func_action( FORMAL_REC_FALL_ARGS )
     assert(prog);
     assert(curr_ptr);
 
-    context->in_func_action = 1;
-
     Token func_header = get_token( CURR );
     if ( !is_tkn_keyword(func_header, KW_FuncActionHeader) )
         return NULL;
     MOVE_CURR_TO_END_OF_TOKEN( func_header );
+
+    context->in_func_action = 1;
 
     Token func_ident = get_token( CURR );
     SYN_ASSERT( func_ident.type == TKN_TYPE_ID && check_is_ident_fresh(comp_prog, func_ident.id, context),
@@ -1036,9 +1051,10 @@ static TreeNode *get_func_def( FORMAL_REC_FALL_ARGS )
         return node_func_recipe;
 
     TreeNode *node_func_action = get_func_action( FACT_REC_FALL_ARGS );
-    SYN_ASSERT( node_func_action, prog, CURR, "Function definition" );
+    if ( node_func_action )
+        return node_func_action;
 
-    return node_func_action;
+    return NULL;
 }
 
 static TreeNode *get_func_defs( FORMAL_REC_FALL_ARGS )
@@ -1129,7 +1145,12 @@ Status compile_prog( const char *prog, CompiledProgram *comp_prog )
     *comp_prog = {};
     comp_prog->tree = {};
     tree_ctor( &comp_prog->tree, sizeof( TreeNodeData ), NULL, print_tree_node_data );
-    Nametables_ctor( &comp_prog->nametables );
+    Status err = Nametables_ctor( &comp_prog->nametables );
+    if ( err )
+    {
+        tree_dtor( &comp_prog->tree );
+        return err;
+    }
 
     const char *curr = prog;
     Context context = {};
@@ -1238,16 +1259,16 @@ Status Nametables_ctor( Nametables *nametables )
 {
     assert(nametables);
 
-    if ( !nametable_ctor( &nametables->global_vars, NT_TYPE_GLOBAL_VAR ) )
+    if ( nametable_ctor( &nametables->global_vars, NT_TYPE_GLOBAL_VAR ) != STATUS_OK )
         return STATUS_ERROR_MEMORY_ALLOC_ERROR;
 
-    if ( !nametable_ctor( &nametables->funcs, NT_TYPE_FUNC ) )
+    if ( nametable_ctor( &nametables->funcs, NT_TYPE_FUNC ) != STATUS_OK )
     {
         FREE(nametables->global_vars.list);
         return STATUS_ERROR_MEMORY_ALLOC_ERROR;
     }
 
-    if ( !nametable_ctor( &nametables->func_vars, NT_TYPE_FUNC_VAR ) )
+    if ( nametable_ctor( &nametables->func_vars, NT_TYPE_FUNC_VAR ) != STATUS_OK )
     {
         FREE(nametables->global_vars.list);
         FREE(nametables->funcs.list);

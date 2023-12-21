@@ -6,6 +6,10 @@ DEF_KEYWORD( While1, "As Long As" )
 
 DEF_KEYWORD( InputOp, "As Much As The Universe Says" )
 
+DEF_KEYWORD( Return2, "As The Result Of This Skill!" )
+
+DEF_KEYWORD( CmpWith, "Comparing With" )
+
 DEF_KEYWORD( CallFuncRecipe, "Cooked Beforehand" )
 
 DEF_KEYWORD( UnrOp_cos, "Diced" )
@@ -60,21 +64,19 @@ DEF_KEYWORD( OpDiv, "Spread On" )
 
 DEF_KEYWORD( UnrOp_ln, "Squeezed" )
 
-DEF_KEYWORD( Than, "Than" )
-
 DEF_KEYWORD( ProgEnd, "That's All! Don't Forget To Check It On Your Friends Before Tasting Yourself!" )
 
 DEF_KEYWORD( InBracketsStart, "The Following Prepared Beforehand:" )
 
 DEF_KEYWORD( ProgStart, "The Recipe Of The Most Delicious Dish One Can Ever Imagine!" )
 
-DEF_KEYWORD( Return, "The Result Of The Skill Is" )
-
 DEF_KEYWORD( CmpOp_lessOrEqual, "The Same Amount Or Less Of" )
 
 DEF_KEYWORD( CmpOp_moreOrEqual, "The Same Amount Or More Of" )
 
 DEF_KEYWORD( Cond, "There Happens To Be" )
+
+DEF_KEYWORD( Return1, "There Is No Time To Explain, Use" )
 
 DEF_KEYWORD( Amp_4, "Thickly" )
 

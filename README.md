@@ -72,7 +72,7 @@ Programs written in this programming language try to look like crazy recipes of 
 
 1. All space symbols are ignored, new line symbols also don't matter, but they separate keywords and other constructions from each other.
 2. Everything surrounded by single `#` is considered a comment and is ignored, e.g. `Quickly Obtain #comment# 10 Units Of Milk!`.
-3. Inside functions global variables can't be seen, only formal parametres and local vars. (NOT IMPLEMENTED YET)
+3. Inside functions global variables can't be seen, only formal parametres and local vars.
 
 ### Grammar
 
@@ -96,7 +96,7 @@ FactArgs        ::= Expr ( "Comma" Expr )*
 Operators       ::= Op+
 Op              ::= VarBirth | VarDeath | Assign | If | While | Return<in FuncRecipe> | CallFuncAction | PrintNum
 PrintNum        ::= "PrintNum" Id<Var> "Dot"
-Return          ::= "Return" Expr "Dot"
+Return          ::= "Return1" Expr "Return2"
 VarBirth        ::= "VarBirthOp" Num "UnitsOf" Id "Dot"
 VarDeath        ::= "VarDeathOp" Id<Var> "Dot"
 Assign          ::= "Asgn1" Expr "Asgn2" Id<Var> "Dot"
@@ -106,10 +106,10 @@ Unr             ::= ( ?Amp (group)? ?UnrOp (group)? Primal ) | Primal
 Primal          ::= ("InBracketsStart" Expr "Semicolon") | CallFuncRecipe | Id<Var>
 Id              ::= ['a'-'z','A'-'Z']['a'-'z','A'-'Z','_','0'-'9']*
 Num             ::= ( "InputOp" ) | ( ?float number? )
-If              ::= "If1" "Cond" ?CmpOp (group)? Expr "Than" Expr "If2" Operators "IfEnd"
-While           ::= "While1" "Cond" ?CmpOp (group)? Expr "Than" Expr "While2" Operators "WhileEnd"
-CallFuncRecipe  ::= "CallFuncRecipe" Id<func> {"Using" FactArgs "AsIngr"}
-CallFuncAction  ::= "CallFuncAction" Id<func> {"Using" FactArgs "AsIngr"} "Dot"
+If              ::= "If1" "Cond" ?CmpOp (group)? Expr "CmpWith" Expr "If2" Operators "IfEnd"
+While           ::= "While1" "Cond" ?CmpOp (group)? Expr "CmpWith" Expr "While2" Operators "WhileEnd"
+CallFuncRecipe  ::= "CallFuncRecipe" Id<func> {"BracketOpn" "Using" FactArgs "AsIngr" "BracketCls"}
+CallFuncAction  ::= "CallFuncAction" Id<func> {"BracketOpn" "Using" FactArgs "AsIngr" "BracketCls"} "Dot"
 ```
 
 ### Keywords
@@ -131,6 +131,7 @@ CallFuncAction  ::= "CallFuncAction" Id<func> {"Using" FactArgs "AsIngr"} "Dot"
 |CmpOp_moreOrEqual|The Same Amount Or More Of|
 |CmpOp_more|More|
 |CmpOp_notEqual|Not The Same Amount Of|
+|CmpWith|Comparing With|
 |Cond|There Happens To Be|
 |FuncActionHeader|Skill To Do|
 |FuncDefsEnd|Here Is The Recipe Itself:|
@@ -148,8 +149,8 @@ CallFuncAction  ::= "CallFuncAction" Id<func> {"Using" FactArgs "AsIngr"} "Dot"
 |PrintNum|Serve|
 |ProgEnd|That's All! Don't Forget To Check It On Your Friends Before Tasting Yourself!|
 |ProgStart|The Recipe Of The Most Delicious Dish One Can Ever Imagine!|
-|Return|The Result Of The Skill Is|
-|Than|Than|
+|Return1|There Is No Time To Explain, Use|
+|Return2|As The Result Of This Skill!|
 |UnitsOf|Units Of|
 |UnrOp_cos|Diced|
 |UnrOp_exp|Grated|
@@ -164,7 +165,6 @@ CallFuncAction  ::= "CallFuncAction" Id<func> {"Using" FactArgs "AsIngr"} "Dot"
 |While2|Repeat The Following:|
 |WhileEnd|Repeat Until Ready And Then Go Further!|
 
-
 ### Separating symbols
 
 |Designation in grammar|Designation in program|Comment|
@@ -173,6 +173,8 @@ CallFuncAction  ::= "CallFuncAction" Id<func> {"Using" FactArgs "AsIngr"} "Dot"
 |Semicolon|;|
 |Colon|:|
 |Comma|,|
+|BracketOpn|(|
+|BracketCls|)|
 
 ### Program examples
 
