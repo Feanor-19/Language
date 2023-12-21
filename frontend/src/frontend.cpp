@@ -29,6 +29,7 @@ static TreeNode *get_num               ( FORMAL_REC_FALL_ARGS );
 static TreeNode *get_if                ( FORMAL_REC_FALL_ARGS );
 static TreeNode *get_while             ( FORMAL_REC_FALL_ARGS );
 static TreeNode *get_primal            ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_ingr              ( FORMAL_REC_FALL_ARGS );
 static TreeNode *get_unr               ( FORMAL_REC_FALL_ARGS );
 static TreeNode *get_mulive            ( FORMAL_REC_FALL_ARGS );
 static TreeNode *get_expr              ( FORMAL_REC_FALL_ARGS );
@@ -151,26 +152,21 @@ static TreeNode *get_num( FORMAL_REC_FALL_ARGS )
 
     UNUSED(context);
 
-    TreeNode *node_num = NULL;
-    Token tkn_input = get_token( CURR );
-    if ( is_tkn_keyword( tkn_input, KW_InputOp ) )
+    Token tkn = get_token( CURR );
+    if ( is_tkn_keyword( tkn, KW_InputOp ) )
     {
-        MOVE_CURR_TO_END_OF_TOKEN( tkn_input );
+        MOVE_CURR_TO_END_OF_TOKEN( tkn );
 
-        node_num = new_node_op( TREE, TREE_OP_INPUT );
+        return new_node_op( TREE, TREE_OP_INPUT );
     }
-    else
+    else if ( tkn.type == TKN_TYPE_NUM )
     {
-        Token tkn_num = get_token( CURR );
-        SYN_ASSERT( tkn_num.type == TKN_TYPE_NUM, prog, CURR, "Number" );
-        MOVE_CURR_TO_END_OF_TOKEN( tkn_num );
+        MOVE_CURR_TO_END_OF_TOKEN( tkn );
 
-        node_num = new_node_num( TREE, tkn_num.num );
+        return new_node_num( TREE, tkn.num );
     }
 
-    SYN_ASSERT( node_num, prog, CURR, "Input operator or a number" );
-
-    return node_num;
+    return NULL;
 }
 
 //! @brief Checks is 'tkn' of type 'Keyword' and belongs to
@@ -351,6 +347,38 @@ static TreeNode *get_primal( FORMAL_REC_FALL_ARGS )
     return node_primal;
 }
 
+static TreeNode *get_ingr ( FORMAL_REC_FALL_ARGS )
+{
+    assert(comp_prog);
+    assert(prog);
+    assert(curr_ptr);
+
+    TreeNode *node_num = get_num( FACT_REC_FALL_ARGS );
+    if ( node_num )
+    {
+        Token tkn_units_of = get_token( CURR );
+        SYN_ASSERT( is_tkn_keyword(tkn_units_of, KW_UnitsOf), prog, CURR, KEYWORDS[KW_UnitsOf].str );
+        MOVE_CURR_TO_END_OF_TOKEN( tkn_units_of );
+
+        TreeNode *node_primal = get_primal( FACT_REC_FALL_ARGS );
+        SYN_ASSERT( node_primal, prog, CURR, "Primal" );
+
+        TreeNode *node_ingr = new_node_op( TREE, TREE_OP_MUL );
+        tree_hang_loose_node_at_left( TREE, node_num, node_ingr );
+        tree_hang_loose_node_at_right( TREE, node_primal, node_ingr );
+
+        return node_ingr;
+    }
+    else
+    {
+        return get_primal( FACT_REC_FALL_ARGS );
+    }
+
+    ASSERT_UNREACHEABLE();
+
+    return NULL;
+}
+
 //! @brief Checks is 'tkn' of type 'Keyword' and belongs to
 //! group 'UnrOp'. If yes, returns corresponding CompTreeOpName,
 //! otherwise returns TREE_OP_DUMMY.
@@ -403,7 +431,7 @@ static TreeNode *get_unr( FORMAL_REC_FALL_ARGS )
 
         TreeNode *node_op = new_node_op( TREE, translate_tkn_unr_op( tkn_op ) );
 
-        TreeNode *node_primal = get_primal( FACT_REC_FALL_ARGS );
+        TreeNode *node_primal = get_ingr( FACT_REC_FALL_ARGS );
         SYN_ASSERT( node_primal, prog, CURR, "Primal" );
 
         tree_hang_loose_node_at_right( TREE, node_primal, node_op );
@@ -412,7 +440,7 @@ static TreeNode *get_unr( FORMAL_REC_FALL_ARGS )
     }
     else
     {
-        TreeNode *node_primal = get_primal( FACT_REC_FALL_ARGS );
+        TreeNode *node_primal = get_ingr( FACT_REC_FALL_ARGS );
         SYN_ASSERT( node_primal, prog, CURR, "Primal" );
         return node_primal;
     }
@@ -1128,18 +1156,19 @@ static TreeNode *get_prog( FORMAL_REC_FALL_ARGS )
     TreeNode *node_operators = get_operators( FACT_REC_FALL_ARGS );
     SYN_ASSERT( node_operators, prog, CURR, "Operators" );
 
+    TreeNode *node_op_main = new_node_op( TREE, TREE_OP_MAIN_PROG );
+    tree_hang_loose_node_at_right( TREE, node_operators, node_op_main );
+
     TreeNode *node_prog = NULL;
     if ( node_func_defs )
     {
         node_prog = new_node_op( TREE, TREE_OP_SEQ_EXEC );
         tree_hang_loose_node_at_left( TREE, node_func_defs, node_prog );
-        TreeNode *node_op_main = new_node_op( TREE, TREE_OP_MAIN_PROG );
         tree_hang_loose_node_at_right( TREE, node_op_main, node_prog );
-        tree_hang_loose_node_at_right( TREE, node_operators, node_op_main );
     }
     else
     {
-        node_prog = node_operators;
+        node_prog = node_op_main;
     }
 
     Token prog_end = get_token( CURR );

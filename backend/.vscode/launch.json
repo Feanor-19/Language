@@ -11,9 +11,9 @@
             "program": "${workspaceFolder}/bin/backend.exe",
             "args": [
                 "-i",
-                ".\\..\\programs\\factorial\\compiler_tree.txt",
+                ".\\..\\programs\\quadratic\\compiler_tree.txt",
                 "-o",
-                ".\\..\\programs\\factorial\\asm.txt",
+                ".\\..\\programs\\quadratic\\asm.txt",
                 "--img-dumps",
                 ".\\dumps\\image_dumps\\"
             ],

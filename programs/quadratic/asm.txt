@@ -1,0 +1,38 @@
+PUSH 1021
+POP rcx
+JMP main
+main:
+IN
+
+POP [0]
+
+IN
+
+POP [1]
+
+IN
+
+POP [2]
+
+PUSH 0.000000
+POP [3]
+
+PUSH [1]
+PUSH [1]
+MUL
+
+PUSH 4.000000
+PUSH [0]
+MUL
+
+PUSH [2]
+MUL
+
+SUB
+
+POP [3]
+
+PUSH [3]
+PRN
+
+HLT
