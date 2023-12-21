@@ -23,6 +23,8 @@
 
 
 static TreeNode *get_num               ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_print_str         ( FORMAL_REC_FALL_ARGS );
+static TreeNode *get_print_num         ( FORMAL_REC_FALL_ARGS );
 static TreeNode *get_if                ( FORMAL_REC_FALL_ARGS );
 static TreeNode *get_while             ( FORMAL_REC_FALL_ARGS );
 static TreeNode *get_primal            ( FORMAL_REC_FALL_ARGS );
@@ -164,6 +166,63 @@ static TreeNode *get_num( FORMAL_REC_FALL_ARGS )
     }
 
     return NULL;
+}
+
+static TreeNode *get_print_str( FORMAL_REC_FALL_ARGS )
+{
+    assert(comp_prog);
+    assert(prog);
+    assert(curr_ptr);
+
+    UNUSED(context);
+
+    Token tkn_print_str = get_token( CURR );
+    if( !is_tkn_keyword( tkn_print_str, KW_PrintStr ) )
+        return NULL;
+    MOVE_CURR_TO_END_OF_TOKEN( tkn_print_str );
+
+    Token tkn_str = get_token( CURR );
+    SYN_ASSERT( tkn_str.type == TKN_TYPE_STR, prog, CURR, "String" );
+    MOVE_CURR_TO_END_OF_TOKEN( tkn_str );
+
+    // first char (obligatory)
+    TreeNode *node_seq_exec_first = new_node_op( TREE, TREE_OP_SEQ_EXEC );
+    TreeNode *node_prc = new_node_op( TREE, TREE_OP_PRINT_CHAR );
+    TreeNode *node_char = new_node_num( TREE, (num_t) tkn_str.str.start[0] );
+    tree_hang_loose_node_at_right( TREE, node_char, node_prc );
+    tree_hang_loose_node_at_left( TREE, node_prc, node_seq_exec_first );
+    TreeNode *node_curr_seq_exec = node_seq_exec_first;
+
+    // other chars (optional)
+    for ( size_t ind = 1; ind < tkn_str.str.len; ind++ )
+    {
+        TreeNode *node_seq_exec = new_node_op( TREE, TREE_OP_SEQ_EXEC );
+        node_prc = new_node_op( TREE, TREE_OP_PRINT_CHAR );
+        node_char = new_node_num( TREE, (num_t) tkn_str.str.start[ind] );
+        tree_hang_loose_node_at_right( TREE, node_char, node_prc );
+        tree_hang_loose_node_at_left( TREE, node_prc, node_seq_exec );
+        tree_hang_loose_node_at_right( TREE, node_seq_exec, node_curr_seq_exec );
+        node_curr_seq_exec = node_seq_exec;
+    }
+
+    TreeNode *node_last_seq_exec = new_node_op( TREE, TREE_OP_SEQ_EXEC );
+    TreeNode *node_prc_r = new_node_op( TREE, TREE_OP_PRINT_CHAR );
+    TreeNode *node_r = new_node_num( TREE, (num_t) '\n' );
+    tree_hang_loose_node_at_right( TREE, node_r, node_prc_r );
+    tree_hang_loose_node_at_left( TREE, node_prc_r, node_last_seq_exec );
+
+    TreeNode *node_prc_n = new_node_op( TREE, TREE_OP_PRINT_CHAR );
+    TreeNode *node_n = new_node_num( TREE, (num_t) '\r' );
+    tree_hang_loose_node_at_right( TREE, node_n, node_prc_n );
+    tree_hang_loose_node_at_right( TREE, node_prc_n, node_last_seq_exec );
+
+    tree_hang_loose_node_at_right( TREE, node_last_seq_exec, node_curr_seq_exec );
+
+    Token dot = get_token( CURR );
+    SYN_ASSERT( is_tkn_sep_char( dot, SEP_Dot ), prog, CURR, "!" );
+    MOVE_CURR_TO_END_OF_TOKEN(dot);
+
+    return node_seq_exec_first;
 }
 
 //! @brief Checks is 'tkn' of type 'Keyword' and belongs to
@@ -847,7 +906,8 @@ static TreeNode *get_op( FORMAL_REC_FALL_ARGS )
     || ( node_op =            get_while( FACT_REC_FALL_ARGS ) )
     || ( node_op =           get_return( FACT_REC_FALL_ARGS ) )
     || ( node_op = get_call_func_action( FACT_REC_FALL_ARGS ) )
-    || ( node_op =        get_print_num( FACT_REC_FALL_ARGS ) );
+    || ( node_op =        get_print_num( FACT_REC_FALL_ARGS ) )
+    || ( node_op =        get_print_str( FACT_REC_FALL_ARGS ) );
 
     return node_op;
 }

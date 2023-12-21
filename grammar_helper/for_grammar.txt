@@ -30,6 +30,7 @@
 |OpMul|Fried With|
 |OpSub|Without|
 |PrintNum|Serve|
+|PrintStr|Scream In Despair:|
 |ProgEnd|That's All! Don't Forget To Check It On Your Friends Before Tasting Yourself!|
 |ProgStart|The Recipe Of The Most Delicious Dish One Can Ever Imagine!|
 |Return1|There Is No Time To Explain, Use|

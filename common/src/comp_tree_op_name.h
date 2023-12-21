@@ -43,6 +43,7 @@ enum CompTreeOpName
     TREE_OP_RETURN              = 402,
     TREE_OP_INPUT               = 403,
     TREE_OP_PRINT_NUM           = 405,
+    TREE_OP_PRINT_CHAR          = 406,
 };
 
 #endif /* OPS_IN_TREE_H */

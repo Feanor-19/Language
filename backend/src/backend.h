@@ -78,7 +78,8 @@ const CompTreeOp COMP_TREE_OPS[] =
     { TREE_OP_CALL_FUNC,                tr_asm_text_call_func   },
     { TREE_OP_RETURN,                   tr_asm_text_return      },
     { TREE_OP_INPUT,                    tr_asm_text_input       },
-    { TREE_OP_PRINT_NUM,                tr_asm_text_print_num   }
+    { TREE_OP_PRINT_NUM,                tr_asm_text_print_num   },
+    { TREE_OP_PRINT_CHAR,               tr_asm_text_print_char  }
 };
 
 Status tr_node_asm_text( FILE *stream, const Tree *tree_ptr,

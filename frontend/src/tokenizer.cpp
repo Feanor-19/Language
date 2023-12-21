@@ -77,6 +77,28 @@ inline Identificator get_identificator( const char *str )
     return {str, str_ind};
 }
 
+//! @brief Returns everything surrounded by qoutes. *str must be \"
+//! (given string must start with quote).
+inline Identificator get_str( const char *str )
+{
+    Identificator res = {};
+    str++;
+    res.start = str;
+    while( *str != '"' && *str != '\n' && *str != '\0' )
+    {
+        str++;
+    }
+
+    if (*str == '\n' || *str == '\0')
+        return {NULL, 0};
+
+    res.len = str - res.start;
+    if (res.len == 0)
+        return {NULL, 0};
+
+    return res;
+}
+
 Token get_token( const char *str )
 {
     assert(str);
@@ -88,7 +110,16 @@ Token get_token( const char *str )
     Token tkn = {};
     tkn.start = str;
 
-    if ( isdigit(*str) )
+    if ( *str == '"' )
+    {
+        tkn.type = TKN_TYPE_STR;
+        tkn.str = get_str( str );
+        if ( !tkn.str.start )
+            tkn.type = TKN_TYPE_ERROR;
+        tkn.len = tkn.str.len + 2;
+        return tkn;
+    }
+    else if ( isdigit(*str) )
     {
         if ( sscanf( str, "%f%n", &tkn.num, (int*) &tkn.len ) == 1 )
             tkn.type = TKN_TYPE_NUM;

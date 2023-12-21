@@ -41,5 +41,6 @@ Status tr_asm_text_call_func    ( FORMAL_TR_ASM_TEXT_ARGS );
 Status tr_asm_text_return       ( FORMAL_TR_ASM_TEXT_ARGS );
 Status tr_asm_text_input        ( FORMAL_TR_ASM_TEXT_ARGS );
 Status tr_asm_text_print_num    ( FORMAL_TR_ASM_TEXT_ARGS );
+Status tr_asm_text_print_char   ( FORMAL_TR_ASM_TEXT_ARGS );
 
 #endif /* TR_ASM_TEXT_FUNCS_H */

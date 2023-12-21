@@ -643,3 +643,16 @@ Status tr_asm_text_print_num( FORMAL_TR_ASM_TEXT_ARGS )
 
     return STATUS_OK;
 }
+
+Status tr_asm_text_print_char ( FORMAL_TR_ASM_TEXT_ARGS )
+{
+    assert( stream );
+    assert( tree_ptr );
+    assert( node );
+
+    TR_RIGHT_CHILD_CURR();
+    PRINT( "%s", _CMD_NAME(CMD_PRC) );
+    END_BLOCK();
+
+    return STATUS_OK;
+}

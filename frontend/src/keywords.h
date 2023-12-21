@@ -54,6 +54,8 @@ DEF_KEYWORD( Asgn2, "Right Into" )
 
 DEF_KEYWORD( UnrOp_minus, "Rinsed" )
 
+DEF_KEYWORD( PrintStr, "Scream In Despair:" )
+
 DEF_KEYWORD( PrintNum, "Serve" )
 
 DEF_KEYWORD( FuncRecipeHeader, "Skill To Cook" )

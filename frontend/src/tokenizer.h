@@ -64,6 +64,7 @@ enum TokenType
     TKN_TYPE_SEP_CHAR,
     TKN_TYPE_KEYWORD,
     TKN_TYPE_ID,
+    TKN_TYPE_STR,
     TKN_TYPE_ERROR,
 };
 
@@ -79,6 +80,7 @@ struct Token
         SepCharName sep_char;
         KeywordName keyword;
         Identificator id;
+        Identificator str;
     };
     size_t len;
 };

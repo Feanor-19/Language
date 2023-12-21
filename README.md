@@ -94,7 +94,8 @@ FuncAction      ::= "FuncActionHeader" Id {"Using" FormalArgs "AsIngr"} "Colon" 
 FormalArgs      ::= Id<Var> ( "Comma" Id<Var> )*
 FactArgs        ::= Expr ( "Comma" Expr )*
 Operators       ::= Op+
-Op              ::= VarBirth | VarDeath | Assign | If | While | Return<in FuncRecipe> | CallFuncAction | PrintNum
+Op              ::= VarBirth | VarDeath | Assign | If | While | Return<in FuncRecipe> | CallFuncAction | PrintNum | PrintStr
+PrintStr        ::= "PrintStr" ?string in quotes? "Dot"
 PrintNum        ::= "PrintNum" Id<Var> "Dot"
 Return          ::= "Return1" Expr "Return2"
 VarBirth        ::= "VarBirthOp" Num "UnitsOf" Id "Dot"
@@ -149,6 +150,7 @@ CallFuncAction  ::= "CallFuncAction" Id<func> {"BracketOpn" "Using" FactArgs "As
 |OpMul|Fried With|
 |OpSub|Without|
 |PrintNum|Serve|
+|PrintStr|Scream In Despair:|
 |ProgEnd|That's All! Don't Forget To Check It On Your Friends Before Tasting Yourself!|
 |ProgStart|The Recipe Of The Most Delicious Dish One Can Ever Imagine!|
 |Return1|There Is No Time To Explain, Use|
