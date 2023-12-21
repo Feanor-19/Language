@@ -44,6 +44,7 @@ const CompTreeOp COMP_TREE_OPS[] =
 {
     { TREE_OP_DUMMY,                    tr_asm_text_dummy       },
     { TREE_OP_SEQ_EXEC,                 tr_asm_text_seq_exec    },
+    { TREE_OP_FUNC_DEF,                 tr_asm_text_func_def    },
 
     { TREE_OP_ASSIGN,                   tr_asm_text_assign      },
     { TREE_OP_CMP_MORE,                 tr_asm_text_cmp_more    },
@@ -69,7 +70,12 @@ const CompTreeOp COMP_TREE_OPS[] =
     { TREE_OP_SQRT,                     tr_asm_text_sqrt        },
     { TREE_OP_LN,                       tr_asm_text_ln          },
     { TREE_OP_EXP,                      tr_asm_text_exp         },
-    { TREE_OP_MINUS,                    tr_asm_text_minus       }
+    { TREE_OP_MINUS,                    tr_asm_text_minus       },
+
+    { TREE_OP_CALL_FUNC,                tr_asm_text_call_func   },
+    { TREE_OP_RETURN,                   tr_asm_text_return      },
+    { TREE_OP_INPUT,                    tr_asm_text_input       },
+    { TREE_OP_PRINT_NUM,                tr_asm_text_print_num   }
 };
 
 Status tr_node_asm_text( FILE *stream, const Tree *tree_ptr,

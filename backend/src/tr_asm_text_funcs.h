@@ -8,6 +8,7 @@
 
 Status tr_asm_text_seq_exec     ( FORMAL_TR_ASM_TEXT_ARGS );
 Status tr_asm_text_dummy        ( FORMAL_TR_ASM_TEXT_ARGS );
+Status tr_asm_text_func_def     ( FORMAL_TR_ASM_TEXT_ARGS );
 
 Status tr_asm_text_assign       ( FORMAL_TR_ASM_TEXT_ARGS );
 Status tr_asm_text_cmp_more     ( FORMAL_TR_ASM_TEXT_ARGS );
@@ -34,5 +35,10 @@ Status tr_asm_text_sqrt         ( FORMAL_TR_ASM_TEXT_ARGS );
 Status tr_asm_text_ln           ( FORMAL_TR_ASM_TEXT_ARGS );
 Status tr_asm_text_exp          ( FORMAL_TR_ASM_TEXT_ARGS );
 Status tr_asm_text_minus        ( FORMAL_TR_ASM_TEXT_ARGS );
+
+Status tr_asm_text_call_func    ( FORMAL_TR_ASM_TEXT_ARGS );
+Status tr_asm_text_return       ( FORMAL_TR_ASM_TEXT_ARGS );
+Status tr_asm_text_input        ( FORMAL_TR_ASM_TEXT_ARGS );
+Status tr_asm_text_print_num    ( FORMAL_TR_ASM_TEXT_ARGS );
 
 #endif /* TR_ASM_TEXT_FUNCS_H */

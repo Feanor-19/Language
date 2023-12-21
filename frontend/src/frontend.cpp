@@ -966,8 +966,13 @@ static TreeNode *get_func_recipe( FORMAL_REC_FALL_ARGS )
     SYN_ASSERT( is_tkn_sep_char( tkn_colon, SEP_Colon ), prog, CURR, ":" );
     MOVE_CURR_TO_END_OF_TOKEN( tkn_colon );
 
-    TreeNode *node_operators = get_operators( FACT_REC_FALL_ARGS );
-    SYN_ASSERT( node_operators, prog, CURR, "Operators" );
+    TreeNode *node_operators_wo_return = get_operators( FACT_REC_FALL_ARGS );
+    SYN_ASSERT( node_operators_wo_return, prog, CURR, "Operators" );
+
+    TreeNode *node_operators = new_node_op( TREE, TREE_OP_SEQ_EXEC );
+    tree_hang_loose_node_at_left( TREE, node_operators_wo_return, node_operators );
+    TreeNode *node_end_ret = new_node_op( TREE, TREE_OP_RETURN );
+    tree_hang_loose_node_at_right( TREE, node_end_ret, node_operators );
 
     if (node_formal_args)
         tree_hang_loose_node_at_left( TREE, node_formal_args, node_func_def_helper );
@@ -1027,8 +1032,13 @@ static TreeNode *get_func_action( FORMAL_REC_FALL_ARGS )
     SYN_ASSERT( is_tkn_sep_char( tkn_colon, SEP_Colon ), prog, CURR, ":" );
     MOVE_CURR_TO_END_OF_TOKEN( tkn_colon );
 
-    TreeNode *node_operators = get_operators( FACT_REC_FALL_ARGS );
-    SYN_ASSERT( node_operators, prog, CURR, "Operators" );
+    TreeNode *node_operators_wo_return = get_operators( FACT_REC_FALL_ARGS );
+    SYN_ASSERT( node_operators_wo_return, prog, CURR, "Operators" );
+
+    TreeNode *node_operators = new_node_op( TREE, TREE_OP_SEQ_EXEC );
+    tree_hang_loose_node_at_left( TREE, node_operators_wo_return, node_operators );
+    TreeNode *node_end_ret = new_node_op( TREE, TREE_OP_RETURN );
+    tree_hang_loose_node_at_right( TREE, node_end_ret, node_operators );
 
     if (node_formal_args)
         tree_hang_loose_node_at_left( TREE, node_formal_args, node_func_def_helper );

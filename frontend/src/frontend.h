@@ -74,8 +74,7 @@ struct CompiledProgram
 };
 
 
-const size_t NAMES_DEFAULT_COUNT    = 5;
-const size_t ERROR_MSG_LEN          = 20;
+const size_t NAMES_DEFAULT_COUNT    = 10;
 
 
 #define SYN_ASSERT( cond, prog, error_ptr, expected ) if (!(cond))  \

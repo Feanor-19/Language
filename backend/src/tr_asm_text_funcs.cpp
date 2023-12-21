@@ -91,6 +91,19 @@ Status tr_asm_text_dummy( FORMAL_TR_ASM_TEXT_ARGS )
     return STATUS_OK;
 }
 
+Status tr_asm_text_func_def( FORMAL_TR_ASM_TEXT_ARGS )
+{
+    assert( stream );
+    assert( tree_ptr );
+    assert( node );
+
+
+
+    return STATUS_OK;
+}
+
+
+
 Status tr_asm_text_assign( FORMAL_TR_ASM_TEXT_ARGS )
 {
     assert( stream );
@@ -431,3 +444,50 @@ Status tr_asm_text_minus( FORMAL_TR_ASM_TEXT_ARGS )
     return STATUS_OK;
 }
 
+
+Status tr_asm_text_call_func( FORMAL_TR_ASM_TEXT_ARGS )
+{
+    assert( stream );
+    assert( tree_ptr );
+    assert( node );
+
+
+
+    return STATUS_OK;
+}
+
+Status tr_asm_text_return( FORMAL_TR_ASM_TEXT_ARGS )
+{
+    assert( stream );
+    assert( tree_ptr );
+    assert( node );
+
+
+
+    return STATUS_OK;
+}
+
+Status tr_asm_text_input( FORMAL_TR_ASM_TEXT_ARGS )
+{
+    assert( stream );
+    assert( tree_ptr );
+    assert( node );
+
+    PRINT( "%s", _CMD_NAME(CMD_IN) );
+    END_BLOCK();
+
+    return STATUS_OK;
+}
+
+Status tr_asm_text_print_num( FORMAL_TR_ASM_TEXT_ARGS )
+{
+    assert( stream );
+    assert( tree_ptr );
+    assert( node );
+
+    TR_RIGHT_CHILD_CURR();
+    PRINT( "%s", _CMD_NAME( CMD_PRN ) );
+    END_BLOCK();
+
+    return STATUS_OK;
+}
