@@ -109,6 +109,15 @@ inline int del_ident_from_nametable( Nametable *nametable, Identificator ident )
     return 0;
 }
 
+inline void clean_nametable( Nametable *nametable )
+{
+    for (size_t ind = 0; ind < nametable->list_cap; ind++)
+    {
+        nametable->list[ind] = {};
+        nametable->list[ind].ident.start = NULL;
+    }
+}
+
 //! @brief Returns 1 if ident is not found in any of the comp_prog's nametables, 0 otherwise.
 inline int check_is_ident_fresh( CompiledProgram *comp_prog, Identificator ident, Context *context )
 {
@@ -1037,6 +1046,8 @@ static TreeNode *get_func_recipe( FORMAL_REC_FALL_ARGS )
 
     context->in_func_recipe = 1;
 
+    clean_nametable( &NT_FUNC_VARS );
+
     Token func_ident = get_token( CURR );
     SYN_ASSERT( func_ident.type == TKN_TYPE_ID && check_is_ident_fresh(comp_prog, func_ident.id, context),
                 prog, CURR, "Fresh function identificator" );
@@ -1102,6 +1113,8 @@ static TreeNode *get_func_action( FORMAL_REC_FALL_ARGS )
     MOVE_CURR_TO_END_OF_TOKEN( func_header );
 
     context->in_func_action = 1;
+
+    clean_nametable( &NT_FUNC_VARS );
 
     Token func_ident = get_token( CURR );
     SYN_ASSERT( func_ident.type == TKN_TYPE_ID && check_is_ident_fresh(comp_prog, func_ident.id, context),
@@ -1289,7 +1302,14 @@ void CompiledProgram_dtor( CompiledProgram *comp_prog_ptr )
     {
         Nametables_dtor( &comp_prog_ptr->nametables );
 
-        tree_dtor(&comp_prog_ptr->tree);
+        TreeStatus err = tree_dtor(&comp_prog_ptr->tree);
+        if (err)
+        {
+            WARNING( "tree_dtor returned error: " );
+            tree_print_status_message( log_get_stream(), err );
+            putc( '\n', log_get_stream() );
+        }
+
         comp_prog_ptr->tree = {};
     }
 }

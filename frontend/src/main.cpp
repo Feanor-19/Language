@@ -46,6 +46,8 @@ int main( int argc, const char *argv[])
 
     close_img_dumps();
 
+    LOG( "All good!" );
+
     log_end();
 
     return 0;
