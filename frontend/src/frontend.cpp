@@ -233,9 +233,9 @@ static TreeNode *get_print_str( FORMAL_REC_FALL_ARGS )
 }
 
 //! @brief Checks is 'tkn' of type 'Keyword' and belongs to
-//! group 'CmpOp'. If yes, returns corresponding CompTreeOpName,
+//! group 'CmpOp'. If yes, returns corresponding CompTreeOpNameEnum,
 //! otherwise returns TREE_OP_DUMMY.
-inline CompTreeOpName translate_kw_cmp_op( Token tkn )
+inline CompTreeOpNameEnum translate_kw_cmp_op( Token tkn )
 {
 
 // Only keywords from the group 'CmpOp' must be held in
@@ -460,9 +460,9 @@ static TreeNode *get_ingr ( FORMAL_REC_FALL_ARGS )
 }
 
 //! @brief Checks is 'tkn' of type 'Keyword' and belongs to
-//! group 'UnrOp'. If yes, returns corresponding CompTreeOpName,
+//! group 'UnrOp'. If yes, returns corresponding CompTreeOpNameEnum,
 //! otherwise returns TREE_OP_DUMMY.
-inline CompTreeOpName translate_tkn_unr_op( Token tkn )
+inline CompTreeOpNameEnum translate_tkn_unr_op( Token tkn )
 {
 // Only keywords from the group 'CmpOp' must be held in
 // in this switch, so the warning "-Wswitch-enum" must be ignored.

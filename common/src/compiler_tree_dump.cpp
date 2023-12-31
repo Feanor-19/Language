@@ -141,6 +141,17 @@ inline void run_dot_to_create_database_img()
 	system(CMN_CMD);
 }
 
+inline const char * find_tree_op_str_by_name( CompTreeOpNameEnum name )
+{
+    for (size_t ind = 0; ind < SIZEARR(COMP_TREE_OPS_NAMES); ind++)
+    {
+        if ( COMP_TREE_OPS_NAMES[ind].name == name )
+            return COMP_TREE_OPS_NAMES[ind].str;
+    }
+
+    return NULL;
+}
+
 inline void write_dot_file( FILE *dot_file, Tree *tree_ptr )
 {
 	assert(dot_file);
@@ -188,8 +199,8 @@ inline void write_dot_file( FILE *dot_file, Tree *tree_ptr )
             fprintf(dot_file,   "NODE_%llu[shape=\"record\", fontname=\"verdana\",\n"
                                 "style=bold, style=filled,\ncolor=\"" COLOR_NODE_COLOR "\""
                                 ", fillcolor=\"" COLOR_OP_NODE_FILL "\",\n"
-                                "label = %d];\n\n",
-                                ind, (int) node_data.op);
+                                "label = %s];\n\n",
+                                ind, find_tree_op_str_by_name((CompTreeOpNameEnum) node_data.op));
         }
         else if ( node_data.type == TREE_NODE_TYPE_ID )
         {

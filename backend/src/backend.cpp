@@ -2,15 +2,15 @@
 
 #define PRINT_ASM(format, ...) do{fprintf(stream, format, ##__VA_ARGS__); putc('\n', stream);}while(0)
 
-inline size_t find_op_by_name( CompTreeOpName name )
+inline size_t find_op_by_name( CompTreeOpNameEnum name )
 {
-    for (size_t ind = 0; ind < SIZEARR(COMP_TREE_OPS); ind++)
+    for (size_t ind = 0; ind < SIZEARR(COMP_TREE_OPS_BACKEND); ind++)
     {
-        if ( COMP_TREE_OPS[ind].name == name )
+        if ( COMP_TREE_OPS_BACKEND[ind].name == name )
             return ind;
     }
 
-    WARNING( "ERROR: Can't find operators with name id <%d> in COMP_TREE_OPS. "
+    WARNING( "ERROR: Can't find operators with name id <%d> in COMP_TREE_OPS_BACKEND. "
              "Pretending it is a dummy operator...", (int) name );
     return DUMMY_OP_INDEX;
 }
@@ -50,7 +50,7 @@ Status tr_node_asm_text( FILE *stream, const Tree *tree_ptr,
     case TREE_NODE_TYPE_OP:
         // REVIEW - как нормально избавиться от crosses initialization??
         {size_t op_ind = find_op_by_name( data.op );
-        Status status = COMP_TREE_OPS[ op_ind ].tr_asm_text( stream, tree_ptr, node,
+        Status status = COMP_TREE_OPS_BACKEND[ op_ind ].tr_asm_text( stream, tree_ptr, node,
                                                              counters, context, frames );
         return status;}
         break;

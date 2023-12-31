@@ -6,9 +6,9 @@
 #include "backend_common.h"
 
 
-struct CompTreeOp
+struct CompTreeOpBackend
 {
-    CompTreeOpName name;
+    CompTreeOpNameEnum name;
     Status (*tr_asm_text)(FILE*,const Tree*,TreeNode*,Counters*,Context*,FuncFrames*);
 };
 
@@ -42,7 +42,7 @@ const size_t DUMMY_OP_INDEX       = 0;
 const size_t FUNCS_DEFAULT_NUMBER = 1;
 const size_t MEMORY_SIZE          = 1024;
 
-const CompTreeOp COMP_TREE_OPS[] =
+const CompTreeOpBackend COMP_TREE_OPS_BACKEND[] =
 {
     { TREE_OP_DUMMY,                    tr_asm_text_dummy       },
     { TREE_OP_SEQ_EXEC,                 tr_asm_text_seq_exec    },
