@@ -114,10 +114,10 @@ inline TreeNode *read_tree_node( FILE *stream, Tree *tree_ptr )
 
     TreeNodeType type = (TreeNodeType) ( getc( stream ) - '0' );
 
-    TreeNode *node      = NULL;
+    TreeNode *node          = NULL;
     CompTreeOpNameEnum op   = TREE_OP_DUMMY;
-    num_t num           = 0;
-    id_t id             = 0;
+    num_t num               = 0;
+    id_t id                 = 0;
     switch (type)
     {
     case TREE_NODE_TYPE_OP:

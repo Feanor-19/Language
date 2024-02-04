@@ -27,15 +27,8 @@ struct Counters
 
 struct Context
 {
-    int in_func  = 0;
-    int in_while = 0;
-};
-
-struct FuncFrames
-{
-    size_t *list;
-    size_t list_curr_len;
-    size_t list_cap;
+    int curr_func_frame_size = 0;
+    int in_while             = 0;
 };
 
 #endif /* BACKEND_COMMON_H */

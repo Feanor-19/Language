@@ -2,6 +2,7 @@
 
 #define PRINT_ASM(format, ...) do{fprintf(stream, format, ##__VA_ARGS__); putc('\n', stream);}while(0)
 
+// TODO - разобраться какого фига эта ф-я вообще существует
 inline size_t find_op_by_name( CompTreeOpNameEnum name )
 {
     for (size_t ind = 0; ind < SIZEARR(COMP_TREE_OPS_BACKEND); ind++)
@@ -17,7 +18,7 @@ inline size_t find_op_by_name( CompTreeOpNameEnum name )
 
 Status tr_node_asm_text( FILE *stream, const Tree *tree_ptr,
                          TreeNode *node, Counters *counters,
-                         Context *context, FuncFrames *frames )
+                         Context *context )
 {
     assert( stream );
     assert( tree_ptr );
@@ -33,25 +34,21 @@ Status tr_node_asm_text( FILE *stream, const Tree *tree_ptr,
     case TREE_NODE_TYPE_ID:
         // NOTE - Function identifiers must be dealt in operators' functions.
         // Otherwise it is supposed that's a variable identificator.
-        if ( context->in_func )
-        {
-            PRINT_ASM( "%s rbx", commands_list[CMD_PUSH] );
-            PRINT_ASM( "%s %d", commands_list[CMD_PUSH], data.id );
-            PRINT_ASM( "%s", commands_list[CMD_SUB] );
-            PRINT_ASM( "%s rdx", commands_list[CMD_POP] );
-            PRINT_ASM( "%s [rdx]", commands_list[CMD_PUSH] );
-        }
-        else
-        {
-            PRINT_ASM( "%s [%d]", commands_list[CMD_PUSH], data.id );
-        }
+        if ( data.id + 3 > context->curr_func_frame_size )
+            context->curr_func_frame_size = data.id + 3;
+
+        PRINT_ASM( "%s " REG_FRAME_REF_CELL , commands_list[CMD_PUSH] );
+        PRINT_ASM( "%s %d", commands_list[CMD_PUSH], data.id );
+        PRINT_ASM( "%s", commands_list[CMD_ADD] );
+        PRINT_ASM( "%s " REG_COMP, commands_list[CMD_POP] );
+        PRINT_ASM( "%s [" REG_COMP "]", commands_list[CMD_PUSH] );
         return STATUS_OK;
         break;
     case TREE_NODE_TYPE_OP:
         // REVIEW - как нормально избавиться от crosses initialization??
         {size_t op_ind = find_op_by_name( data.op );
         Status status = COMP_TREE_OPS_BACKEND[ op_ind ].tr_asm_text( stream, tree_ptr, node,
-                                                             counters, context, frames );
+                                                             counters, context );
         return status;}
         break;
     default:
@@ -70,16 +67,13 @@ Status translate_to_asm_text( const Tree *tree_ptr, FILE *stream )
 
     Counters counters = {};
     Context context   = {};
-    FuncFrames frames = {};
-    frames.list = (size_t*) calloc( FUNCS_DEFAULT_NUMBER, sizeof(size_t) );
-    frames.list_cap = FUNCS_DEFAULT_NUMBER;
 
-    PRINT_ASM( "%s %d", commands_list[CMD_PUSH], (int) MEMORY_SIZE - 3 );
-    PRINT_ASM( "%s rcx", commands_list[CMD_POP] );
+    PRINT_ASM( "%s %d", commands_list[CMD_PUSH], FRAME_REF_CELL_OFF );
+    PRINT_ASM( "%s " REG_FRAME_REF_CELL, commands_list[CMD_POP] );
     PRINT_ASM( "%s main", commands_list[CMD_JMP] );
 
     Status err = tr_node_asm_text( stream, tree_ptr, tree_get_root( tree_ptr ),
-                                   &counters, &context, &frames );
+                                   &counters, &context );
     if (err)
         return err;
 

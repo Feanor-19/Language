@@ -9,7 +9,7 @@
 struct CompTreeOpBackend
 {
     CompTreeOpNameEnum name;
-    Status (*tr_asm_text)(FILE*,const Tree*,TreeNode*,Counters*,Context*,FuncFrames*);
+    Status (*tr_asm_text)(FILE*,const Tree*,TreeNode*,Counters*,Context*);
 };
 
 
@@ -38,9 +38,20 @@ const char * const commands_list[] =
 #undef DEF_CMD
 // REVIEW - ???
 
-const size_t DUMMY_OP_INDEX       = 0;
-const size_t FUNCS_DEFAULT_NUMBER = 1;
-const size_t MEMORY_SIZE          = 1024;
+const size_t DUMMY_OP_INDEX  = 0;
+
+//! @brief Considering the firstt cell of some frame has index 0,
+//! this const says what index reference cell will have in this case.
+const int FRAME_REF_CELL_OFF = 2;
+
+//! @brief Defines which register is used for storing temporary values.
+#define REG_TMP "rbx"
+
+//! @brief Defines which register is used for storing current frame reference cell's address.
+#define REG_FRAME_REF_CELL "rcx"
+
+//! @brief Defines which register is used for computing.
+#define REG_COMP "rdx"
 
 const CompTreeOpBackend COMP_TREE_OPS_BACKEND[] =
 {
@@ -84,7 +95,7 @@ const CompTreeOpBackend COMP_TREE_OPS_BACKEND[] =
 
 Status tr_node_asm_text( FILE *stream, const Tree *tree_ptr,
                          TreeNode *node, Counters *counters,
-                         Context *context, FuncFrames *frames );
+                         Context *context);
 
 Status translate_to_asm_text( const Tree *tree_ptr, FILE *stream );
 
