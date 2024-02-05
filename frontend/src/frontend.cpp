@@ -119,18 +119,10 @@ inline void clean_nametable( Nametable *nametable )
 }
 
 //! @brief Returns 1 if ident is not found in any of the comp_prog's nametables, 0 otherwise.
-inline int check_is_ident_fresh( CompiledProgram *comp_prog, Identificator ident, Context *context )
+inline int check_is_ident_fresh( CompiledProgram *comp_prog, Identificator ident)
 {
-    if ( context->in_func_action || context->in_func_recipe )
-    {
-        return find_ident_in_nametable( NT_FUNCS, ident )     == ABSENT_ID
-            && find_ident_in_nametable( NT_FUNC_VARS, ident ) == ABSENT_ID;
-    }
-    else
-    {
-        return find_ident_in_nametable( NT_FUNCS, ident )       == ABSENT_ID
-            && find_ident_in_nametable( NT_GLOBAL, ident ) == ABSENT_ID;
-    }
+    return find_ident_in_nametable( NT_FUNCS, ident )     == ABSENT_ID
+        && find_ident_in_nametable( NT_FUNC_VARS, ident ) == ABSENT_ID;
 }
 
 //! @brief Counts number of nodes connected as a list using TREE_OP_LIST_CONNECTOR.
@@ -612,15 +604,13 @@ static TreeNode *get_var( FORMAL_REC_FALL_ARGS )
     assert(prog);
     assert(curr_ptr);
 
+    UNUSED(context);
+
     Token tkn_ident = get_token( CURR );
     if ( tkn_ident.type != TKN_TYPE_ID )
         return NULL;
 
-    id_t id = ABSENT_ID;
-    if ( context->in_func_action || context->in_func_recipe )
-        id = find_ident_in_nametable( NT_FUNC_VARS, tkn_ident.id );
-    else
-        id = find_ident_in_nametable( NT_GLOBAL, tkn_ident.id );
+    id_t id = find_ident_in_nametable( NT_FUNC_VARS, tkn_ident.id );
     SYN_ASSERT( id != ABSENT_ID, prog, CURR, "Variable" );
     MOVE_CURR_TO_END_OF_TOKEN(tkn_ident);
 
@@ -667,6 +657,8 @@ static TreeNode *get_var_death( FORMAL_REC_FALL_ARGS )
     assert(prog);
     assert(curr_ptr);
 
+    UNUSED(context);
+
     Token var_death = get_token( CURR );
     if ( !is_tkn_keyword( var_death, KW_VarDeathOp ) )
         return NULL;
@@ -676,10 +668,7 @@ static TreeNode *get_var_death( FORMAL_REC_FALL_ARGS )
     SYN_ASSERT( var_ident.type == TKN_TYPE_ID, prog, CURR, "Identificator" );
 
     int res = 0;
-    if ( context->in_func_action || context->in_func_recipe )
-        res = del_ident_from_nametable( &NT_FUNC_VARS, var_ident.id );
-    else
-        res = del_ident_from_nametable( &NT_GLOBAL, var_ident.id );
+    res = del_ident_from_nametable( &NT_FUNC_VARS, var_ident.id );
 
     SYN_ASSERT( res == 1, prog, CURR, "Variable" );
     MOVE_CURR_TO_END_OF_TOKEN(var_ident);
@@ -712,15 +701,12 @@ static TreeNode *get_var_birth( FORMAL_REC_FALL_ARGS )
     MOVE_CURR_TO_END_OF_TOKEN(units_of);
 
     Token tkn_id = get_token( CURR );
-    SYN_ASSERT( tkn_id.type == TKN_TYPE_ID && check_is_ident_fresh( comp_prog, tkn_id.id, context ),
+    SYN_ASSERT( tkn_id.type == TKN_TYPE_ID && check_is_ident_fresh( comp_prog, tkn_id.id ),
                 prog, CURR, "A fresh identificator" );
     MOVE_CURR_TO_END_OF_TOKEN(tkn_id);
 
     id_t var_id = ABSENT_ID;
-    if ( context->in_func_action || context->in_func_recipe )
-        var_id = add_ident_into_nametable( &NT_FUNC_VARS, tkn_id.id );
-    else
-        var_id = add_ident_into_nametable( &NT_GLOBAL, tkn_id.id );
+    var_id = add_ident_into_nametable( &NT_FUNC_VARS, tkn_id.id );
 
     TreeNode *node_assign = new_node_op( TREE, TREE_OP_ASSIGN );
     tree_hang_loose_node_at_left( TREE, node_num, node_assign );
@@ -998,10 +984,12 @@ static TreeNode *get_formal_args( FORMAL_REC_FALL_ARGS )
     assert(prog);
     assert(curr_ptr);
 
+    UNUSED(context);
+
     TreeNode *node_list = new_node_op( TREE, TREE_OP_LIST_CONNECTOR );
 
     Token tkn_id = get_token( CURR );
-    SYN_ASSERT( tkn_id.type == TKN_TYPE_ID && check_is_ident_fresh( comp_prog, tkn_id.id, context ),
+    SYN_ASSERT( tkn_id.type == TKN_TYPE_ID && check_is_ident_fresh( comp_prog, tkn_id.id ),
                 prog, CURR, "At least one fresh variable name" );
     MOVE_CURR_TO_END_OF_TOKEN( tkn_id );
 
@@ -1016,7 +1004,7 @@ static TreeNode *get_formal_args( FORMAL_REC_FALL_ARGS )
         MOVE_CURR_TO_END_OF_TOKEN(tkn_comma);
 
         Token tkn_new_id = get_token( CURR );
-        SYN_ASSERT( tkn_new_id.type == TKN_TYPE_ID && check_is_ident_fresh( comp_prog, tkn_new_id.id, context ),
+        SYN_ASSERT( tkn_new_id.type == TKN_TYPE_ID && check_is_ident_fresh( comp_prog, tkn_new_id.id ),
                     prog, CURR, "A fresh variable name" );
         MOVE_CURR_TO_END_OF_TOKEN( tkn_new_id );
 
@@ -1049,7 +1037,7 @@ static TreeNode *get_func_recipe( FORMAL_REC_FALL_ARGS )
     clean_nametable( &NT_FUNC_VARS );
 
     Token func_ident = get_token( CURR );
-    SYN_ASSERT( func_ident.type == TKN_TYPE_ID && check_is_ident_fresh(comp_prog, func_ident.id, context),
+    SYN_ASSERT( func_ident.type == TKN_TYPE_ID && check_is_ident_fresh(comp_prog, func_ident.id ),
                 prog, CURR, "Fresh function identificator" );
     MOVE_CURR_TO_END_OF_TOKEN( func_ident );
 
@@ -1117,7 +1105,7 @@ static TreeNode *get_func_action( FORMAL_REC_FALL_ARGS )
     clean_nametable( &NT_FUNC_VARS );
 
     Token func_ident = get_token( CURR );
-    SYN_ASSERT( func_ident.type == TKN_TYPE_ID && check_is_ident_fresh(comp_prog, func_ident.id, context),
+    SYN_ASSERT( func_ident.type == TKN_TYPE_ID && check_is_ident_fresh(comp_prog, func_ident.id ),
                 prog, CURR, "Fresh function identificator" );
     MOVE_CURR_TO_END_OF_TOKEN( func_ident );
 
@@ -1244,6 +1232,8 @@ static TreeNode *get_prog( FORMAL_REC_FALL_ARGS )
 
     TreeNode *node_func_defs = get_func_defs( FACT_REC_FALL_ARGS );
 
+    // in fact this is the main function, although it is not highlighted
+    clean_nametable( &NT_FUNC_VARS );
     TreeNode *node_operators = get_operators( FACT_REC_FALL_ARGS );
     SYN_ASSERT( node_operators, prog, CURR, "Operators" );
 
@@ -1322,6 +1312,8 @@ void print_rec_fall_err_msg( const char *prog, const char *error_ptr, const char
 
     error_ptr = skip_spaces(error_ptr);
 
+    //TODO - добавить печать номера строки, на которой была ошибка
+
     if (!error_ptr)
         error_ptr = prog + strlen( prog ) - 1;
 
@@ -1397,18 +1389,13 @@ Status Nametables_ctor( Nametables *nametables )
 {
     assert(nametables);
 
-    if ( nametable_ctor( &nametables->global_vars, NT_TYPE_GLOBAL_VAR ) != STATUS_OK )
-        return STATUS_ERROR_MEMORY_ALLOC_ERROR;
-
     if ( nametable_ctor( &nametables->funcs, NT_TYPE_FUNC ) != STATUS_OK )
     {
-        FREE(nametables->global_vars.list);
         return STATUS_ERROR_MEMORY_ALLOC_ERROR;
     }
 
     if ( nametable_ctor( &nametables->func_vars, NT_TYPE_FUNC_VAR ) != STATUS_OK )
     {
-        FREE(nametables->global_vars.list);
         FREE(nametables->funcs.list);
         return STATUS_ERROR_MEMORY_ALLOC_ERROR;
     }
@@ -1429,7 +1416,6 @@ void Nametables_dtor( Nametables *nametables )
 {
     assert(nametables);
 
-    nametable_dtor( &nametables->global_vars );
     nametable_dtor( &nametables->funcs );
     nametable_dtor( &nametables->func_vars );
 }

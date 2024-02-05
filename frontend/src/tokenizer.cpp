@@ -46,9 +46,6 @@ inline KeywordName get_keyword( const char *str, size_t *len_ptr )
     assert(str);
     assert(len_ptr);
 
-    // TODO - определение самого длинного префикса, который является ключевым словом,
-    // а не первого попавшегося
-
     // TODO - идея алгоритма "равномерного распространения" по всем ключевым словам сразу?
 
     int kw_len = 0;

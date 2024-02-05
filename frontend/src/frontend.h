@@ -25,7 +25,6 @@ const char * const status_messages[] =
 
 enum NametableType
 {
-    NT_TYPE_GLOBAL_VAR,
     NT_TYPE_FUNC,
     NT_TYPE_FUNC_VAR,
 };
@@ -55,9 +54,9 @@ struct Nametable
 
 struct Nametables
 {
-    Nametable global_vars;
     Nametable funcs;
     Nametable func_vars; //NOTE - переиспользуется внутри каждой функции, обязательно чистить после использования!
+                         //NOTE - main на самом деле тоже ф-я, хоть это и не выглядит так грамматически
 };
 
 struct Context
