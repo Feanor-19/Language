@@ -33,7 +33,10 @@ int main( int argc, const char *argv[])
     LOG( "Starting compilation..." );
     CompiledProgram compiled_prog = {};
     Status comp_err = compile_prog( prog_str, &compiled_prog );
-    LOG( "Compilation is done!" );
+    if (comp_err == STATUS_OK)
+    {
+        LOG( "Compilation is done!" );
+    }
 
     if (!comp_err)
     {
@@ -46,7 +49,7 @@ int main( int argc, const char *argv[])
 
     close_img_dumps();
 
-    LOG( "All good!" );
+    LOG( "All work done, shutting down!" );
 
     log_end();
 

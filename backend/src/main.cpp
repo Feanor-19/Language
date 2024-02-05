@@ -66,6 +66,9 @@ int main(int argc, const char *argv[])
     FCLOSE(out_stream);
     tree_dtor( &compiler_tree );
     close_img_dumps();
+
+    LOG("All work done, shutting down!");
+
     log_end();
 
     return 0;

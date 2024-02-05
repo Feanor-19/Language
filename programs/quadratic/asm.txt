@@ -1,0 +1,8077 @@
+PUSH 2
+POP rcx
+JMP main
+; tr_asm_text_seq_exec
+; tr_asm_text_seq_exec
+; tr_asm_text_func_def
+func_0:
+PUSH rcx
+PUSH 2
+SUB
+POP rdx
+POP [rdx]
+
+; tr_asm_text_seq_exec
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+PUSH 0.000000
+PUSH rcx
+PUSH 3
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+; tr_asm_text_sub
+; tr_asm_text_mul
+PUSH rcx
+PUSH 1
+ADD
+POP rdx
+PUSH [rdx]
+PUSH rcx
+PUSH 1
+ADD
+POP rdx
+PUSH [rdx]
+MUL
+
+; tr_asm_text_mul END
+
+; tr_asm_text_mul
+; tr_asm_text_mul
+PUSH 4.000000
+PUSH rcx
+PUSH 0
+ADD
+POP rdx
+PUSH [rdx]
+MUL
+
+; tr_asm_text_mul END
+
+PUSH rcx
+PUSH 2
+ADD
+POP rdx
+PUSH [rdx]
+MUL
+
+; tr_asm_text_mul END
+
+SUB
+
+; tr_asm_text_sub END
+
+PUSH rcx
+PUSH 3
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_return
+; computing ret value
+PUSH rcx
+PUSH 3
+ADD
+POP rdx
+PUSH [rdx]
+POP rax
+; push [reg_fr_ref - 2] (pushing ret address)
+PUSH rcx
+PUSH 2
+SUB
+POP rdx
+PUSH [rdx]
+
+; reg_fr_ref = mem[reg_fr_ref - 1] (updating reg_fr_ref)
+PUSH rcx
+PUSH 1
+SUB
+POP rdx
+PUSH [rdx]
+POP rcx
+
+RET
+
+; tr_asm_text_return END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_return
+; push [reg_fr_ref - 2] (pushing ret address)
+PUSH rcx
+PUSH 2
+SUB
+POP rdx
+PUSH [rdx]
+
+; reg_fr_ref = mem[reg_fr_ref - 1] (updating reg_fr_ref)
+PUSH rcx
+PUSH 1
+SUB
+POP rdx
+PUSH [rdx]
+POP rcx
+
+RET
+
+; tr_asm_text_return END
+
+; tr_asm_text_seq_exec END
+
+
+; tr_asm_text_func_def END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_func_def
+func_1:
+PUSH rcx
+PUSH 2
+SUB
+POP rdx
+POP [rdx]
+
+; tr_asm_text_seq_exec
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+PUSH 0.000000
+PUSH rcx
+PUSH 2
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+; tr_asm_text_div
+; tr_asm_text_minus
+PUSH rcx
+PUSH 1
+ADD
+POP rdx
+PUSH [rdx]
+PUSH -1
+MUL
+; tr_asm_text_minus END
+
+PUSH rcx
+PUSH 0
+ADD
+POP rdx
+PUSH [rdx]
+DIV
+
+; tr_asm_text_div END
+
+PUSH rcx
+PUSH 2
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_return
+; computing ret value
+PUSH rcx
+PUSH 2
+ADD
+POP rdx
+PUSH [rdx]
+POP rax
+; push [reg_fr_ref - 2] (pushing ret address)
+PUSH rcx
+PUSH 2
+SUB
+POP rdx
+PUSH [rdx]
+
+; reg_fr_ref = mem[reg_fr_ref - 1] (updating reg_fr_ref)
+PUSH rcx
+PUSH 1
+SUB
+POP rdx
+PUSH [rdx]
+POP rcx
+
+RET
+
+; tr_asm_text_return END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_return
+; push [reg_fr_ref - 2] (pushing ret address)
+PUSH rcx
+PUSH 2
+SUB
+POP rdx
+PUSH [rdx]
+
+; reg_fr_ref = mem[reg_fr_ref - 1] (updating reg_fr_ref)
+PUSH rcx
+PUSH 1
+SUB
+POP rdx
+PUSH [rdx]
+POP rcx
+
+RET
+
+; tr_asm_text_return END
+
+; tr_asm_text_seq_exec END
+
+
+; tr_asm_text_func_def END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_func_def
+func_2:
+PUSH rcx
+PUSH 2
+SUB
+POP rdx
+POP [rdx]
+
+; tr_asm_text_seq_exec
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+PUSH 0.000000
+PUSH rcx
+PUSH 2
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_if
+; tr_asm_text_cmp_equal
+; helper_asm_text_cmp
+PUSH rcx
+PUSH 0
+ADD
+POP rdx
+PUSH [rdx]
+PUSH rcx
+PUSH 2
+ADD
+POP rdx
+PUSH [rdx]
+JE cmp_yes_0
+PUSH 0
+JMP cmp_end_0
+cmp_yes_0:
+PUSH 1
+cmp_end_0:
+
+; helper_asm_text_cmp END
+
+PUSH 0
+JE if_else_0
+; tr_asm_text_if
+; tr_asm_text_cmp_equal
+; helper_asm_text_cmp
+PUSH rcx
+PUSH 1
+ADD
+POP rdx
+PUSH [rdx]
+PUSH rcx
+PUSH 2
+ADD
+POP rdx
+PUSH [rdx]
+JE cmp_yes_1
+PUSH 0
+JMP cmp_end_1
+cmp_yes_1:
+PUSH 1
+cmp_end_1:
+
+; helper_asm_text_cmp END
+
+PUSH 0
+JE if_else_1
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 87.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 44.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 104.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 107.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 100.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 104.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 119.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 104.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 102.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 121.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 100.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 109.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 99.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 103.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 102.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 46.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 46.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 46.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 10.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_print_char
+PUSH 13.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+JMP if_end_1
+if_else_1:
+; tr_asm_text_seq_exec
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 81.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 117.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 103.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 44.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 104.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 39.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 113.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 117.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 46.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 10.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_print_char
+PUSH 13.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 73.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 39.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 113.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 117.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 58.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 104.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 109.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 112.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 121.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 44.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 118.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 109.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 103.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 121.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 33.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 10.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_print_char
+PUSH 13.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+if_end_1:
+
+; tr_asm_text_if END
+
+JMP if_end_0
+if_else_0:
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+PUSH 0.000000
+PUSH rcx
+PUSH 3
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+; tr_asm_text_call_func
+; storing old reg_frame_ref value in the being created frame
+PUSH rcx
+PUSH 5 ; func_frame_size - 1
+ADD
+POP rdx
+PUSH rcx
+POP [rdx]
+
+; storing new reg_frame_ref into reg_tmp
+PUSH rdx
+PUSH 1
+ADD
+POP rbx
+
+; passing fact args (if there are any)
+PUSH rcx
+PUSH 0
+ADD
+POP rdx
+PUSH [rdx]
+PUSH rbx
+PUSH 0 ; curr_fact_arg_id
+ADD
+POP rdx
+POP [rdx]
+PUSH rcx
+PUSH 1
+ADD
+POP rdx
+PUSH [rdx]
+PUSH rbx
+PUSH 1 ; curr_fact_arg_id
+ADD
+POP rdx
+POP [rdx]
+; updating reg_frame_ref from reg_tmp to end the process of creating new frame
+PUSH rbx
+POP rcx
+CALL func_1
+PUSH rax
+
+; tr_asm_text_call_func END
+
+PUSH rcx
+PUSH 3
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 72.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 104.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 121.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 58.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 10.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_print_char
+PUSH 13.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_print_num
+PUSH rcx
+PUSH 3
+ADD
+POP rdx
+PUSH [rdx]
+PRN
+
+; tr_asm_text_print_num END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+if_end_0:
+
+; tr_asm_text_if END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_return
+; push [reg_fr_ref - 2] (pushing ret address)
+PUSH rcx
+PUSH 2
+SUB
+POP rdx
+PUSH [rdx]
+
+; reg_fr_ref = mem[reg_fr_ref - 1] (updating reg_fr_ref)
+PUSH rcx
+PUSH 1
+SUB
+POP rdx
+PUSH [rdx]
+POP rcx
+
+RET
+
+; tr_asm_text_return END
+
+; tr_asm_text_seq_exec END
+
+
+; tr_asm_text_func_def END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_func_def
+func_3:
+PUSH rcx
+PUSH 2
+SUB
+POP rdx
+POP [rdx]
+
+; tr_asm_text_seq_exec
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+PUSH 0.000000
+PUSH rcx
+PUSH 3
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+; tr_asm_text_div
+; tr_asm_text_add
+; tr_asm_text_minus
+PUSH rcx
+PUSH 1
+ADD
+POP rdx
+PUSH [rdx]
+PUSH -1
+MUL
+; tr_asm_text_minus END
+
+; tr_asm_text_sqrt
+PUSH rcx
+PUSH 2
+ADD
+POP rdx
+PUSH [rdx]
+SQRT
+
+; tr_asm_text_sqrt END
+
+ADD
+
+; tr_asm_text_add END
+
+; tr_asm_text_mul
+PUSH 2.000000
+PUSH rcx
+PUSH 0
+ADD
+POP rdx
+PUSH [rdx]
+MUL
+
+; tr_asm_text_mul END
+
+DIV
+
+; tr_asm_text_div END
+
+PUSH rcx
+PUSH 3
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_return
+; computing ret value
+PUSH rcx
+PUSH 3
+ADD
+POP rdx
+PUSH [rdx]
+POP rax
+; push [reg_fr_ref - 2] (pushing ret address)
+PUSH rcx
+PUSH 2
+SUB
+POP rdx
+PUSH [rdx]
+
+; reg_fr_ref = mem[reg_fr_ref - 1] (updating reg_fr_ref)
+PUSH rcx
+PUSH 1
+SUB
+POP rdx
+PUSH [rdx]
+POP rcx
+
+RET
+
+; tr_asm_text_return END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_return
+; push [reg_fr_ref - 2] (pushing ret address)
+PUSH rcx
+PUSH 2
+SUB
+POP rdx
+PUSH [rdx]
+
+; reg_fr_ref = mem[reg_fr_ref - 1] (updating reg_fr_ref)
+PUSH rcx
+PUSH 1
+SUB
+POP rdx
+PUSH [rdx]
+POP rcx
+
+RET
+
+; tr_asm_text_return END
+
+; tr_asm_text_seq_exec END
+
+
+; tr_asm_text_func_def END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_func_def
+func_4:
+PUSH rcx
+PUSH 2
+SUB
+POP rdx
+POP [rdx]
+
+; tr_asm_text_seq_exec
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+PUSH 0.000000
+PUSH rcx
+PUSH 1
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+PUSH 1.000000
+PUSH rcx
+PUSH 2
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+PUSH 0.000000
+PUSH rcx
+PUSH 3
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_if
+; tr_asm_text_cmp_more
+; helper_asm_text_cmp
+PUSH rcx
+PUSH 0
+ADD
+POP rdx
+PUSH [rdx]
+PUSH rcx
+PUSH 3
+ADD
+POP rdx
+PUSH [rdx]
+JA cmp_yes_2
+PUSH 0
+JMP cmp_end_2
+cmp_yes_2:
+PUSH 1
+cmp_end_2:
+
+; helper_asm_text_cmp END
+
+PUSH 0
+JE if_end_2
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+; tr_asm_text_mul
+PUSH 2.000000
+PUSH rcx
+PUSH 2
+ADD
+POP rdx
+PUSH [rdx]
+MUL
+
+; tr_asm_text_mul END
+
+PUSH rcx
+PUSH 1
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_return
+; computing ret value
+PUSH rcx
+PUSH 1
+ADD
+POP rdx
+PUSH [rdx]
+POP rax
+; push [reg_fr_ref - 2] (pushing ret address)
+PUSH rcx
+PUSH 2
+SUB
+POP rdx
+PUSH [rdx]
+
+; reg_fr_ref = mem[reg_fr_ref - 1] (updating reg_fr_ref)
+PUSH rcx
+PUSH 1
+SUB
+POP rdx
+PUSH [rdx]
+POP rcx
+
+RET
+
+; tr_asm_text_return END
+
+; tr_asm_text_seq_exec END
+
+if_end_2:
+
+; tr_asm_text_if END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_if
+; tr_asm_text_cmp_equal
+; helper_asm_text_cmp
+PUSH rcx
+PUSH 0
+ADD
+POP rdx
+PUSH [rdx]
+PUSH rcx
+PUSH 3
+ADD
+POP rdx
+PUSH [rdx]
+JE cmp_yes_3
+PUSH 0
+JMP cmp_end_3
+cmp_yes_3:
+PUSH 1
+cmp_end_3:
+
+; helper_asm_text_cmp END
+
+PUSH 0
+JE if_end_3
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+; tr_asm_text_mul
+PUSH 1.000000
+PUSH rcx
+PUSH 2
+ADD
+POP rdx
+PUSH [rdx]
+MUL
+
+; tr_asm_text_mul END
+
+PUSH rcx
+PUSH 1
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_return
+; computing ret value
+PUSH rcx
+PUSH 1
+ADD
+POP rdx
+PUSH [rdx]
+POP rax
+; push [reg_fr_ref - 2] (pushing ret address)
+PUSH rcx
+PUSH 2
+SUB
+POP rdx
+PUSH [rdx]
+
+; reg_fr_ref = mem[reg_fr_ref - 1] (updating reg_fr_ref)
+PUSH rcx
+PUSH 1
+SUB
+POP rdx
+PUSH [rdx]
+POP rcx
+
+RET
+
+; tr_asm_text_return END
+
+; tr_asm_text_seq_exec END
+
+if_end_3:
+
+; tr_asm_text_if END
+
+; tr_asm_text_if
+; tr_asm_text_cmp_less
+; helper_asm_text_cmp
+PUSH rcx
+PUSH 0
+ADD
+POP rdx
+PUSH [rdx]
+PUSH rcx
+PUSH 3
+ADD
+POP rdx
+PUSH [rdx]
+JB cmp_yes_4
+PUSH 0
+JMP cmp_end_4
+cmp_yes_4:
+PUSH 1
+cmp_end_4:
+
+; helper_asm_text_cmp END
+
+PUSH 0
+JE if_end_4
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+; tr_asm_text_mul
+PUSH 0.000000
+PUSH rcx
+PUSH 2
+ADD
+POP rdx
+PUSH [rdx]
+MUL
+
+; tr_asm_text_mul END
+
+PUSH rcx
+PUSH 1
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_return
+; computing ret value
+PUSH rcx
+PUSH 1
+ADD
+POP rdx
+PUSH [rdx]
+POP rax
+; push [reg_fr_ref - 2] (pushing ret address)
+PUSH rcx
+PUSH 2
+SUB
+POP rdx
+PUSH [rdx]
+
+; reg_fr_ref = mem[reg_fr_ref - 1] (updating reg_fr_ref)
+PUSH rcx
+PUSH 1
+SUB
+POP rdx
+PUSH [rdx]
+POP rcx
+
+RET
+
+; tr_asm_text_return END
+
+; tr_asm_text_seq_exec END
+
+if_end_4:
+
+; tr_asm_text_if END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_return
+; push [reg_fr_ref - 2] (pushing ret address)
+PUSH rcx
+PUSH 2
+SUB
+POP rdx
+PUSH [rdx]
+
+; reg_fr_ref = mem[reg_fr_ref - 1] (updating reg_fr_ref)
+PUSH rcx
+PUSH 1
+SUB
+POP rdx
+PUSH [rdx]
+POP rcx
+
+RET
+
+; tr_asm_text_return END
+
+; tr_asm_text_seq_exec END
+
+
+; tr_asm_text_func_def END
+
+; tr_asm_text_func_def
+func_5:
+PUSH rcx
+PUSH 2
+SUB
+POP rdx
+POP [rdx]
+
+; tr_asm_text_seq_exec
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+PUSH 0.000000
+PUSH rcx
+PUSH 3
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+PUSH 1.000000
+PUSH rcx
+PUSH 4
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_if
+; tr_asm_text_cmp_equal
+; helper_asm_text_cmp
+PUSH rcx
+PUSH 0
+ADD
+POP rdx
+PUSH [rdx]
+PUSH rcx
+PUSH 3
+ADD
+POP rdx
+PUSH [rdx]
+JE cmp_yes_5
+PUSH 0
+JMP cmp_end_5
+cmp_yes_5:
+PUSH 1
+cmp_end_5:
+
+; helper_asm_text_cmp END
+
+PUSH 0
+JE if_else_5
+; tr_asm_text_seq_exec
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 87.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 44.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 104.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 39.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 113.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 117.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 113.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 117.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 100.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 99.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 113.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 117.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 44.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 10.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_print_char
+PUSH 13.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 109.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 109.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 107.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 46.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 65.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 121.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 119.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 121.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 46.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 46.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 46.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 10.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_print_char
+PUSH 13.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_call_func
+; storing old reg_frame_ref value in the being created frame
+PUSH rcx
+PUSH 6 ; func_frame_size - 1
+ADD
+POP rdx
+PUSH rcx
+POP [rdx]
+
+; storing new reg_frame_ref into reg_tmp
+PUSH rdx
+PUSH 1
+ADD
+POP rbx
+
+; passing fact args (if there are any)
+PUSH rcx
+PUSH 1
+ADD
+POP rdx
+PUSH [rdx]
+PUSH rbx
+PUSH 0 ; curr_fact_arg_id
+ADD
+POP rdx
+POP [rdx]
+PUSH rcx
+PUSH 2
+ADD
+POP rdx
+PUSH [rdx]
+PUSH rbx
+PUSH 1 ; curr_fact_arg_id
+ADD
+POP rdx
+POP [rdx]
+; updating reg_frame_ref from reg_tmp to end the process of creating new frame
+PUSH rbx
+POP rcx
+CALL func_2
+PUSH rax
+
+; tr_asm_text_call_func END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+JMP if_end_5
+if_else_5:
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+PUSH 0.000000
+PUSH rcx
+PUSH 5
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+; tr_asm_text_call_func
+; storing old reg_frame_ref value in the being created frame
+PUSH rcx
+PUSH 7 ; func_frame_size - 1
+ADD
+POP rdx
+PUSH rcx
+POP [rdx]
+
+; storing new reg_frame_ref into reg_tmp
+PUSH rdx
+PUSH 1
+ADD
+POP rbx
+
+; passing fact args (if there are any)
+PUSH rcx
+PUSH 0
+ADD
+POP rdx
+PUSH [rdx]
+PUSH rbx
+PUSH 0 ; curr_fact_arg_id
+ADD
+POP rdx
+POP [rdx]
+PUSH rcx
+PUSH 1
+ADD
+POP rdx
+PUSH [rdx]
+PUSH rbx
+PUSH 1 ; curr_fact_arg_id
+ADD
+POP rdx
+POP [rdx]
+PUSH rcx
+PUSH 2
+ADD
+POP rdx
+PUSH [rdx]
+PUSH rbx
+PUSH 2 ; curr_fact_arg_id
+ADD
+POP rdx
+POP [rdx]
+; updating reg_frame_ref from reg_tmp to end the process of creating new frame
+PUSH rbx
+POP rcx
+CALL func_0
+PUSH rax
+
+; tr_asm_text_call_func END
+
+PUSH rcx
+PUSH 5
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 72.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 104.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 100.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 99.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 109.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 102.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 121.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 117.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 113.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 117.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 58.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 10.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_print_char
+PUSH 13.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_num
+PUSH rcx
+PUSH 5
+ADD
+POP rdx
+PUSH [rdx]
+PRN
+
+; tr_asm_text_print_num END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+PUSH 0.000000
+PUSH rcx
+PUSH 6
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+; tr_asm_text_call_func
+; storing old reg_frame_ref value in the being created frame
+PUSH rcx
+PUSH 8 ; func_frame_size - 1
+ADD
+POP rdx
+PUSH rcx
+POP [rdx]
+
+; storing new reg_frame_ref into reg_tmp
+PUSH rdx
+PUSH 1
+ADD
+POP rbx
+
+; passing fact args (if there are any)
+PUSH rcx
+PUSH 5
+ADD
+POP rdx
+PUSH [rdx]
+PUSH rbx
+PUSH 0 ; curr_fact_arg_id
+ADD
+POP rdx
+POP [rdx]
+; updating reg_frame_ref from reg_tmp to end the process of creating new frame
+PUSH rbx
+POP rcx
+CALL func_4
+PUSH rax
+
+; tr_asm_text_call_func END
+
+PUSH rcx
+PUSH 6
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 84.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 104.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 117.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 109.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 98.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 102.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 58.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 10.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_print_char
+PUSH 13.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_num
+PUSH rcx
+PUSH 6
+ADD
+POP rdx
+PUSH [rdx]
+PRN
+
+; tr_asm_text_print_num END
+
+; tr_asm_text_if
+; tr_asm_text_cmp_equal
+; helper_asm_text_cmp
+PUSH rcx
+PUSH 6
+ADD
+POP rdx
+PUSH [rdx]
+PUSH rcx
+PUSH 3
+ADD
+POP rdx
+PUSH [rdx]
+JE cmp_yes_6
+PUSH 0
+JMP cmp_end_6
+cmp_yes_6:
+PUSH 1
+cmp_end_6:
+
+; helper_asm_text_cmp END
+
+PUSH 0
+JE if_else_6
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 78.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 33.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 10.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_print_char
+PUSH 13.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+JMP if_end_6
+if_else_6:
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+PUSH 0.000000
+PUSH rcx
+PUSH 7
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+; tr_asm_text_call_func
+; storing old reg_frame_ref value in the being created frame
+PUSH rcx
+PUSH 9 ; func_frame_size - 1
+ADD
+POP rdx
+PUSH rcx
+POP [rdx]
+
+; storing new reg_frame_ref into reg_tmp
+PUSH rdx
+PUSH 1
+ADD
+POP rbx
+
+; passing fact args (if there are any)
+PUSH rcx
+PUSH 0
+ADD
+POP rdx
+PUSH [rdx]
+PUSH rbx
+PUSH 0 ; curr_fact_arg_id
+ADD
+POP rdx
+POP [rdx]
+PUSH rcx
+PUSH 1
+ADD
+POP rdx
+PUSH [rdx]
+PUSH rbx
+PUSH 1 ; curr_fact_arg_id
+ADD
+POP rdx
+POP [rdx]
+PUSH rcx
+PUSH 5
+ADD
+POP rdx
+PUSH [rdx]
+PUSH rbx
+PUSH 2 ; curr_fact_arg_id
+ADD
+POP rdx
+POP [rdx]
+; updating reg_frame_ref from reg_tmp to end the process of creating new frame
+PUSH rbx
+POP rcx
+CALL func_3
+PUSH rax
+
+; tr_asm_text_call_func END
+
+PUSH rcx
+PUSH 7
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 65.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 100.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 104.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 104.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 102.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 58.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 10.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_print_char
+PUSH 13.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_num
+PUSH rcx
+PUSH 7
+ADD
+POP rdx
+PUSH [rdx]
+PRN
+
+; tr_asm_text_print_num END
+
+; tr_asm_text_if
+; tr_asm_text_cmp_equal
+; helper_asm_text_cmp
+PUSH rcx
+PUSH 6
+ADD
+POP rdx
+PUSH [rdx]
+; tr_asm_text_mul
+PUSH 2.000000
+PUSH rcx
+PUSH 4
+ADD
+POP rdx
+PUSH [rdx]
+MUL
+
+; tr_asm_text_mul END
+
+JE cmp_yes_7
+PUSH 0
+JMP cmp_end_7
+cmp_yes_7:
+PUSH 1
+cmp_end_7:
+
+; helper_asm_text_cmp END
+
+PUSH 0
+JE if_end_7
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+PUSH 0.000000
+PUSH rcx
+PUSH 8
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+; tr_asm_text_sub
+; tr_asm_text_div
+; tr_asm_text_minus
+PUSH rcx
+PUSH 1
+ADD
+POP rdx
+PUSH [rdx]
+PUSH -1
+MUL
+; tr_asm_text_minus END
+
+PUSH rcx
+PUSH 0
+ADD
+POP rdx
+PUSH [rdx]
+DIV
+
+; tr_asm_text_div END
+
+PUSH rcx
+PUSH 7
+ADD
+POP rdx
+PUSH [rdx]
+SUB
+
+; tr_asm_text_sub END
+
+PUSH rcx
+PUSH 8
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 65.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 100.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 104.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 99.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 100.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 58.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 10.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_print_char
+PUSH 13.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_print_num
+PUSH rcx
+PUSH 8
+ADD
+POP rdx
+PUSH [rdx]
+PRN
+
+; tr_asm_text_print_num END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+if_end_7:
+
+; tr_asm_text_if END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+if_end_6:
+
+; tr_asm_text_if END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+if_end_5:
+
+; tr_asm_text_if END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_return
+; push [reg_fr_ref - 2] (pushing ret address)
+PUSH rcx
+PUSH 2
+SUB
+POP rdx
+PUSH [rdx]
+
+; reg_fr_ref = mem[reg_fr_ref - 1] (updating reg_fr_ref)
+PUSH rcx
+PUSH 1
+SUB
+POP rdx
+PUSH [rdx]
+POP rcx
+
+RET
+
+; tr_asm_text_return END
+
+; tr_asm_text_seq_exec END
+
+
+; tr_asm_text_func_def END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_main_prog
+main:
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+PUSH 1.000000
+PUSH rcx
+PUSH 0
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+PUSH 0.000000
+PUSH rcx
+PUSH 1
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 72.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 44.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 73.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 99.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 118.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 113.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 117.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 100.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 99.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 113.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 117.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 44.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 107.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 120.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 94.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 50.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 43.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 98.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 120.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 43.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 99.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 61.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 48.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 33.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 10.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_print_char
+PUSH 13.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 68.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 121.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 117.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 119.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 109.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 107.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 121.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 63.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 91.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 49.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 47.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 48.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 93.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 10.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_print_char
+PUSH 13.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+; tr_asm_text_input
+IN
+
+; tr_asm_text_input END
+
+PUSH rcx
+PUSH 2
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_while
+while_0:
+; tr_asm_text_cmp_not_eq
+; helper_asm_text_cmp
+PUSH rcx
+PUSH 2
+ADD
+POP rdx
+PUSH [rdx]
+PUSH rcx
+PUSH 1
+ADD
+POP rdx
+PUSH [rdx]
+JNE cmp_yes_8
+PUSH 0
+JMP cmp_end_8
+cmp_yes_8:
+PUSH 1
+cmp_end_8:
+
+; helper_asm_text_cmp END
+
+PUSH 0
+JE while_end_0
+; tr_asm_text_seq_exec
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 80.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 44.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 99.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 102.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 102.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 99.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 58.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 10.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_print_char
+PUSH 13.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+; tr_asm_text_input
+IN
+
+; tr_asm_text_input END
+
+PUSH rcx
+PUSH 3
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 80.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 44.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 99.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 102.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 102.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 99.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 98.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 58.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 10.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_print_char
+PUSH 13.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+; tr_asm_text_input
+IN
+
+; tr_asm_text_input END
+
+PUSH rcx
+PUSH 4
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 80.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 44.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 99.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 102.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 102.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 99.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 99.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 58.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 10.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_print_char
+PUSH 13.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+; tr_asm_text_input
+IN
+
+; tr_asm_text_input END
+
+PUSH rcx
+PUSH 5
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_call_func
+; storing old reg_frame_ref value in the being created frame
+PUSH rcx
+PUSH 7 ; func_frame_size - 1
+ADD
+POP rdx
+PUSH rcx
+POP [rdx]
+
+; storing new reg_frame_ref into reg_tmp
+PUSH rdx
+PUSH 1
+ADD
+POP rbx
+
+; passing fact args (if there are any)
+PUSH rcx
+PUSH 3
+ADD
+POP rdx
+PUSH [rdx]
+PUSH rbx
+PUSH 0 ; curr_fact_arg_id
+ADD
+POP rdx
+POP [rdx]
+PUSH rcx
+PUSH 4
+ADD
+POP rdx
+PUSH [rdx]
+PUSH rbx
+PUSH 1 ; curr_fact_arg_id
+ADD
+POP rdx
+POP [rdx]
+PUSH rcx
+PUSH 5
+ADD
+POP rdx
+PUSH [rdx]
+PUSH rbx
+PUSH 2 ; curr_fact_arg_id
+ADD
+POP rdx
+POP [rdx]
+; updating reg_frame_ref from reg_tmp to end the process of creating new frame
+PUSH rbx
+POP rcx
+CALL func_5
+PUSH rax
+
+; tr_asm_text_call_func END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 68.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 33.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 68.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 121.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 117.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 119.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 115.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 108.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 118.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 104.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 114.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 113.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 117.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 97.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 116.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 105.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 110.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 63.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 32.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 91.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 49.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 47.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 48.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 93.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 10.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_print_char
+PUSH 13.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_assign
+; tr_asm_text_mul
+; tr_asm_text_input
+IN
+
+; tr_asm_text_input END
+
+PUSH rcx
+PUSH 0
+ADD
+POP rdx
+PUSH [rdx]
+MUL
+
+; tr_asm_text_mul END
+
+PUSH rcx
+PUSH 2
+ADD
+POP rdx
+POP [rdx]
+
+; tr_asm_text_assign END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_dummy
+; dummy
+
+; tr_asm_text_dummy END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_dummy
+; dummy
+
+; tr_asm_text_dummy END
+
+; tr_asm_text_dummy
+; dummy
+
+; tr_asm_text_dummy END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+JMP while_0
+while_end_0:
+
+; tr_asm_text_while END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 71.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 111.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 100.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 98.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 121.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 101.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 33.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec
+; tr_asm_text_print_char
+PUSH 10.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_print_char
+PUSH 13.000000
+PRC
+
+; tr_asm_text_print_char END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_seq_exec END
+
+; tr_asm_text_main_prog END
+
+; tr_asm_text_seq_exec END
+
+HLT

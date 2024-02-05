@@ -46,17 +46,25 @@ inline KeywordName get_keyword( const char *str, size_t *len_ptr )
     assert(str);
     assert(len_ptr);
 
+    // TODO - определение самого длинного префикса, который является ключевым словом,
+    // а не первого попавшегося
+
+    // TODO - идея алгоритма "равномерного распространения" по всем ключевым словам сразу?
+
     int kw_len = 0;
+    KeywordName ans = KW_FICTIONAL;
+    size_t ans_len = 0;
     for (size_t keyword = 0; keyword < SIZEARR( KEYWORDS ); keyword++)
     {
-        if ( (kw_len = cmp_keyword( KEYWORDS[keyword].str, str ) ) != -1 )
+        if ( (kw_len = cmp_keyword( KEYWORDS[keyword].str, str ) ) != -1 && (size_t) kw_len > ans_len )
         {
-            *len_ptr = (size_t) kw_len;
-            return KEYWORDS[keyword].name;
+            ans_len = (size_t) kw_len;
+            ans = KEYWORDS[keyword].name;
         }
     }
 
-    return KW_FICTIONAL;
+    *len_ptr = ans_len;
+    return ans;
 }
 
 //! @brief Returns identificator, found in the prefix of the given 'str'.

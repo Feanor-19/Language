@@ -15,7 +15,7 @@ SRC 	= src
 BIN 	= bin
 CMN 	= ./../common
 LOGS 	= ./logs
-CURR_PROG = .\\..\\programs\\factorial
+CURR_PROG = .\\..\\programs\\test_program
 
 COMMON_LIB_FOLDER = ./../../../mylibs/
 LIB_NAMES 			= tree onegin
